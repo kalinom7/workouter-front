@@ -1,8 +1,8 @@
 import CreateExerciseModal from "./CreateExerciseModal";
 import { useState } from "react";
 import {testUserId} from "../../testUserId";
-import type { CreateExercisePayload } from "../../../../types/Exercise";
-import { ExerciseApi } from "../../../../api/Exercise/exercise.api";
+import type { CreateExercisePayload } from "../../../../types/ExerciseTypes";
+import { ExerciseApi } from "../../../../api/exercise/Exercise.api";
 
 
 

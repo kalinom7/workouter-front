@@ -6,7 +6,7 @@ export type WorkoutTemplateExercise = {
 };
 
 
-export interface WorkoutTemplate{
+export type WorkoutTemplate = {
     id: string;
     name: string;
     userId: string;

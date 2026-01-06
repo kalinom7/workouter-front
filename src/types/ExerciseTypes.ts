@@ -10,4 +10,4 @@ export interface CreateExercisePayload {
     description?: string;
 }
 
-type UpdateExercisePayload = Partial<CreateExercisePayload>;
+export type UpdateExercisePayload = Partial<CreateExercisePayload>;

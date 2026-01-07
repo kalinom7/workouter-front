@@ -1,6 +1,4 @@
 
-
-
 export type Workout = {
   id: string;
   userId: string;

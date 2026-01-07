@@ -2,7 +2,7 @@ import Home from './views/Home/Home'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './views/Login/Login'
-import TestView from './views/Test/TestView'
+import TestView from './Test/TestView'
 
 function App() {
  

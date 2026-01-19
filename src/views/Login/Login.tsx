@@ -1,26 +1,26 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import AuthModal from './components/AuthModal'
-import './Login.css'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthModal from "./components/AuthModal";
+import "./Login.css";
 
-type AuthMode = 'login' | 'register' | null
+type AuthMode = "login" | "register" | null;
 
-function Login() {
-  const navigate = useNavigate()
-  const [mode, setMode] = useState<AuthMode>(null)
+export const Login = () => {
+  const navigate = useNavigate();
+  const [mode, setMode] = useState<AuthMode>(null);
 
-  const closeModal = () => setMode(null)
+  const closeModal = () => setMode(null);
 
   const handleSubmit = (data: {
-    username: string
-    password: string
-    confirmPassword?: string
+    username: string;
+    password: string;
+    confirmPassword?: string;
   }) => {
-    console.log(mode, data)
+    console.log(mode, data);
 
-    closeModal()
-    navigate('/home')
-  }
+    closeModal();
+    navigate("/home");
+  };
 
   return (
     <main>
@@ -28,20 +28,14 @@ function Login() {
         <h1>Welcome</h1>
 
         <div className="buttons">
-          <button onClick={() => setMode('login')}>Login</button>
-          <button onClick={() => setMode('register')}>Register</button>
+          <button onClick={() => setMode("login")}>Login</button>
+          <button onClick={() => setMode("register")}>Register</button>
         </div>
 
         {mode && (
-          <AuthModal
-            mode={mode}
-            onClose={closeModal}
-            onSubmit={handleSubmit}
-          />
+          <AuthModal mode={mode} onClose={closeModal} onSubmit={handleSubmit} />
         )}
       </div>
     </main>
-  )
-}
-
-export default Login
+  );
+};

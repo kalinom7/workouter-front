@@ -1,13 +1,11 @@
-import {Header} from './components/Header/Header'
+import { Header } from "./components/Header/Header";
 
-function Home() {
+export const Home = () => {
   return (
     <main>
-      <Header user = "User"></Header>
+      <Header user="User"></Header>
       <section> Hero </section>
       <section> Footer </section>
     </main>
-  )
-}   
-
-export default Home
+  );
+};

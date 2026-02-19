@@ -22,7 +22,7 @@ function App() {
             element={<WorkoutTemplateCreateView />}
           />
           <Route
-            path="/workout-template/add-exercise"
+            path="/workout-template/:id/add-exercise"
             element={<WorkoutTemplateAddExerciseView />}
           />
           <Route

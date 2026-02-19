@@ -1,13 +1,14 @@
 import { useGetWorkoutTemplate } from "@/api/workouttemplate/useGetWorkoutTemplate";
+import { WorkoutTemplateContext } from "@/App";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useParams } from "react-router-dom";
+import { useContext } from "react";
 
 const someUuid = "123e4567-e89b-12d3-a456-426614174000";
 
 export const WorkoutTemplateAddExerciseView = () => {
-  const { id } = useParams<{ id: string }>();
-  const { data, isLoading, isError } = useGetWorkoutTemplate(id!, someUuid);
+  const { id } = useContext(WorkoutTemplateContext);
+  const { data, isLoading, isError } = useGetWorkoutTemplate(id, someUuid);
 
   if (isError) {
     return <>Error loading workout template.</>;

@@ -1,8 +1,15 @@
 import { Home } from "./views/Home/Home";
 import "./App.css";
-import { BrowserRouter, Routes, Route, useParams, Outlet } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useParams,
+  Outlet,
+} from "react-router-dom";
 import { Login } from "./views/Login/Login";
 import { WorkoutTemplateCreateView } from "./views/WorkoutTemplate/Create/WorkoutTemplateCreateView";
+import { CreateExerciseView } from "./views/Exercise/Create/CreateExerciseView";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 import { WorkoutTemplateAddExerciseView } from "./views/WorkoutTemplate/AddExercise/WorkoutTemplateAddExerciseView";
@@ -42,11 +49,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
+          <Route path="exercise">
+            <Route path="create" element={<CreateExerciseView />} />
+          </Route>
+
           <Route path="workout-template">
-            <Route
-              path="create"
-              element={<WorkoutTemplateCreateView />}
-            />
+            <Route path="create" element={<WorkoutTemplateCreateView />} />
             <Route path=":id" element={<WorkoutTemplateProvider />}>
               <Route
                 path="add-exercise"

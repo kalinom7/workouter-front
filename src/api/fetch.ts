@@ -1,9 +1,8 @@
-
 const API_URL = "http://localhost:3000";
 
 export async function apiFetch<T>(
   endpoint: string,
-  options?: RequestInit
+  options?: RequestInit,
 ): Promise<T> {
   const response = await fetch(`${API_URL}${endpoint}`, {
     headers: {
@@ -17,5 +16,5 @@ export async function apiFetch<T>(
     throw new Error(`API error: ${response.status}`);
   }
 
-    return response.json() as Promise<T>;
+  return response.json() as Promise<T>;
 }

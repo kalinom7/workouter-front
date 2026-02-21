@@ -1,31 +1,39 @@
-import type { CreateExercisePayload, Exercise, UpdateExercisePayload,} from "../../types/ExerciseTypes";
 import { apiFetch } from "../fetch";
+import type { Exercise } from "@/types/ExerciseTypes";
 
-export class ExerciseApi { 
+export class ExerciseApi {
+  static async createExercise(
+    userId: string,
+    name: string,
+    description?: string,
+  ) {
+    return apiFetch<Exercise>(`/exercises?userId=${userId}`, {
+      method: "POST",
+      body: JSON.stringify({ name, description }),
+    });
+  }
 
-    static async createExercise(userId: string, payload: CreateExercisePayload) {
-        return apiFetch<Exercise>(`/exercises?userId=${userId}`, {
-            method: "POST",
-            body: JSON.stringify(payload),
-        });
-    }
+  static async getExercise(userId: string, exerciseId: string) {
+    return apiFetch<Exercise>(`/exercises/${exerciseId}?userId=${userId}`, {
+      method: "GET",
+    });
+  }
 
-    static async getExercise(userId: string, exerciseId: string ) {
-        return apiFetch<Exercise>(`/exercises/${exerciseId}?userId=${userId}`, {
-            method: "GET",
-        });
-    }
+  static async updateExercise(
+    userId: string,
+    exerciseId: string,
+    name?: string,
+    description?: string,
+  ) {
+    return apiFetch<Exercise>(`/exercises/${exerciseId}?userId=${userId}`, {
+      method: "PATCH",
+      body: JSON.stringify({ name, description }),
+    });
+  }
 
-    static async updateExercise(userId: string, exerciseId: string, payload: UpdateExercisePayload){
-        return apiFetch<Exercise>(`/exercises/${exerciseId}?userId=${userId}`, {
-            method: "PATCH",
-            body: JSON.stringify(payload),
-        });
-    }
-
-    static async deleteExercise(userId: string, exerciseId: string) {
-        return apiFetch<void>(`/exercises/${exerciseId}?userId=${userId}`, {
-            method: "DELETE",
-        });
-    }
+  static async deleteExercise(userId: string, exerciseId: string) {
+    return apiFetch<void>(`/exercises/${exerciseId}?userId=${userId}`, {
+      method: "DELETE",
+    });
+  }
 }

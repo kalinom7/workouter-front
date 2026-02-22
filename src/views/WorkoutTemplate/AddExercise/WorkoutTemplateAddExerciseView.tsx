@@ -1,5 +1,5 @@
 import { useGetWorkoutTemplate } from "@/api/workouttemplate/useGetWorkoutTemplate";
-import { WorkoutTemplateContext } from "@/App";
+import { WorkoutTemplateContext } from "@/routes/workoutTemplate/WorkoutTemplateContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useContext } from "react";

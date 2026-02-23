@@ -10,7 +10,7 @@ import { WorkoutTemplateAddExerciseView } from "./views/WorkoutTemplate/AddExerc
 import { WorkoutTemplateExercisesView } from "./views/WorkoutTemplate/Exercises/WorkoutTemplateExercisesView";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { WorkoutTemplateProvider } from "./routes/workoutTemplate/WorkoutTemplateProvider";
-import { AllExercisesView } from "./views/Exercise/Create/AllExercisesView";
+import { AllExercisesView } from "./views/Exercise/AllExercises/AllExercisesView";
 import { AllWorkoutTemplatesView } from "./views/WorkoutTemplate/AllWorkoutTemplates/AllWorkoutTemplatesView";
 
 const queryClient = new QueryClient();

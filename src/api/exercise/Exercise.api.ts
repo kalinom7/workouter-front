@@ -19,6 +19,12 @@ export class ExerciseApi {
     });
   }
 
+  static async getAllExercises(userId: string) {
+    return apiFetch<Exercise[]>(`/exercises?userId=${userId}`, {
+      method: "GET",
+    });
+  }
+
   static async updateExercise(
     userId: string,
     exerciseId: string,

@@ -14,8 +14,8 @@ export const CreateExerciseView = () => {
   const { mutate, isPending } = useCreateExercise();
   const navigate = useNavigate();
 
-  const onCreateSuccess = ({ name, id }: { name: string; id: string }) => {
-    navigate(`/exercise/${id}`);
+  const onCreateSuccess = ({ name }: { name: string; id: string }) => {
+    navigate(`/exercises/?user=${someUuid}`);
     toast.success(`Exercise "${name}" created successfully!`);
   };
 

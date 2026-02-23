@@ -10,6 +10,7 @@ import { WorkoutTemplateAddExerciseView } from "./views/WorkoutTemplate/AddExerc
 import { WorkoutTemplateExercisesView } from "./views/WorkoutTemplate/Exercises/WorkoutTemplateExercisesView";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { WorkoutTemplateProvider } from "./routes/workoutTemplate/WorkoutTemplateProvider";
+import { AllExercisesView } from "./views/Exercise/Create/AllExercisesView";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="exercise">
             <Route path="create" element={<CreateExerciseView />} />
           </Route>
+          <Route path="exercises" element={<AllExercisesView />} />
 
           <Route path="workout-template">
             <Route path="create" element={<WorkoutTemplateCreateView />} />

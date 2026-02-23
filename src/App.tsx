@@ -11,6 +11,7 @@ import { WorkoutTemplateExercisesView } from "./views/WorkoutTemplate/Exercises/
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { WorkoutTemplateProvider } from "./routes/workoutTemplate/WorkoutTemplateProvider";
 import { AllExercisesView } from "./views/Exercise/Create/AllExercisesView";
+import { AllWorkoutTemplatesView } from "./views/WorkoutTemplate/AllWorkoutTemplates/AllWorkoutTemplatesView";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,10 @@ function App() {
               />
             </Route>
           </Route>
+          <Route
+            path="workout-templates"
+            element={<AllWorkoutTemplatesView />}
+          />
         </Routes>
       </BrowserRouter>
       <Toaster />

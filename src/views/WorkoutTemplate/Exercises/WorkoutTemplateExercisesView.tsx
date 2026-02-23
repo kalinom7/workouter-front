@@ -27,8 +27,8 @@ export const WorkoutTemplateExercisesView = () => {
       <ul>
         {sortedExercises.map((exercise) => (
           <li key={exercise.order}>
-            Exercise ID: {exercise.exercise}, Sets: {exercise.sets}, Rest:{" "}
-            {exercise.restPeriod}s
+            Order: {exercise.order}, Exercise ID: {exercise.exercise}, Sets:{" "}
+            {exercise.sets}, Rest: {exercise.restPeriod}s
           </li>
         ))}
       </ul>

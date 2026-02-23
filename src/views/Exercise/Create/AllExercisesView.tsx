@@ -22,7 +22,9 @@ export const AllExercisesView = () => {
       <h2>Exercises:</h2>
       <ul>
         {exercises.map((exercise) => (
-          <li key={exercise.id}>{exercise.name}</li>
+          <li key={exercise.id}>
+            name: {exercise.name}, id: {exercise.id}
+          </li>
         ))}
       </ul>
       <Button onClick={onCreateExerciseClick}>Create New Exercise</Button>

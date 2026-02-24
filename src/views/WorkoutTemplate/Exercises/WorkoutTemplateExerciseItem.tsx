@@ -19,7 +19,7 @@ export const WorkoutTemplateExerciseItem = ({
   return (
     <li>
       Order: {exercise.order}, Exercise ID: {exercise.exercise}, Sets:{" "}
-      {exercise.sets}, Rest: {exercise.restPeriod}s
+      {exercise.sets}, Rest: {exercise.restPeriod}s<Button>Edit</Button>
       <Button onClick={() => onRemove(exercise.order)} disabled={isPending}>
         Remove
       </Button>

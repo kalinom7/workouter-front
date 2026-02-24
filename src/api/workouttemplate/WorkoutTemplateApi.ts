@@ -40,11 +40,11 @@ export class WorkoutTemplateApi {
 
   static async removeWorkoutTemplateExercise(
     userId: string,
-    exerciseId: string,
     workoutTemplateId: string,
+    order: number,
   ) {
     return apiFetch<WorkoutTemplate>(
-      `/workout-templates/${workoutTemplateId}/exercises/${exerciseId}?userId=${userId}`,
+      `/workout-templates/${workoutTemplateId}/exercises/${order}?userId=${userId}`,
       {
         method: "DELETE",
       },

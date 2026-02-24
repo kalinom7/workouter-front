@@ -12,12 +12,19 @@ export const AllWorkoutTemplatesView = () => {
 
   const workoutTemplates = data;
 
+  const onWorkoutTemplateClick = (workoutTemplateId: string) => {
+    navigate(`/workout-template/${workoutTemplateId}/exercises`);
+  };
   return (
     <>
       <h2>All Workout Templates: </h2>
       <ul>
         {workoutTemplates.map((workoutTemplate) => (
-          <li key={workoutTemplate.id}>{workoutTemplate.name}</li>
+          <li key={workoutTemplate.id}>
+            <Button onClick={() => onWorkoutTemplateClick(workoutTemplate.id)}>
+              {workoutTemplate.name}
+            </Button>
+          </li>
         ))}
       </ul>
       <Button onClick={() => navigate("/workout-template/create")}>

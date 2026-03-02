@@ -1,16 +1,12 @@
 import { useGetWorkoutTemplate } from "@/api/workouttemplate/useGetWorkoutTemplate";
 import { WorkoutTemplateContext } from "@/routes/workoutTemplate/WorkoutTemplateContext";
 import { Button } from "@/components/ui/button";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRemoveWorkoutTemplateExercise } from "@/api/workouttemplate/useRemoveWorkoutTemplateExercise";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
-import {
-  EditableWorkoutTemplateExerciseItem,
-  WorkoutTemplateExerciseItem,
-} from "./WorkoutTemplateExerciseItems";
-import { useEditWorkoutTemplateExercise } from "@/api/workouttemplate/useEditWorkoutTemplateExercise";
+import { WorkoutTemplateExerciseItem } from "./WorkoutTemplateExerciseItems";
 
 const someUuid = "123e4567-e89b-12d3-a456-426614174000";
 
@@ -19,10 +15,6 @@ export const WorkoutTemplateExercisesView = () => {
   const { data, isLoading, isError } = useGetWorkoutTemplate(id, someUuid);
   const { mutate: removeExercise, isPending: isRemovingExercise } =
     useRemoveWorkoutTemplateExercise();
-  const { mutate: editExercise, isPending: isEditingExercise } =
-    useEditWorkoutTemplateExercise();
-  const [exerciseToEdit, setExerciseToEdit] = useState(-1);
-
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -52,39 +44,18 @@ export const WorkoutTemplateExercisesView = () => {
   };
 
   const onEditClick = (order: number) => {
-    setExerciseToEdit(order);
-  };
+    const exercise = sortedExercises.find((e) => e.order === order);
+    if (!exercise) {
+      toast.error("Exercise not found.");
+      return;
+    }
+    const exerciseId = exercise.exercise;
+    const sets = exercise.sets;
+    const restPeriod = exercise.restPeriod;
 
-  const onSaveSuccess = () => {
-    queryClient.invalidateQueries({
-      queryKey: ["workout-templates", id, someUuid],
+    navigate(`/workout-template/${id}/exercise/${order}`, {
+      state: { exerciseId, sets, restPeriod, order },
     });
-    toast.success("Exercise updated.");
-    setExerciseToEdit(-1);
-  };
-  const onSaveError = (error: Error) => {
-    toast.error(`Failed to update exercise: ${error.message}`);
-  };
-
-  const onSaveExercise = (
-    order: number,
-    newSets: number,
-    newRestPeriod: number,
-  ) => {
-    const original = data.exercises.find((e) => e.order === order);
-    if (!original) return;
-    editExercise(
-      {
-        userId: someUuid,
-        workoutTemplateId: id,
-        order,
-        originalSets: original.sets,
-        originalRestPeriod: original.restPeriod,
-        newSets,
-        newRestPeriod,
-      },
-      { onSuccess: onSaveSuccess, onError: onSaveError },
-    );
   };
 
   return (
@@ -92,25 +63,15 @@ export const WorkoutTemplateExercisesView = () => {
       <h1>Template name: {data.name}</h1>
       <h2>Exercises:</h2>
       <ul>
-        {sortedExercises.map((exercise) =>
-          exercise.order === exerciseToEdit ? (
-            <EditableWorkoutTemplateExerciseItem
-              key={exercise.order}
-              exercise={exercise}
-              onCancel={() => setExerciseToEdit(-1)}
-              onSave={onSaveExercise}
-              isPending={isEditingExercise}
-            />
-          ) : (
-            <WorkoutTemplateExerciseItem
-              key={exercise.order}
-              exercise={exercise}
-              onRemove={onRemoveExerciseClick}
-              onEdit={onEditClick}
-              isPending={isRemovingExercise}
-            />
-          ),
-        )}
+        {sortedExercises.map((exercise) => (
+          <WorkoutTemplateExerciseItem
+            key={exercise.order}
+            exercise={exercise}
+            onRemove={onRemoveExerciseClick}
+            onEdit={onEditClick}
+            isPending={isRemovingExercise}
+          />
+        ))}
       </ul>
       <Button onClick={onAddExerciseClick}>Add Exercise to Template</Button>
     </>

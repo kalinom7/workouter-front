@@ -27,41 +27,17 @@ export const useAddWorkoutTemplateExercise = () => {
       userId: string;
       workoutTemplateId: string;
       exerciseId: string;
-      sets?: number;
-      restPeriod?: number;
+      sets: number;
+      restPeriod: number;
     }) => {
       await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate network delay
-      let updatedTemplate = await WorkoutTemplateApi.addWorkoutTemplateExercise(
+      return WorkoutTemplateApi.addWorkoutTemplateExercise(
         userId,
         exerciseId,
         workoutTemplateId,
+        sets,
+        restPeriod,
       );
-
-      if (sets !== undefined && sets > 0) {
-        const exerciseIndex = updatedTemplate.exercises.findIndex(
-          (ex) => ex.exercise === exerciseId,
-        );
-        updatedTemplate = await WorkoutTemplateApi.setNumberOfSets(
-          userId,
-          exerciseIndex,
-          sets,
-          workoutTemplateId,
-        );
-      }
-
-      if (restPeriod !== undefined && restPeriod > 0) {
-        const exerciseIndex = updatedTemplate.exercises.findIndex(
-          (ex) => ex.exercise === exerciseId,
-        );
-        updatedTemplate = await WorkoutTemplateApi.setRestPeriod(
-          userId,
-          exerciseIndex,
-          restPeriod,
-          workoutTemplateId,
-        );
-      }
-
-      return updatedTemplate;
     },
   });
 };

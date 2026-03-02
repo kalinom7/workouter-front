@@ -5,44 +5,28 @@ export const useEditWorkoutTemplateExercise = () => {
   return useMutation({
     mutationFn: async ({
       userId,
+      exerciseId,
       workoutTemplateId,
-      originalSets,
-      originalRestPeriod,
       order,
       newSets,
       newRestPeriod,
     }: {
       userId: string;
+      exerciseId: string;
       workoutTemplateId: string;
       order: number;
-      originalSets?: number;
-      originalRestPeriod?: number;
-      newSets?: number;
-      newRestPeriod?: number;
+      newSets: number;
+      newRestPeriod: number;
     }) => {
       await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate network delay
-
-      if (order === undefined) {
-        throw new Error("Order is required to edit an exercise.");
-      }
-
-      if (newSets !== undefined && newSets !== originalSets) {
-        await WorkoutTemplateApi.setNumberOfSets(
-          userId,
-          order,
-          newSets,
-          workoutTemplateId,
-        );
-      }
-
-      if (newRestPeriod != undefined && newRestPeriod !== originalRestPeriod) {
-        await WorkoutTemplateApi.setRestPeriod(
-          userId,
-          order,
-          newRestPeriod,
-          workoutTemplateId,
-        );
-      }
+      return WorkoutTemplateApi.editWorkoutTemplateExercise(
+        userId,
+        exerciseId,
+        workoutTemplateId,
+        newSets,
+        newRestPeriod,
+        order,
+      );
     },
   });
 };

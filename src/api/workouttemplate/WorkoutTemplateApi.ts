@@ -28,12 +28,14 @@ export class WorkoutTemplateApi {
     userId: string,
     exerciseId: string,
     workoutTemplateId: string,
+    sets: number,
+    restPeriod: number,
   ) {
     return apiFetch<WorkoutTemplate>(
       `/workout-templates/${workoutTemplateId}/exercises?userId=${userId}`,
       {
         method: "POST",
-        body: JSON.stringify({ exerciseId }),
+        body: JSON.stringify({ exerciseId, sets, restPeriod }),
       },
     );
   }
@@ -50,33 +52,19 @@ export class WorkoutTemplateApi {
       },
     );
   }
-
-  static async setNumberOfSets(
+  static async editWorkoutTemplateExercise(
     userId: string,
-    order: number,
+    exerciseId: string,
+    workoutTemplateId: string,
     sets: number,
-    workoutTemplateId: string,
-  ) {
-    return apiFetch<WorkoutTemplate>(
-      `/workout-templates/${workoutTemplateId}/exercises/${order}/sets?userId=${userId}`,
-      {
-        method: "PATCH",
-        body: JSON.stringify({ sets }),
-      },
-    );
-  }
-
-  static async setRestPeriod(
-    userId: string,
-    order: number,
     restPeriod: number,
-    workoutTemplateId: string,
-  ) {
+    order: number,
+  ){
     return apiFetch<WorkoutTemplate>(
-      `/workout-templates/${workoutTemplateId}/exercises/${order}/rest-period?userId=${userId}`,
+      `/workout-templates/${workoutTemplateId}/exercises/${order}?userId=${userId}`,
       {
-        method: "PATCH",
-        body: JSON.stringify({ restPeriod }),
+        method: "PUT",
+        body: JSON.stringify({ exerciseId, sets, restPeriod }),
       },
     );
   }

@@ -1,12 +1,8 @@
+import type { WorkoutTemplateExercise } from "@/api/workouttemplate/useAddWorkoutTemplateExercise";
 import { Button } from "@/components/ui/button";
 
-type Props = {
-  exercise: {
-    order: number;
-    exercise: string;
-    sets: number;
-    restPeriod: number;
-  };
+type WorkoutTemplateExerciseItemProps = {
+  exercise: WorkoutTemplateExercise;
   onRemove: (order: number) => void;
   onEdit: (order: number) => void;
   isPending: boolean;
@@ -17,7 +13,7 @@ export const WorkoutTemplateExerciseItem = ({
   onRemove,
   onEdit,
   isPending,
-}: Props) => {
+}: WorkoutTemplateExerciseItemProps) => {
   return (
     <li>
       Order: {exercise.order}, Exercise ID: {exercise.exercise}, Sets:{" "}

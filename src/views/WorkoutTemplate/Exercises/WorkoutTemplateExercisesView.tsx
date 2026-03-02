@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { WorkoutTemplateExercisesList } from "./WorkoutTemplateExercisesList";
-import { useRemoveWorkoutTemplateExerciseFromList } from "./useRemoveWorkoutTemplateExerciseFromList";
+import { WorkoutTemplateExercisesList } from "./utils/WorkoutTemplateExercisesList";
+import { useRemoveWorkoutTemplateExerciseFromList } from "./utils/useRemoveWorkoutTemplateExerciseFromList";
 
 const someUuid = "123e4567-e89b-12d3-a456-426614174000";
 

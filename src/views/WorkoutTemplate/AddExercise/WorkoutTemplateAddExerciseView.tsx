@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { useAddWorkoutTemplateExercise } from "@/api/workouttemplate/useAddWorkoutTemplateExercise";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
+import { ExerciseSelector } from "./utils/ExerciseSelector";
 
 const someUuid = "123e4567-e89b-12d3-a456-426614174000";
 
@@ -17,6 +18,7 @@ export const WorkoutTemplateAddExerciseView = () => {
   const [exerciseId, setExerciseId] = useState("");
   const [sets, setSets] = useState(0);
   const [restPeriod, setRestPeriod] = useState(0);
+  const [showExerciseSelector, setShowExerciseSelector] = useState(false);
 
   if (isError) {
     return <>Error loading workout template.</>;
@@ -48,16 +50,25 @@ export const WorkoutTemplateAddExerciseView = () => {
         onError,
       },
     );
+    setExerciseId("");
   };
+  const onSelectClick = () => {
+    setShowExerciseSelector(false);
+  };
+
   return (
     <>
       <h1>Add Exercise to Template: {data.name}</h1>
-      <Input
-        placeholder="Exercise ID"
-        disabled={isPending}
-        value={exerciseId}
-        onChange={(e) => setExerciseId(e.target.value)}
-      />
+      <Button onClick={() => setShowExerciseSelector(true)}>
+        Select Exercise
+      </Button>
+      {showExerciseSelector && (
+        <ExerciseSelector
+          setExerciseId={setExerciseId}
+          onSelectClick={onSelectClick}
+        />
+      )}
+
       <Input
         placeholder="Sets"
         type="number"

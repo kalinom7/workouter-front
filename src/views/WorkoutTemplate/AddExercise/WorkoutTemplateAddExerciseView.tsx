@@ -4,9 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useContext, useState } from "react";
 import { useAddWorkoutTemplateExercise } from "@/api/workouttemplate/useAddWorkoutTemplateExercise";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
-import { ExerciseSelector } from "./utils/ExerciseSelector";
 
 const someUuid = "123e4567-e89b-12d3-a456-426614174000";
 
@@ -14,11 +13,11 @@ export const WorkoutTemplateAddExerciseView = () => {
   const { id } = useContext(WorkoutTemplateContext);
   const { data, isLoading, isError } = useGetWorkoutTemplate(id, someUuid);
   const { mutate, isPending } = useAddWorkoutTemplateExercise();
+  const [searchParams] = useSearchParams();
+  const exerciseId = searchParams.get("exerciseId") ?? "";
   const navigate = useNavigate();
-  const [exerciseId, setExerciseId] = useState("");
   const [sets, setSets] = useState(0);
   const [restPeriod, setRestPeriod] = useState(0);
-  const [showExerciseSelector, setShowExerciseSelector] = useState(false);
 
   if (isError) {
     return <>Error loading workout template.</>;
@@ -50,38 +49,36 @@ export const WorkoutTemplateAddExerciseView = () => {
         onError,
       },
     );
-    setExerciseId("");
   };
-  const onSelectClick = () => {
-    setShowExerciseSelector(false);
+  const onSelectExerciseClick = () => {
+    navigate(`/workout-template/${id}/select-exercise`);
   };
 
   return (
     <>
       <h1>Add Exercise to Template: {data.name}</h1>
-      <Button onClick={() => setShowExerciseSelector(true)}>
-        Select Exercise
+      <Button onClick={onSelectExerciseClick}>
+        {exerciseId === "" ? "Select Exercise" : exerciseId}
       </Button>
-      {showExerciseSelector && (
-        <ExerciseSelector
-          setExerciseId={setExerciseId}
-          onSelectClick={onSelectClick}
-        />
-      )}
 
       <Input
         placeholder="Sets"
         type="number"
         value={sets}
         onChange={(e) => setSets(Number(e.target.value))}
+        disabled={exerciseId === ""}
       />
       <Input
         placeholder="Rest period (seconds)"
         type="number"
         value={restPeriod}
         onChange={(e) => setRestPeriod(Number(e.target.value))}
+        disabled={exerciseId === ""}
       />
-      <Button disabled={isPending} onClick={onAddExerciseClick}>
+      <Button
+        disabled={isPending || exerciseId === ""}
+        onClick={onAddExerciseClick}
+      >
         Add Exercise
       </Button>
     </>

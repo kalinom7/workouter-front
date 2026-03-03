@@ -1,25 +1,22 @@
 import { useGetAllExercises } from "@/api/exercise/useGetAllExercises";
 import { Button } from "@/components/ui/button";
+import { WorkoutTemplateContext } from "@/routes/workoutTemplate/WorkoutTemplateContext";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 const someUuid = "123e4567-e89b-12d3-a456-426614174000";
 
-export const ExerciseSelector = ({
-  setExerciseId,
-  onSelectClick,
-}: {
-  setExerciseId: (id: string) => void;
-  onSelectClick: () => void;
-}) => {
+export const ExerciseSelector = () => {
   const { data, isLoading, isError } = useGetAllExercises(someUuid);
-
+  const { id } = useContext(WorkoutTemplateContext);
+  const navigate = useNavigate();
   if (isError) return <>Error loading exercises.</>;
   if (isLoading || !data) return <>Loading...</>;
 
   const exercises = data;
 
   const onSelectExerciseClick = (exerciseId: string) => {
-    setExerciseId(exerciseId);
-    onSelectClick();
+    navigate(`/workout-template/${id}/add-exercise?exerciseId=${exerciseId}`);
   };
 
   return (

@@ -13,6 +13,7 @@ import { WorkoutTemplateProvider } from "./routes/workoutTemplate/WorkoutTemplat
 import { AllExercisesView } from "./views/Exercise/AllExercises/AllExercisesView";
 import { AllWorkoutTemplatesView } from "./views/WorkoutTemplate/AllWorkoutTemplates/AllWorkoutTemplatesView";
 import { WorkoutTemplateEditExerciseView } from "./views/WorkoutTemplate/EditExercise/WorkoutTemplateEditExerciseView";
+import { ExerciseSelector } from "./views/WorkoutTemplate/ExerciseSelector/ExerciseSelector";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ function App() {
                 path="exercise/:order"
                 element={<WorkoutTemplateEditExerciseView />}
               />
+              <Route path="select-exercise" element={<ExerciseSelector />} />
             </Route>
           </Route>
           <Route

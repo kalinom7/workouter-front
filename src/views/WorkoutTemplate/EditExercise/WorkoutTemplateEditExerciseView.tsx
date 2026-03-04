@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { WorkoutTemplateContext } from "@/routes/workoutTemplate/WorkoutTemplateContext";
 import { useContext, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -15,8 +15,9 @@ export const WorkoutTemplateEditExerciseView = () => {
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const params = useParams();
   const exerciseId = searchParams.get("exerciseId") ?? "";
-  const order = Number(searchParams.get("order"));
+  const order = Number(params.order);
   const oldSets = Number(searchParams.get("sets"));
   const oldRestPeriod = Number(searchParams.get("restPeriod"));
 
@@ -49,6 +50,10 @@ export const WorkoutTemplateEditExerciseView = () => {
     );
   };
   const onSelectExerciseClick = () => {
+    console.log(
+      `Navigating to select exercise with returnTo=/workout-template/${id}/exercise/${order}`,
+      `ORDER: ${order}`,
+    );
     navigate(
       `/select-exercise?returnTo=/workout-template/${id}/exercise/${order}`,
     );

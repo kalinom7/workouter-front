@@ -29,7 +29,7 @@ function App() {
             <Route path="create" element={<CreateExerciseView />} />
           </Route>
           <Route path="exercises" element={<AllExercisesView />} />
-
+          <Route path="select-exercise" element={<ExerciseSelector />} />
           <Route path="workout-template">
             <Route path="create" element={<WorkoutTemplateCreateView />} />
             <Route path=":id" element={<WorkoutTemplateProvider />}>
@@ -45,7 +45,6 @@ function App() {
                 path="exercise/:order"
                 element={<WorkoutTemplateEditExerciseView />}
               />
-              <Route path="select-exercise" element={<ExerciseSelector />} />
             </Route>
           </Route>
           <Route

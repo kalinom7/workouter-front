@@ -1,22 +1,22 @@
 import { useGetAllExercises } from "@/api/exercise/useGetAllExercises";
 import { Button } from "@/components/ui/button";
-import { WorkoutTemplateContext } from "@/routes/workoutTemplate/WorkoutTemplateContext";
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const someUuid = "123e4567-e89b-12d3-a456-426614174000";
 
 export const ExerciseSelector = () => {
   const { data, isLoading, isError } = useGetAllExercises(someUuid);
-  const { id } = useContext(WorkoutTemplateContext);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const returnTo = searchParams.get("returnTo");
+
   if (isError) return <>Error loading exercises.</>;
   if (isLoading || !data) return <>Loading...</>;
 
   const exercises = data;
 
   const onSelectExerciseClick = (exerciseId: string) => {
-    navigate(`/workout-template/${id}/add-exercise?exerciseId=${exerciseId}`);
+    navigate(`${returnTo}?exerciseId=${exerciseId}`);
   };
 
   return (

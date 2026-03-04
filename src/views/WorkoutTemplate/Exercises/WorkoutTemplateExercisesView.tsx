@@ -3,7 +3,6 @@ import { WorkoutTemplateContext } from "@/routes/workoutTemplate/WorkoutTemplate
 import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
 import { WorkoutTemplateExercisesList } from "./utils/WorkoutTemplateExercisesList";
 import { useRemoveWorkoutTemplateExerciseFromList } from "./utils/useRemoveWorkoutTemplateExerciseFromList";
 
@@ -28,17 +27,10 @@ export const WorkoutTemplateExercisesView = () => {
 
   const onEditClick = (order: number) => {
     const exercise = data.exercises.find((e) => e.order === order);
-    if (!exercise) {
-      toast.error("Exercise not found.");
-      return;
-    }
-    const exerciseId = exercise.exercise;
-    const sets = exercise.sets;
-    const restPeriod = exercise.restPeriod;
-
-    navigate(`/workout-template/${id}/exercise/${order}`, {
-      state: { exerciseId, sets, restPeriod, order },
-    });
+    if (!exercise) return;
+    navigate(
+      `/workout-template/${id}/exercise/${order}?exerciseId=${exercise.exercise}&sets=${exercise.sets}&restPeriod=${exercise.restPeriod}`,
+    );
   };
 
   return (

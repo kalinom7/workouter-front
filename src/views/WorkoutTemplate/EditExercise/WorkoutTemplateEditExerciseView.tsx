@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { WorkoutTemplateContext } from "@/routes/workoutTemplate/WorkoutTemplateContext";
 import { useContext, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -12,12 +12,16 @@ const someUuid = "123e4567-e89b-12d3-a456-426614174000";
 export const WorkoutTemplateEditExerciseView = () => {
   const { mutate, isPending } = useEditWorkoutTemplateExercise();
   const { id } = useContext(WorkoutTemplateContext);
+
   const navigate = useNavigate();
-  const exerciseData = useLocation();
-  const { exerciseId, sets, restPeriod, order } = exerciseData.state;
-  const [newExerciseId, setNewExerciseId] = useState(exerciseId);
-  const [newSets, setNewSets] = useState(sets);
-  const [newRestPeriod, setNewRestPeriod] = useState(restPeriod);
+  const [searchParams] = useSearchParams();
+  const exerciseId = searchParams.get("exerciseId") ?? "";
+  const order = Number(searchParams.get("order"));
+  const oldSets = Number(searchParams.get("sets"));
+  const oldRestPeriod = Number(searchParams.get("restPeriod"));
+
+  const [newSets, setNewSets] = useState(oldSets);
+  const [newRestPeriod, setNewRestPeriod] = useState(oldRestPeriod);
   const queryClient = useQueryClient();
 
   const onSuccess = () => {
@@ -35,7 +39,7 @@ export const WorkoutTemplateEditExerciseView = () => {
     mutate(
       {
         userId: someUuid,
-        exerciseId: newExerciseId,
+        exerciseId,
         workoutTemplateId: id,
         order,
         newSets,
@@ -44,14 +48,16 @@ export const WorkoutTemplateEditExerciseView = () => {
       { onSuccess, onError },
     );
   };
+  const onSelectExerciseClick = () => {
+    navigate(
+      `/select-exercise?returnTo=/workout-template/${id}/exercise/${order}`,
+    );
+  };
+
   return (
     <>
-      <h1>Edit Exercise {exerciseId}</h1>
-      <Input
-        disabled={isPending}
-        value={newExerciseId}
-        onChange={(e) => setNewExerciseId(e.target.value)}
-      />
+      <h1>Edit Exercise</h1>
+      <Button onClick={onSelectExerciseClick}>{exerciseId}</Button>
       <Input
         type="number"
         value={newSets}

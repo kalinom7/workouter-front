@@ -16,6 +16,7 @@ export const WorkoutTemplateEditExerciseView = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const params = useParams();
+
   const exerciseId = searchParams.get("exerciseId") ?? "";
   const order = Number(params.order);
   const oldSets = Number(searchParams.get("sets"));
@@ -50,19 +51,14 @@ export const WorkoutTemplateEditExerciseView = () => {
     );
   };
   const onSelectExerciseClick = () => {
-    console.log(
-      `Navigating to select exercise with returnTo=/workout-template/${id}/exercise/${order}`,
-      `ORDER: ${order}`,
-    );
-    navigate(
-      `/select-exercise?returnTo=/workout-template/${id}/exercise/${order}`,
-    );
+    navigate(`/workout-template/${id}/exercise/${order}/select`);
   };
 
   return (
     <>
       <h1>Edit Exercise</h1>
       <Button onClick={onSelectExerciseClick}>{exerciseId}</Button>
+
       <Input
         type="number"
         value={newSets}

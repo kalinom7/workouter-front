@@ -13,7 +13,7 @@ import { WorkoutTemplateProvider } from "./routes/workoutTemplate/WorkoutTemplat
 import { AllExercisesView } from "./views/Exercise/AllExercises/AllExercisesView";
 import { AllWorkoutTemplatesView } from "./views/WorkoutTemplate/AllWorkoutTemplates/AllWorkoutTemplatesView";
 import { WorkoutTemplateEditExerciseView } from "./views/WorkoutTemplate/EditExercise/WorkoutTemplateEditExerciseView";
-import { ExerciseSelector } from "./views/WorkoutTemplate/ExerciseSelector/ExerciseSelector";
+import { ExerciseSelectorView } from "./views/WorkoutTemplate/ExerciseSelector/ExerciseSelectorView";
 
 const queryClient = new QueryClient();
 
@@ -29,7 +29,7 @@ function App() {
             <Route path="create" element={<CreateExerciseView />} />
           </Route>
           <Route path="exercises" element={<AllExercisesView />} />
-          <Route path="select-exercise" element={<ExerciseSelector />} />
+
           <Route path="workout-template">
             <Route path="create" element={<WorkoutTemplateCreateView />} />
             <Route path=":id" element={<WorkoutTemplateProvider />}>
@@ -44,6 +44,10 @@ function App() {
               <Route
                 path="exercise/:order"
                 element={<WorkoutTemplateEditExerciseView />}
+              />
+              <Route
+                path="exercise/:order/select"
+                element={<ExerciseSelectorView />}
               />
             </Route>
           </Route>

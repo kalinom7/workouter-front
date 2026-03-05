@@ -59,7 +59,9 @@ export const WorkoutTemplateExerciseEditor = ({
   return (
     <>
       <h1>Edit Exercise</h1>
-      <Button onClick={onSelectExerciseClick}>{exerciseId}</Button>
+      <Button disabled={isPending} onClick={onSelectExerciseClick}>
+        {exerciseId}
+      </Button>
 
       <Input
         type="number"

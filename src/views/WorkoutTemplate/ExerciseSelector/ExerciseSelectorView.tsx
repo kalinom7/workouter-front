@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ExerciseSelector } from "./ExerciseSelector";
 
 export const ExerciseSelectorView = () => {
@@ -6,13 +6,22 @@ export const ExerciseSelectorView = () => {
   const params = useParams();
   const workoutTemplateId = params.id;
   const order = params.order;
+  const [searchParams] = useSearchParams();
+  const mode = searchParams.get("mode");
 
   return (
     <ExerciseSelector
       onSelectExerciseClick={(id) => {
-        navigate(
-          `/workout-template/${workoutTemplateId}/exercise/${order}?exerciseId=${id}`,
-        );
+        if (mode === "edit") {
+          navigate(
+            `/workout-template/${workoutTemplateId}/exercise/${order}?exerciseId=${id}`,
+          );
+        }
+        if (mode === "add") {
+          navigate(
+            `/workout-template/${workoutTemplateId}/add-exercise?exerciseId=${id}`,
+          );
+        }
       }}
     />
   );

@@ -51,7 +51,7 @@ export const WorkoutTemplateEditExerciseView = () => {
     );
   };
   const onSelectExerciseClick = () => {
-    navigate(`/workout-template/${id}/exercise/${order}/select`);
+    navigate(`/workout-template/${id}/exercise/${order}/select?mode=edit`);
   };
 
   return (

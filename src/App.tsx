@@ -49,6 +49,10 @@ function App() {
                 path="exercise/:order/select"
                 element={<ExerciseSelectorView />}
               />
+              <Route
+                path="add-exercise/select"
+                element={<ExerciseSelectorView />}
+              />
             </Route>
           </Route>
           <Route

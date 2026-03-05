@@ -1,7 +1,9 @@
+import { useDeleteWorkoutTemplate } from "@/api/workouttemplate/useRemoveWorkoutTemplate";
 import { Button } from "@/components/ui/button";
 import type { WorkoutTemplate } from "@/types/WorkoutTemplateTypes";
 import { useNavigate } from "react-router-dom";
 
+const userId = "123e4567-e89b-12d3-a456-426614174000";
 export const WorkoutTemplatesList = ({
   templates,
 }: {
@@ -11,20 +13,26 @@ export const WorkoutTemplatesList = ({
   const onWorkoutTemplateClick = (workoutTemplateId: string) => {
     navigate(`/workout-template/${workoutTemplateId}/exercises`);
   };
-
+  const { mutate, isPending } = useDeleteWorkoutTemplate();
   const workoutTemplates = templates;
+
+  const onDeleteClick = (workoutTemplateId: string) => {
+    mutate({userId, workoutTemplateId});
+  };
+
   return (
     <>
       <ul>
         {workoutTemplates.map((workoutTemplate) => (
           <li key={workoutTemplate.id}>
-            <Button onClick={() => onWorkoutTemplateClick(workoutTemplate.id)}>
+            <Button disabled={isPending} onClick={() => onWorkoutTemplateClick(workoutTemplate.id)}>
               {workoutTemplate.name}
             </Button>
+            <Button disabled={isPending} onClick={() => onDeleteClick(workoutTemplate.id)}>delete</Button>
           </li>
         ))}
       </ul>
-      <Button onClick={() => navigate("/workout-template/create")}>
+      <Button disabled={isPending} onClick={() => navigate("/workout-template/create")}>
         Add new workout template
       </Button>
     </>

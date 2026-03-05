@@ -1,7 +1,6 @@
 import { useEditWorkoutTemplateExercise } from "@/api/workouttemplate/useEditWorkoutTemplateExercise";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
@@ -29,14 +28,10 @@ export const WorkoutTemplateExerciseEditor = ({
       `/workout-template/${templateId}/exercise/${order}/select?mode=edit`,
     );
   };
-  const queryClient = useQueryClient();
 
   const { mutate, isPending } = useEditWorkoutTemplateExercise();
   const onSuccess = () => {
     toast.success("Exercise successfully edited!");
-    queryClient.invalidateQueries({
-      queryKey: ["workout-templates", templateId, someUuid],
-    });
     navigate(`/workout-template/${templateId}/exercises`);
   };
 

@@ -9,6 +9,14 @@ export class WorkoutTemplateApi {
     });
   }
 
+  static async editName(userId: string, workoutTemplateId: string, newName: string){
+    return apiFetch<WorkoutTemplate>(`workout-templates/${workoutTemplateId}/edit-name/?userId=${userId}`, {
+      method: "PATCH",
+      body: JSON.stringify({ newName }),
+    }
+    )
+  }
+
   static async getWorkoutTemplate(userId: string, workoutTemplateId: string) {
     return apiFetch<WorkoutTemplate>(
       `/workout-templates/${workoutTemplateId}?userId=${userId}`,

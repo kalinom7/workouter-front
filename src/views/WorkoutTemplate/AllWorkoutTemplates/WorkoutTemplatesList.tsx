@@ -1,4 +1,4 @@
-import { useDeleteWorkoutTemplate } from "@/api/workouttemplate/useRemoveWorkoutTemplate";
+import { useDeleteWorkoutTemplate } from "@/api/workouttemplate/useDeleteWorkoutTemplate";
 import { Button } from "@/components/ui/button";
 import type { WorkoutTemplate } from "@/types/WorkoutTemplateTypes";
 import { useNavigate } from "react-router-dom";

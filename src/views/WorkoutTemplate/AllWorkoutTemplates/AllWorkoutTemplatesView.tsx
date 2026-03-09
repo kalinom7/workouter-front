@@ -1,5 +1,5 @@
 import { useGetAllWorkoutTemplates } from "@/api/workouttemplate/useGetAllWorkoutTemplates";
-import { WorkoutTemplatesList } from "./WorkoutTemplatesList";
+import { WorkoutTemplatesList } from "./utils/WorkoutTemplatesList";
 
 const userId = "123e4567-e89b-12d3-a456-426614174000";
 

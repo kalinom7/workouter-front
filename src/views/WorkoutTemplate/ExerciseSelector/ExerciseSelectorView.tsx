@@ -1,5 +1,5 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { ExerciseSelector } from "./ExerciseSelector";
+import { ExerciseSelector } from "./utils/ExerciseSelector";
 
 export const ExerciseSelectorView = () => {
   const navigate = useNavigate();

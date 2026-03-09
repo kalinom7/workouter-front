@@ -1,7 +1,6 @@
 import { Home } from "./views/Home/Home";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Login } from "./views/Login/Login";
 import { WorkoutTemplateCreateView } from "./views/WorkoutTemplate/Create/WorkoutTemplateCreateView";
 import { CreateExerciseView } from "./views/Exercise/Create/CreateExerciseView";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -14,6 +13,8 @@ import { AllExercisesView } from "./views/Exercise/AllExercises/AllExercisesView
 import { AllWorkoutTemplatesView } from "./views/WorkoutTemplate/AllWorkoutTemplates/AllWorkoutTemplatesView";
 import { WorkoutTemplateEditExerciseView } from "./views/WorkoutTemplate/EditExercise/WorkoutTemplateEditExerciseView";
 import { ExerciseSelectorView } from "./views/WorkoutTemplate/ExerciseSelector/ExerciseSelectorView";
+import { LoginView } from "./views/Login/LoginView";
+import { RegisterView } from "./views/Register/RegisterView";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +24,8 @@ function App() {
       <ReactQueryDevtools />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<LoginView />} />
+          <Route path="/register" element={<RegisterView />} />
           <Route path="/home" element={<Home />} />
           <Route path="exercise">
             <Route path="create" element={<CreateExerciseView />} />

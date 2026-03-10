@@ -1,4 +1,4 @@
-import { Home } from "./views/Home/Home";
+
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { WorkoutTemplateCreateView } from "./views/WorkoutTemplate/Create/WorkoutTemplateCreateView";
@@ -15,6 +15,7 @@ import { WorkoutTemplateEditExerciseView } from "./views/WorkoutTemplate/EditExe
 import { ExerciseSelectorView } from "./views/WorkoutTemplate/ExerciseSelector/ExerciseSelectorView";
 import { LoginView } from "./views/Login/LoginView";
 import { RegisterView } from "./views/Register/RegisterView";
+import { HomeView } from "./views/Home/HomeView";
 
 const queryClient = new QueryClient();
 
@@ -26,7 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginView />} />
           <Route path="/register" element={<RegisterView />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<HomeView />} />
           <Route path="exercise">
             <Route path="create" element={<CreateExerciseView />} />
           </Route>

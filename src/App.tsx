@@ -16,7 +16,8 @@ import { ExerciseSelectorView } from "./views/WorkoutTemplate/ExerciseSelector/E
 import { LoginView } from "./views/Login/LoginView";
 import { RegisterView } from "./views/Register/RegisterView";
 import { HomeView } from "./views/Home/HomeView";
-import { StartWorkoutView } from "./views/StartWorkout/StartWorkoutView";
+import { StartWorkoutView } from "./views/StartWorkoutMenu/StartWorkoutView";
+import { StartWorkoutFromTemplateView } from "./views/StartWorkoutFromTemplate/StartWorkoutFromTemplateView";
 
 const queryClient = new QueryClient();
 
@@ -65,6 +66,7 @@ function App() {
           />
           <Route path="workout">
             <Route path="start-menu" element={<StartWorkoutView />} />
+            <Route path="startFromTemplate" element={<StartWorkoutFromTemplateView />} />
           </Route>
         </Routes>
       </BrowserRouter>

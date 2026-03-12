@@ -29,8 +29,7 @@ export const WorkoutTemplateExercisesView = () => {
     const exercise = data.exercises.find((e) => e.order === order);
     if (!exercise) return;
     navigate(
-      `/workout-template/${id}/exercise/${order}?exerciseId=${exercise.exercise}&sets=${exercise.sets}&restPeriod=${exercise.restPeriod}`,
-    );
+      `/workout-template/${id}/exercise/${order}?exerciseId=${exercise.exercise}`);
   };
 
   return (

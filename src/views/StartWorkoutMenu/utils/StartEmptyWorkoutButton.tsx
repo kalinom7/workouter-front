@@ -11,7 +11,7 @@ export const StartEmptyWorkoutButton = () => {
 
     const onStartSuccess = (workout: Workout) => {
         toast.success(`Workout started! Workout ID: ${workout.id}`);
-        navigate(`/workout/${workout.id}`);
+        navigate(`/workout/${workout.id}/ongoing`);
     }
     const onStartError = (error: Error) => {
         toast.error(`Failed to start workout: ${error.message || 'Unknown error'}`);

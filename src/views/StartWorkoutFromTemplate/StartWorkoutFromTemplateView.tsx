@@ -16,7 +16,7 @@ export const StartWorkoutFromTemplateView = () => {
    const onStartSuccess = (workout: Workout) => {
       setPreviewedTemplateId("");
       toast.success("Workout started successfully");
-      navigate(`/workout/${workout.id}`);
+      navigate(`/workout/${workout.id}/ongoing`);
    }
    const onStartError = (error: Error) => {
       toast.error(`Failed to start workout: ${error.message || 'Unknown error'}`);

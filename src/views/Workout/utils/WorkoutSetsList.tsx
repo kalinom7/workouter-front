@@ -8,8 +8,8 @@ export const WorkoutSetsList = ({workoutSets} : {workoutSets: WorkoutExerciseSet
         <ul>
             {workoutSets.map((set) => (
                 <li key={set.order}>
-                    <Input>weight</Input>
-                    <Input>reps</Input>
+                    <Input placeholder="Weight"/>
+                    <Input placeholder="Reps"/>
                     <Button>mark completed</Button>
                 </li>
             )

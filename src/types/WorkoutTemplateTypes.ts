@@ -12,4 +12,3 @@ export type WorkoutTemplate = {
     userId: string;
     exercises: WorkoutTemplateExercise[];
 }
-

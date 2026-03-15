@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { WorkoutTemplateExercisesList } from "./utils/WorkoutTemplateExercisesList";
 import { useRemoveWorkoutTemplateExerciseFromList } from "./utils/useRemoveWorkoutTemplateExerciseFromList";
+import { useGetAllExercises } from "@/api/exercise/useGetAllExercises";
 
 const someUuid = "123e4567-e89b-12d3-a456-426614174000";
 
@@ -14,9 +15,10 @@ export const WorkoutTemplateExercisesView = () => {
   const { removeExercise, isPending } =
     useRemoveWorkoutTemplateExerciseFromList(id, someUuid);
   const navigate = useNavigate();
+  const {data: exercises, isLoading: isExercisesLoading, isError: isExercisesError } = useGetAllExercises(someUuid);
 
-  if (isError) return <>Error loading workout template.</>;
-  if (isLoading || !data) return <>Loading...</>;
+  if (isError || isExercisesError) return <>Error loading workout template.</>;
+  if (isLoading || isExercisesLoading || !data || !exercises) return <>Loading...</>;
 
   const onAddExerciseClick = () => {
     navigate(`/workout-template/${id}/add-exercise`);
@@ -37,7 +39,8 @@ export const WorkoutTemplateExercisesView = () => {
       <h1>Template name: {data.name}</h1>
       <h2>Exercises:</h2>
       <WorkoutTemplateExercisesList
-        exercises={data.exercises}
+        workoutTemplateExercises={data.exercises}
+        exercises={exercises}
         onRemoveExerciseClick={onRemoveExerciseClick}
         onEditClick={onEditClick}
         isPending={isPending}

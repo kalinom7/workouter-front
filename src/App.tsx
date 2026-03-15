@@ -70,8 +70,7 @@ function App() {
             <Route path="start-menu" element={<StartWorkoutView />} />
             <Route path="startFromTemplate" element={<StartWorkoutFromTemplateView />} />
             <Route path=":id" element={<WorkoutProvider />}> 
-            
-            <Route path="ongoing" element={<WorkoutView />}/>
+               <Route path="ongoing" element={<WorkoutView />}/>
             </Route>
           </Route>
         </Routes>

@@ -1,11 +1,11 @@
 
 import { WorkoutExercisesList } from "./WorkoutExercisesList";
 import { Button } from "@/components/ui/button";
-import { useAddExerciseToWorkout } from "@/api/workout/useAddExerciseToWorkout";
+import { useAddExerciseToWorkout } from "@/api/workout/hooks/useAddExerciseToWorkout";
 import { useContext, useState } from "react";
 import { WorkoutContext } from "@/routes/workout/WorkoutContext";
 import { ExerciseSelector } from "@/views/WorkoutTemplate/ExerciseSelector/utils/ExerciseSelector";
-import { useGetWorkout } from "@/api/workout/useGetWorkout";
+import { useGetWorkout } from "@/api/workout/hooks/useGetWorkout";
 
 
 const userId = "123e4567-e89b-12d3-a456-426614174000";

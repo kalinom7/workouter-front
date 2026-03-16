@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { WorkoutApi } from "./WorkoutApi";
+import { WorkoutApi } from "../WorkoutApi";
 import type { Workout } from "@/types/WorkoutTypes";
 
 export const useAddExerciseToWorkout = () => {
@@ -8,8 +8,8 @@ export const useAddExerciseToWorkout = () => {
         mutationFn: async ({userId, workoutId, exerciseId} : {userId: string, workoutId: string, exerciseId: string}) => {
             return WorkoutApi.addExerciseToWorkout(userId, workoutId, exerciseId);
         },
-        onMutate: async ( variables ) => {
-            const {userId, workoutId, exerciseId} = variables;
+        onMutate: async ( {userId, workoutId, exerciseId} ) => {
+           
             await queryClient.cancelQueries({queryKey: ["workout", workoutId, userId]});
 
             const previousWorkout = queryClient.getQueryData<Workout>(["workout", workoutId, userId]);

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Footer } from "../Home/utils/Footer";
 import { WorkoutTemplatePreview } from "./utils/WorkoutTemplatePreview";
 import { WorkoutTemplateSelector } from "./utils/WorkoutTemplateSelector";
-import { useStartWorkoutFromTemplate } from "@/api/workout/useStartWorkoutFromTemplate";
+import { useStartWorkoutFromTemplate } from "@/api/workout/hooks/useStartWorkoutFromTemplate";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import type { Workout } from "@/types/WorkoutTypes";

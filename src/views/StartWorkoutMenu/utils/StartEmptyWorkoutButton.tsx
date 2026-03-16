@@ -1,4 +1,4 @@
-import { useStartEmptyWorkout } from "@/api/workout/useStartEmptyWorkout";
+import { useStartEmptyWorkout } from "@/api/workout/hooks/useStartEmptyWorkout";
 import { Button } from "@/components/ui/button"
 import type { Workout } from "@/types/WorkoutTypes";
 import { useNavigate } from "react-router-dom";

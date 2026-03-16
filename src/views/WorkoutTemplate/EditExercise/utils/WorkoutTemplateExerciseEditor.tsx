@@ -1,3 +1,4 @@
+import { useGetAllExercises } from "@/api/exercise/useGetAllExercises";
 import { useEditWorkoutTemplateExercise } from "@/api/workouttemplate/useEditWorkoutTemplateExercise";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,6 +22,7 @@ export const WorkoutTemplateExerciseEditor = ({
   const [newSets, setNewSets] = useState(oldSets);
   const [newRestPeriod, setNewRestPeriod] = useState(oldRestPeriod);
   const [searchParams] = useSearchParams();
+  const {data: exercises, isLoading: isExercisesLoading, isError: isExercisesError} = useGetAllExercises(someUuid);
   const exerciseId = searchParams.get("exerciseId") ?? "";
   const navigate = useNavigate();
   const onSelectExerciseClick = () => {
@@ -28,8 +30,16 @@ export const WorkoutTemplateExerciseEditor = ({
       `/workout-template/${templateId}/exercise/${order}/select?mode=edit`,
     );
   };
-
+  
   const { mutate, isPending } = useEditWorkoutTemplateExercise();
+
+  if (isExercisesLoading) return <>Loading...</>;
+  if (isExercisesError || !exercises) return <>Error loading exercise</>;
+
+  const exercise = exercises.find( (ex) => ex.id === exerciseId );
+   
+    
+
   const onSuccess = () => {
     toast.success("Exercise successfully edited!");
     navigate(`/workout-template/${templateId}/exercises`);
@@ -55,7 +65,7 @@ export const WorkoutTemplateExerciseEditor = ({
     <>
       <h1>Edit Exercise</h1>
       <Button disabled={isPending} onClick={onSelectExerciseClick}>
-        {exerciseId}
+        {exercise?.name}
       </Button>
 
       <Input

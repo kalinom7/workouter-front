@@ -18,6 +18,7 @@ export const WorkoutTemplateEditExerciseView = () => {
   if (isGetPending) return <>Loading...</>;
   if (isGetError || !data) return <>Error loading exercise</>;
 
+
   const exercise = data.exercises.find(
     (ex) => ex.order === Number(params.order),
   );

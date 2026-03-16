@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { useAddWorkoutTemplateExercise } from "@/api/workouttemplate/useAddWorkoutTemplateExercise";
 import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
+import { useGetAllExercises } from "@/api/exercise/useGetAllExercises";
 
 const someUuid = "123e4567-e89b-12d3-a456-426614174000";
 
@@ -15,17 +16,21 @@ export const WorkoutTemplateAddExerciseView = () => {
   const { mutate, isPending } = useAddWorkoutTemplateExercise();
   const [searchParams] = useSearchParams();
   const exerciseId = searchParams.get("exerciseId") ?? "";
+  const {data: exercises, isLoading: isExercisesLoading, isError: isExercisesError } = useGetAllExercises(someUuid);
+  
   const navigate = useNavigate();
   const [sets, setSets] = useState(0);
   const [restPeriod, setRestPeriod] = useState(0);
 
-  if (isError) {
+  if (isError || isExercisesError) {
     return <>Error loading workout template.</>;
   }
 
-  if (isLoading || !data) {
+  if (isLoading || !data || isExercisesLoading || !exercises) {
     return <>Loading...</>;
   }
+
+  const exercise = exercises.find( (ex) => ex.id === exerciseId );
 
   const onSuccess = () => {
     toast.success("Exercise added to workout template!");
@@ -58,7 +63,7 @@ export const WorkoutTemplateAddExerciseView = () => {
     <>
       <h1>Add Exercise to Template: {data.name}</h1>
       <Button onClick={onSelectExerciseClick}>
-        {exerciseId === "" ? "Select Exercise" : exerciseId}
+        {exerciseId === "" ? "Select Exercise" : exercise?.name}
       </Button>
 
       <Input

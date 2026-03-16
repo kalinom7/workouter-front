@@ -1,6 +1,6 @@
 
 
-import { WorkoutExerciseManager } from "./utils/WorkotExerciseManager";
+import { WorkoutExerciseManager } from "./utils/WorkoutExerciseManager";
 
 
 export const WorkoutView = () => {

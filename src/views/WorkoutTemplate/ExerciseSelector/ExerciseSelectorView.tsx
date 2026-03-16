@@ -9,20 +9,23 @@ export const ExerciseSelectorView = () => {
   const [searchParams] = useSearchParams();
   const mode = searchParams.get("mode");
 
-  return (
-    <ExerciseSelector
-      onSelectExerciseClick={(id) => {
-        if (mode === "edit") {
+  const onSelectExerciseClick = (id:string) => {
+     if (mode === "edit") {
           navigate(
             `/workout-template/${workoutTemplateId}/exercise/${order}?exerciseId=${id}`,
           );
         }
+
         if (mode === "add") {
           navigate(
             `/workout-template/${workoutTemplateId}/add-exercise?exerciseId=${id}`,
           );
         }
-      }}
+  }
+  return (
+    <ExerciseSelector
+      isPending={false}
+      onSelectExerciseClick={onSelectExerciseClick}
     />
   );
 };

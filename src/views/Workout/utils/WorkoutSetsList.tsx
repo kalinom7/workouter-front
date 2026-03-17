@@ -1,21 +1,20 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import type { WorkoutExerciseSet } from "@/types/WorkoutTypes";
+import { WorkoutSetItem } from "./WorkoutSetItem";
 
-
-export const WorkoutSetsList = ({workoutSets} : {workoutSets: WorkoutExerciseSet[]}) => {
-    return (
-        <ul>
-            {workoutSets.map((set) => (
-                <li key={set.order}>
-                    <Input placeholder="Weight"/>
-                    <Input placeholder="Reps"/>
-                    <Button>mark completed</Button>
-                </li>
-            )
-        )
-            }
-        </ul>
-    )
-
-}
+export const WorkoutSetsList = ({
+  workoutSets,
+  exerciseOrder,
+}: {
+  workoutSets: WorkoutExerciseSet[];
+  exerciseOrder: number;
+}) => {
+  return (
+    <ul>
+      {workoutSets.map((set) => (
+        <li key={set.order}>
+          <WorkoutSetItem exerciseOrder={exerciseOrder} setOrder={set.order} />
+        </li>
+      ))}
+    </ul>
+  );
+};

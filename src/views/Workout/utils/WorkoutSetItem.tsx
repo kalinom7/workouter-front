@@ -1,3 +1,4 @@
+import { useMarkSetAsUnCompleted } from "@/api/workout/hooks/useMarkSetAsUnCompleted";
 import { useSaveSet } from "@/api/workout/hooks/useSaveSet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +8,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useContext, useState } from "react";
 import { toast } from "sonner";
 
+//TODO: manage refreshing page causing states to rerender and values dissapearing - replace state
 export const WorkoutSetItem = ({
   exerciseOrder,
   setOrder,
@@ -14,7 +16,9 @@ export const WorkoutSetItem = ({
   exerciseOrder: number;
   setOrder: number;
 }) => {
-  const { mutate, isPending } = useSaveSet();
+  const { mutate: saveSet, isPending: isSaveSetPending } = useSaveSet();
+  const { mutate: unSaveSet, isPending: isUnSaveSetPending } =
+    useMarkSetAsUnCompleted();
   const { id } = useContext(WorkoutContext);
   const [isSetCompleted, setIsSetCompleted] = useState(false);
   const [weight, setWeight] = useState(0);
@@ -32,7 +36,7 @@ export const WorkoutSetItem = ({
   };
 
   const onSaveSetClick = (weight: number, reps: number) => {
-    mutate(
+    saveSet(
       {
         userId: globalUserId,
         workoutId: id,
@@ -44,6 +48,11 @@ export const WorkoutSetItem = ({
       { onSuccess: onSaveSetSuccess, onError: onSaveSetError },
     );
     setIsSetCompleted(true);
+  };
+
+  const onUnSaveSetClick = () => {
+    unSaveSet({ userId: globalUserId, workoutId: id, exerciseOrder, setOrder });
+    setIsSetCompleted(false);
   };
 
   return (
@@ -62,9 +71,19 @@ export const WorkoutSetItem = ({
         type="number"
         onChange={(e) => setReps(Number(e.target.value))}
       />
-      <Button disabled={isPending} onClick={() => onSaveSetClick(weight, reps)}>
-        Save set
-      </Button>
+      {isSetCompleted ? (
+        <Button disabled={isUnSaveSetPending} onClick={onUnSaveSetClick}>
+          {" "}
+          UnSave{" "}
+        </Button>
+      ) : (
+        <Button
+          disabled={isSaveSetPending}
+          onClick={() => onSaveSetClick(weight, reps)}
+        >
+          Save set
+        </Button>
+      )}
     </>
   );
 };

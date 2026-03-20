@@ -1,5 +1,6 @@
 import { useGetWorkout } from "@/api/workout/hooks/useGetWorkout";
 import { useMarkSetAsUnCompleted } from "@/api/workout/hooks/useMarkSetAsUnCompleted";
+import { useRemoveSetFromWorkoutExercise } from "@/api/workout/hooks/useRemoveSetFromWorkoutExercise";
 import { useSaveSet } from "@/api/workout/hooks/useSaveSet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,6 +19,8 @@ export const WorkoutSetItem = ({
   const { mutate: saveSet, isPending: isSaveSetPending } = useSaveSet();
   const { mutate: unSaveSet, isPending: isUnSaveSetPending } =
     useMarkSetAsUnCompleted();
+  const { mutate: removeSet, isPending: isRemovingSet } =
+    useRemoveSetFromWorkoutExercise();
   const { id } = useContext(WorkoutContext);
 
   const { data, isLoading, isError } = useGetWorkout(globalUserId, id);
@@ -44,6 +47,10 @@ export const WorkoutSetItem = ({
 
   const onUnSaveSetClick = () => {
     unSaveSet({ userId: globalUserId, workoutId: id, exerciseOrder, setOrder });
+  };
+
+  const onRemoveSetClick = () => {
+    removeSet({ userId: globalUserId, workoutId: id, exerciseOrder, setOrder });
   };
 
   return (
@@ -75,6 +82,12 @@ export const WorkoutSetItem = ({
           Save set
         </Button>
       )}
+      <Button
+        onClick={onRemoveSetClick}
+        disabled={isRemovingSet || set.isCompleted}
+      >
+        Remove Set
+      </Button>
     </>
   );
 };

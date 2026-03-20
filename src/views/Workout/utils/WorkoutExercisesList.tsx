@@ -6,13 +6,17 @@ import { useContext } from "react";
 import { globalUserId } from "@/utils/globalUserId";
 import { WorkoutContext } from "@/routes/workout/WorkoutContext";
 import { useGetAllExercises } from "@/api/exercise/useGetAllExercises";
+import { useRemoveExerciseFromWorkout } from "@/api/workout/hooks/useRemoveExerciseFromWorkout";
 
 export const WorkoutExercisesList = ({
   workoutExercises,
 }: {
   workoutExercises: WorkoutExercise[];
 }) => {
-  const { mutate, isPending } = useAddSetToWorkoutExercise();
+  const { mutate: addSet, isPending: isAddingSet } =
+    useAddSetToWorkoutExercise();
+  const { mutate: removeExercise, isPending: isRemovingExercise } =
+    useRemoveExerciseFromWorkout();
   const sorted = [...workoutExercises].sort((a, b) => a.order - b.order);
   const { id } = useContext(WorkoutContext);
   const { data, isLoading, isError } = useGetAllExercises(globalUserId);
@@ -25,7 +29,11 @@ export const WorkoutExercisesList = ({
   }
 
   const onAddSetClick = (exerciseOrder: number) => {
-    mutate({ userId: globalUserId, workoutId: id, exerciseOrder });
+    addSet({ userId: globalUserId, workoutId: id, exerciseOrder });
+  };
+
+  const onRemoveExerciseClick = (exerciseOrder: number) => {
+    removeExercise({ userId: globalUserId, workoutId: id, exerciseOrder });
   };
 
   return (
@@ -40,10 +48,16 @@ export const WorkoutExercisesList = ({
             exerciseOrder={exercise.order}
           />
           <Button
-            disabled={isPending}
+            disabled={isAddingSet}
             onClick={() => onAddSetClick(exercise.order)}
           >
             Add set
+          </Button>
+          <Button
+            onClick={() => onRemoveExerciseClick(exercise.order)}
+            disabled={isRemovingExercise}
+          >
+            Remove Exercise
           </Button>
         </li>
       ))}

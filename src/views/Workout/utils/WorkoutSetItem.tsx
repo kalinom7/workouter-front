@@ -21,8 +21,8 @@ export const WorkoutSetItem = ({
   const { id } = useContext(WorkoutContext);
 
   const { data, isLoading, isError } = useGetWorkout(globalUserId, id);
-  const exercise = data?.exercises.find((e) => e.order === exerciseOrder);
-  const set = exercise?.sets.find((s) => s.order === setOrder);
+  const exercise = data?.exercises?.find((e) => e.order === exerciseOrder);
+  const set = exercise?.sets?.find((s) => s.order === setOrder);
   const [weight, setWeight] = useState(set?.weight ?? 0);
   const [reps, setReps] = useState(set?.reps ?? 0);
 

@@ -1,18 +1,12 @@
-
-
 import { WorkoutExerciseManager } from "./utils/WorkoutExerciseManager";
-
+import { WorkoutTimer } from "./utils/WorkoutTimer";
 
 export const WorkoutView = () => {
-
-
-  
-
-    return (
-        <>
-        <p> Timer </p>
-        <p> finish workout button</p>
-        <WorkoutExerciseManager/>
-      </> 
-    );
-}
+  return (
+    <>
+      <WorkoutTimer />
+      <p> finish workout button</p>
+      <WorkoutExerciseManager />
+    </>
+  );
+};

@@ -17,6 +17,7 @@ export const WorkoutExercisesList = ({
     useAddSetToWorkoutExercise();
   const { mutate: removeExercise, isPending: isRemovingExercise } =
     useRemoveExerciseFromWorkout();
+
   const sorted = [...workoutExercises].sort((a, b) => a.order - b.order);
   const { id } = useContext(WorkoutContext);
   const { data, isLoading, isError } = useGetAllExercises(globalUserId);

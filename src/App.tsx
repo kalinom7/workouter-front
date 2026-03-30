@@ -1,4 +1,3 @@
-
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { WorkoutTemplateCreateView } from "./views/WorkoutTemplate/Create/WorkoutTemplateCreateView";
@@ -20,6 +19,7 @@ import { StartWorkoutView } from "./views/StartWorkoutMenu/StartWorkoutView";
 import { StartWorkoutFromTemplateView } from "./views/StartWorkoutFromTemplate/StartWorkoutFromTemplateView";
 import { WorkoutView } from "./views/Workout/WorkoutView";
 import { WorkoutProvider } from "./routes/workout/WorkoutProvider";
+import { RestTimePicker } from "./views/Workout/components/RestTimePicker";
 
 const queryClient = new QueryClient();
 
@@ -68,11 +68,15 @@ function App() {
           />
           <Route path="workout">
             <Route path="start-menu" element={<StartWorkoutView />} />
-            <Route path="startFromTemplate" element={<StartWorkoutFromTemplateView />} />
-            <Route path=":id" element={<WorkoutProvider />}> 
-               <Route path="ongoing" element={<WorkoutView />}/>
+            <Route
+              path="startFromTemplate"
+              element={<StartWorkoutFromTemplateView />}
+            />
+            <Route path=":id" element={<WorkoutProvider />}>
+              <Route path="ongoing" element={<WorkoutView />} />
             </Route>
           </Route>
+          <Route path="test" element={<RestTimePicker />} />
         </Routes>
       </BrowserRouter>
       <Toaster />

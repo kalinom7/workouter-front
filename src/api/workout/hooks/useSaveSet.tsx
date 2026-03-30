@@ -22,7 +22,7 @@ export const useSaveSet = () => {
       weight: number;
       reps: number;
     }) => {
-      return WorkoutApi.addWeightAndRepsToSet(
+      return WorkoutApi.saveSet(
         userId,
         workoutId,
         exerciseOrder,

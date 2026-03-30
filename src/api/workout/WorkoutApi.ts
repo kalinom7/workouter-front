@@ -84,7 +84,7 @@ export class WorkoutApi {
     );
   }
 
-  static async addWeightAndRepsToSet(
+  static async saveSet(
     userId: string,
     workoutId: string,
     exerciseOrder: number,
@@ -154,4 +154,5 @@ export class WorkoutApi {
       },
     );
   }
+  
 }

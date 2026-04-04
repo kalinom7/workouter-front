@@ -158,7 +158,7 @@ export class WorkoutApi {
   static async setRestPeriod(userId:string, workoutId: string, exerciseOrder: number, restPeriod: number){
     return apiFetch<Workout>(`/workouts/${workoutId}/exercises/${exerciseOrder}/setRestPeriod?userId=${userId}`,{
       method: "PATCH",
-      body: JSON.stringify(restPeriod),
+      body: JSON.stringify({restPeriod}),
     })
   }
   

@@ -19,7 +19,6 @@ import { StartWorkoutView } from "./views/StartWorkoutMenu/StartWorkoutView";
 import { StartWorkoutFromTemplateView } from "./views/StartWorkoutFromTemplate/StartWorkoutFromTemplateView";
 import { WorkoutView } from "./views/Workout/WorkoutView";
 import { WorkoutProvider } from "./routes/workout/WorkoutProvider";
-import { RestTimePicker } from "./views/Workout/components/RestTimePicker";
 
 const queryClient = new QueryClient();
 
@@ -76,7 +75,6 @@ function App() {
               <Route path="ongoing" element={<WorkoutView />} />
             </Route>
           </Route>
-          <Route path="test" element={<RestTimePicker />} />
         </Routes>
       </BrowserRouter>
       <Toaster />

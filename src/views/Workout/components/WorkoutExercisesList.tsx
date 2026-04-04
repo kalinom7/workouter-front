@@ -7,6 +7,7 @@ import { globalUserId } from "@/utils/globalUserId";
 import { WorkoutContext } from "@/routes/workout/WorkoutContext";
 import { useGetAllExercises } from "@/api/exercise/useGetAllExercises";
 import { useRemoveExerciseFromWorkout } from "@/api/workout/hooks/useRemoveExerciseFromWorkout";
+import { RestPeriodSetter } from "./RestPeriodSetter";
 
 export const WorkoutExercisesList = ({
   workoutExercises,
@@ -60,6 +61,7 @@ export const WorkoutExercisesList = ({
           >
             Remove Exercise
           </Button>
+          <RestPeriodSetter exerciseOrder={exercise.order} />
         </li>
       ))}
     </ul>

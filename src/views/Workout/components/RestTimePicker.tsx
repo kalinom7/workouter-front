@@ -1,140 +1,137 @@
-import { useRef, useState } from "react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
+import { useEffect, useState } from "react";
 
-export const RestTimePicker = () => {
-  const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const minutesRef = useRef<HTMLDivElement>(null);
-  const secondsRef = useRef<HTMLDivElement>(null);
-  const minuteItemRefs = useRef<HTMLDivElement[]>([]);
-  const secondItemRefs = useRef<HTMLDivElement[]>([]);
+export const RestTimePicker = ({
+  initialMinutes,
+  initialSeconds,
+  setSeconds,
+  setMinutes,
+}: {
+  initialMinutes: number;
+  initialSeconds: number;
+  setSeconds: (s: number) => void;
+  setMinutes: (m: number) => void;
+}) => {
+  const [minutesApi, setMinutesApi] = useState<CarouselApi>();
+  const [secondsApi, setSecondsApi] = useState<CarouselApi>();
 
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    const attach = (
+      api: CarouselApi | undefined,
+      setValue: (v: number) => void,
+    ) => {
+      if (!api) return () => {};
 
-  const onMinutesScroll = () => {
-    const container = minutesRef.current;
-    if (!container) return;
+      const update = () => {
+        const value = api.selectedScrollSnap();
+        setValue(value);
+      };
 
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
+      const snap = () => {
+        const index = api.selectedScrollSnap();
+        api.scrollTo(index);
+      };
+
+      api.on("select", update);
+      api.on("pointerUp", snap);
+      api.on("settle", snap);
+
+      update();
+
+      return () => {
+        api.off("select", update);
+        api.off("pointerUp", snap);
+        api.off("settle", snap);
+      };
+    };
+
+    const cleanup1 = attach(minutesApi, setMinutes);
+    const cleanup2 = attach(secondsApi, setSeconds);
+
+    return () => {
+      cleanup1();
+      cleanup2();
+    };
+  }, [minutesApi, secondsApi, setMinutes, setSeconds]);
+
+  useEffect(() => {
+    if (minutesApi) {
+      minutesApi.scrollTo(initialMinutes, true);
     }
+  }, [minutesApi, initialMinutes]);
 
-    timeoutRef.current = setTimeout(() => {
-      const containerRect = container.getBoundingClientRect();
-      const centerY = containerRect.top + containerRect.height / 2;
-
-      const closest = minuteItemRefs.current
-        .map((el, i) => {
-          if (!el) return null;
-
-          const rect = el.getBoundingClientRect();
-          const elCenter = rect.top + rect.height / 2;
-
-          return { i, dist: Math.abs(elCenter - centerY) };
-        })
-        .filter((x): x is { i: number; dist: number } => x !== null)
-        .sort((a, b) => a.dist - b.dist)[0];
-
-      if (closest) setMinutes(closest.i % 60);
-    }, 50);
-  };
-
-  const onSecondsScroll = () => {
-    const container = secondsRef.current;
-    if (!container) return;
-
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
+  useEffect(() => {
+    if (secondsApi) {
+      secondsApi.scrollTo(initialSeconds, true);
     }
-
-    timeoutRef.current = setTimeout(() => {
-      const containerRect = container.getBoundingClientRect();
-      const centerY = containerRect.top + containerRect.height / 2;
-
-      const closest = secondItemRefs.current
-        .map((el, i) => {
-          const rect = el.getBoundingClientRect();
-          const elCenter = rect.top + rect.height / 2;
-
-          return { i, dist: Math.abs(elCenter - centerY) };
-        })
-        .sort((a, b) => a.dist - b.dist)[0];
-
-      if (closest) setSeconds(closest.i % 60);
-    }, 50);
-  };
+  }, [secondsApi, initialSeconds]);
 
   return (
-    <div className="flex gap-5">
-      <p>
-        minutes: {minutes} seconds: {seconds}
-      </p>
+    <div id="root" className="flex flex-col items-center gap-4">
+      <div className="flex gap-4 justify-center relative">
+        {/* MINUTES */}
+        <div className="relative w-full max-w-xs">
+          <Carousel
+            setApi={setMinutesApi}
+            opts={{
+              align: "center",
+              dragFree: true,
+              loop: true,
+            }}
+            orientation="vertical"
+          >
+            <CarouselContent className="h-[180px]">
+              {Array.from({ length: 60 }).map((_, index) => (
+                <CarouselItem
+                  key={index}
+                  className="basis-[36px] flex items-center justify-center"
+                >
+                  <span>{index}</span>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+          {/* label */}
+          <span className="text-sm text-muted-foreground">min</span>
+        </div>
 
-      {/* MINUTES */}
-      <div className="relative h-40 overflow-hidden">
-        {/* TOP FADE */}
-        <div className="absolute top-0 left-0 w-full h-10 bg-gradient-to-b from-background to-transparent pointer-events-none z-10" />
+        {/* SECONDS */}
+        <div className="relative w-full max-w-xs">
+          <Carousel
+            setApi={setSecondsApi}
+            opts={{
+              align: "center",
+              dragFree: true,
+              loop: true,
+            }}
+            orientation="vertical"
+          >
+            <CarouselContent className="h-[180px]">
+              {Array.from({ length: 60 }).map((_, index) => (
+                <CarouselItem
+                  key={index}
+                  className="basis-[36px] flex items-center justify-center"
+                >
+                  <span>{index}</span>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+          {/* label */}
+          <span className="text-sm text-muted-foreground">sec</span>
+        </div>
 
-        {/* CENTER LINE */}
-        <div className="absolute top-1/2 left-0 w-full h-10 -translate-y-1/2 border-y pointer-events-none z-10" />
-
-        {/* SCROLL */}
-        <section
-          className="h-40 overflow-y-auto snap-y snap-mandatory"
-          ref={minutesRef}
-          onScroll={onMinutesScroll}
-        >
-          {Array.from({ length: 1000 }, (_, k) => k).map((k) => {
-            const value = k % 60;
-            return (
-              <div
-                key={k}
-                ref={(el) => {
-                  if (el) minuteItemRefs.current[k] = el;
-                }}
-                className="h-10 flex items-center justify-center snap-center"
-              >
-                {value.toString().padStart(2, "0")}
-              </div>
-            );
-          })}
-        </section>
-
-        {/* BOTTOM FADE */}
-        <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
-      </div>
-
-      {/* SECONDS */}
-      <div className="relative h-40 overflow-hidden">
-        {/* TOP FADE */}
-        <div className="absolute top-0 left-0 w-full h-10 bg-gradient-to-b from-background to-transparent pointer-events-none z-10" />
-
-        {/* CENTER LINE */}
-        <div className="absolute top-1/2 left-0 w-full h-10 -translate-y-1/2 border-y pointer-events-none z-10" />
-
-        {/* SCROLL */}
-        <section
-          className="h-40 overflow-y-auto snap-y snap-mandatory"
-          ref={secondsRef}
-          onScroll={onSecondsScroll}
-        >
-          {Array.from({ length: 1000 }, (_, k) => k).map((k) => {
-            const value = k % 60;
-            return (
-              <div
-                key={k}
-                ref={(el) => {
-                  if (el) secondItemRefs.current[k] = el;
-                }}
-                className="h-10 flex items-center justify-center snap-center"
-              >
-                {value.toString().padStart(2, "0")}
-              </div>
-            );
-          })}
-        </section>
-
-        {/* BOTTOM FADE */}
-        <div className="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
+        {/* overlay */}
+        <div className="pointer-events-none absolute inset-0 flex flex-col justify-center">
+          <div className="h-[1px] w-full bg-primary/40" />
+          <div className="h-[36px]" />
+          <div className="h-[1px] w-full bg-primary/40" />
+        </div>
       </div>
     </div>
   );

@@ -101,19 +101,7 @@ export class WorkoutApi {
     );
   }
 
-  static async markSetAsCompleted(
-    userId: string,
-    workoutId: string,
-    exerciseOrder: number,
-    setOrder: number,
-  ) {
-    return apiFetch<Workout>(
-      `/workouts/${workoutId}/exercises/${exerciseOrder}/sets/${setOrder}/complete?userId=${userId}`,
-      {
-        method: "PATCH",
-      },
-    );
-  }
+ 
 
   static async markSetAsUncompleted(
     userId: string,
@@ -129,31 +117,7 @@ export class WorkoutApi {
     );
   }
 
-  static async markExerciseAsCompleted(
-    userId: string,
-    workoutId: string,
-    exerciseOrder: number,
-  ) {
-    return apiFetch<Workout>(
-      `/workouts/${workoutId}/exercises/${exerciseOrder}/complete?userId=${userId}`,
-      {
-        method: "PATCH",
-      },
-    );
-  }
-
-  static async markExerciseAsUncompleted(
-    userId: string,
-    workoutId: string,
-    exerciseOrder: number,
-  ) {
-    return apiFetch<Workout>(
-      `/workouts/${workoutId}/exercises/${exerciseOrder}/uncomplete?userId=${userId}`,
-      {
-        method: "PATCH",
-      },
-    );
-  }
+  
 
   static async setRestPeriod(userId:string, workoutId: string, exerciseOrder: number, restPeriod: number){
     return apiFetch<Workout>(`/workouts/${workoutId}/exercises/${exerciseOrder}/setRestPeriod?userId=${userId}`,{

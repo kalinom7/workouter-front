@@ -1,4 +1,4 @@
-import { WorkoutTemplateContext } from "@/routes/workoutTemplate/WorkoutTemplateContext";
+import { WorkoutTemplateContext } from "@/contexts/workoutTemplate/WorkoutTemplateContext";
 import { useContext } from "react";
 import { useGetWorkoutTemplate } from "@/api/workouttemplate/useGetWorkoutTemplate";
 import { WorkoutTemplateExerciseEditor } from "./utils/WorkoutTemplateExerciseEditor";
@@ -17,7 +17,6 @@ export const WorkoutTemplateEditExerciseView = () => {
   const order = Number(params.order);
   if (isGetPending) return <>Loading...</>;
   if (isGetError || !data) return <>Error loading exercise</>;
-
 
   const exercise = data.exercises.find(
     (ex) => ex.order === Number(params.order),

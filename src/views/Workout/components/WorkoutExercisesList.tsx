@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useAddSetToWorkoutExercise } from "@/api/workout/hooks/useAddSetToWorkoutExercise";
 import { useContext } from "react";
 import { globalUserId } from "@/utils/globalUserId";
-import { WorkoutContext } from "@/routes/workout/WorkoutContext";
+import { WorkoutContext } from "@/contexts/workout/WorkoutContext";
 import { useGetAllExercises } from "@/api/exercise/useGetAllExercises";
 import { useRemoveExerciseFromWorkout } from "@/api/workout/hooks/useRemoveExerciseFromWorkout";
 import { RestPeriodSetter } from "./RestPeriodSetter";

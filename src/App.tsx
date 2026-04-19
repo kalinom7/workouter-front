@@ -7,7 +7,7 @@ import { Toaster } from "sonner";
 import { WorkoutTemplateAddExerciseView } from "./views/WorkoutTemplate/AddExercise/WorkoutTemplateAddExerciseView";
 import { WorkoutTemplateExercisesView } from "./views/WorkoutTemplate/Exercises/WorkoutTemplateExercisesView";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { WorkoutTemplateProvider } from "./routes/workoutTemplate/WorkoutTemplateProvider";
+import { WorkoutTemplateProvider } from "./contexts/workoutTemplate/WorkoutTemplateProvider";
 import { AllExercisesView } from "./views/Exercise/AllExercises/AllExercisesView";
 import { AllWorkoutTemplatesView } from "./views/WorkoutTemplate/AllWorkoutTemplates/AllWorkoutTemplatesView";
 import { WorkoutTemplateEditExerciseView } from "./views/WorkoutTemplate/EditExercise/WorkoutTemplateEditExerciseView";
@@ -18,7 +18,7 @@ import { HomeView } from "./views/Home/HomeView";
 import { StartWorkoutView } from "./views/StartWorkoutMenu/StartWorkoutView";
 import { StartWorkoutFromTemplateView } from "./views/StartWorkoutFromTemplate/StartWorkoutFromTemplateView";
 import { WorkoutView } from "./views/Workout/WorkoutView";
-import { WorkoutProvider } from "./routes/workout/WorkoutProvider";
+import { WorkoutProvider } from "./contexts/workout/WorkoutProvider";
 
 const queryClient = new QueryClient();
 

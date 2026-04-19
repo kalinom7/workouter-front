@@ -1,6 +1,6 @@
 import { useFinishWorkout } from "@/api/workout/hooks/useFinishWorkout";
 import { Button } from "@/components/ui/button";
-import { WorkoutContext } from "@/routes/workout/WorkoutContext";
+import { WorkoutContext } from "@/contexts/workout/WorkoutContext";
 import { globalUserId } from "@/utils/globalUserId";
 import { useContext, useState } from "react";
 import { areAllExercisesDone } from "../helper/areAllExercisesDone";

@@ -1,5 +1,5 @@
 import { useGetWorkout } from "@/api/workout/hooks/useGetWorkout";
-import { WorkoutContext } from "@/routes/workout/WorkoutContext";
+import { WorkoutContext } from "@/contexts/workout/WorkoutContext";
 import { globalUserId } from "@/utils/globalUserId";
 import { useContext, useEffect, useState } from "react";
 

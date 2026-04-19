@@ -4,7 +4,8 @@ import { useRemoveSetFromWorkoutExercise } from "@/api/workout/hooks/useRemoveSe
 import { useSaveSet } from "@/api/workout/hooks/useSaveSet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { WorkoutContext } from "@/routes/workout/WorkoutContext";
+import { RestTimerContext } from "@/contexts/workout/RestTimerContext";
+import { WorkoutContext } from "@/contexts/workout/WorkoutContext";
 import { globalUserId } from "@/utils/globalUserId";
 
 import { useContext, useState } from "react";
@@ -22,6 +23,7 @@ export const WorkoutSetItem = ({
   const { mutate: removeSet, isPending: isRemovingSet } =
     useRemoveSetFromWorkoutExercise();
   const { id } = useContext(WorkoutContext);
+  const { startRestTimer } = useContext(RestTimerContext);
 
   const { data, isLoading, isError } = useGetWorkout(globalUserId, id);
   const exercise = data?.exercises?.find((e) => e.order === exerciseOrder);
@@ -43,6 +45,9 @@ export const WorkoutSetItem = ({
       weight,
       reps,
     });
+    if (exercise?.restPeriod && exercise.restPeriod > 0) {
+      startRestTimer(exercise.restPeriod);
+    }
   };
 
   const onUnSaveSetClick = () => {

@@ -1,5 +1,5 @@
 import { useGetWorkoutTemplate } from "@/api/workouttemplate/useGetWorkoutTemplate";
-import { WorkoutTemplateContext } from "@/routes/workoutTemplate/WorkoutTemplateContext";
+import { WorkoutTemplateContext } from "@/contexts/workoutTemplate/WorkoutTemplateContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useContext, useState } from "react";
@@ -16,8 +16,12 @@ export const WorkoutTemplateAddExerciseView = () => {
   const { mutate, isPending } = useAddWorkoutTemplateExercise();
   const [searchParams] = useSearchParams();
   const exerciseId = searchParams.get("exerciseId") ?? "";
-  const {data: exercises, isLoading: isExercisesLoading, isError: isExercisesError } = useGetAllExercises(someUuid);
-  
+  const {
+    data: exercises,
+    isLoading: isExercisesLoading,
+    isError: isExercisesError,
+  } = useGetAllExercises(someUuid);
+
   const navigate = useNavigate();
   const [sets, setSets] = useState(0);
   const [restPeriod, setRestPeriod] = useState(0);
@@ -30,7 +34,7 @@ export const WorkoutTemplateAddExerciseView = () => {
     return <>Loading...</>;
   }
 
-  const exercise = exercises.find( (ex) => ex.id === exerciseId );
+  const exercise = exercises.find((ex) => ex.id === exerciseId);
 
   const onSuccess = () => {
     toast.success("Exercise added to workout template!");

@@ -40,12 +40,13 @@ export const RestTimer = () => {
   const format = (n: number) => String(n).padStart(2, "0");
 
   return (
-    <Dialog
-      open={restTimer.isActive}
-      onOpenChange={stopRestTimer}
-      modal={false}
-    >
-      <DialogContent className="bg-white rounded-lg p-6 w-64">
+    <Dialog open={restTimer.isActive} onOpenChange={stopRestTimer}>
+      <DialogContent
+        className="bg-white rounded-lg p-6 w-64"
+        onPointerDownOutside={(e) => {
+          e.preventDefault();
+        }}
+      >
         <DialogHeader>
           <DialogTitle>Rest Timer</DialogTitle>
         </DialogHeader>

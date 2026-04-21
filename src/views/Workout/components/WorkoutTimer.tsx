@@ -9,10 +9,11 @@ export const WorkoutTimer = () => {
   const { id } = useContext(WorkoutContext);
   const { data, isLoading, isError } = useGetWorkout(globalUserId, id);
 
-  const startTime = data ? new Date(data.startTime).getTime() : null;
+  const startTime = data ? data.startTime.getTime() : null;
+  const endTime = data ? data.endTime?.getTime() : null;
 
   useEffect(() => {
-    if (!startTime) return;
+    if (!startTime || endTime) return;
 
     const update = () => {
       const now = Date.now();
@@ -24,7 +25,7 @@ export const WorkoutTimer = () => {
 
     const interval = setInterval(update, 1000);
     return () => clearInterval(interval);
-  }, [startTime]);
+  }, [startTime, endTime]);
 
   if (isError) return <>Error loading workout template.</>;
   if (isLoading || !data) return <>Loading...</>;

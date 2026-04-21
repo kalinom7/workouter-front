@@ -1,27 +1,40 @@
 import { apiFetch } from "../fetch";
-import type { Workout } from "../../types/WorkoutTypes";
+import type { Workout, WorkoutDto } from "../../types/WorkoutTypes";
+import { mapWorkout } from "./hooks/helper/mapWorkout";
 
 export class WorkoutApi {
   static async startWorkoutFromTemplate(
     userId: string,
     workoutTemplateId: string,
   ) {
-    return apiFetch<Workout>(`/workouts/start/from-template?userId=${userId}`, {
-      method: "POST",
-      body: JSON.stringify({ workoutTemplateId }),
-    });
+    const workoutInDto = await apiFetch<WorkoutDto>(
+      `/workouts/start/from-template?userId=${userId}`,
+      {
+        method: "POST",
+        body: JSON.stringify({ workoutTemplateId }),
+      },
+    );
+    return mapWorkout(workoutInDto);
   }
 
   static async startEmptyWorkout(userId: string) {
-    return apiFetch<Workout>(`/workouts/start/empty?userId=${userId}`, {
-      method: "POST",
-    });
+    const workoutInDto = await apiFetch<WorkoutDto>(
+      `/workouts/start/empty?userId=${userId}`,
+      {
+        method: "POST",
+      },
+    );
+    return mapWorkout(workoutInDto);
   }
 
   static async getWorkout(userId: string, workoutId: string) {
-    return apiFetch<Workout>(`/workouts/${workoutId}?userId=${userId}`, {
-      method: "GET",
-    });
+    const workoutInDto = await apiFetch<WorkoutDto>(
+      `/workouts/${workoutId}?userId=${userId}`,
+      {
+        method: "GET",
+      },
+    );
+    return mapWorkout(workoutInDto);
   }
 
   static async finishWorkout(userId: string, workoutId: string) {
@@ -101,8 +114,6 @@ export class WorkoutApi {
     );
   }
 
- 
-
   static async markSetAsUncompleted(
     userId: string,
     workoutId: string,
@@ -117,13 +128,18 @@ export class WorkoutApi {
     );
   }
 
-  
-
-  static async setRestPeriod(userId:string, workoutId: string, exerciseOrder: number, restPeriod: number){
-    return apiFetch<Workout>(`/workouts/${workoutId}/exercises/${exerciseOrder}/setRestPeriod?userId=${userId}`,{
-      method: "PATCH",
-      body: JSON.stringify({restPeriod}),
-    })
+  static async setRestPeriod(
+    userId: string,
+    workoutId: string,
+    exerciseOrder: number,
+    restPeriod: number,
+  ) {
+    return apiFetch<Workout>(
+      `/workouts/${workoutId}/exercises/${exerciseOrder}/setRestPeriod?userId=${userId}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({ restPeriod }),
+      },
+    );
   }
-  
 }

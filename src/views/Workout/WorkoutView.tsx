@@ -7,17 +7,18 @@ import { RestTimerContext } from "@/contexts/workout/RestTimerContext";
 import { RestTimer } from "./components/RestTimer";
 
 export const WorkoutView = () => {
-  const [isWorkoutFinished, setIsWorkoutFinished] = useState(false);
+  const [openSummary, setOpenSummary] = useState(false);
   const { restTimer } = useContext(RestTimerContext);
 
   return (
     <>
       <WorkoutTimer />
-      <FinishWorkoutButton
-        setIsWorkoutFinished={() => setIsWorkoutFinished(true)}
-      />
+      <FinishWorkoutButton setIsWorkoutFinished={() => setOpenSummary(true)} />
       <WorkoutExerciseManager />
-      {isWorkoutFinished && <WorkoutSummary />}
+      <WorkoutSummary
+        isOpen={openSummary}
+        closeSummary={() => setOpenSummary(false)}
+      />
       {restTimer.isActive && <RestTimer />}
     </>
   );

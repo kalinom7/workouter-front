@@ -1,4 +1,4 @@
-import { useCreateWorkoutTemplate } from "@/api/workouttemplate/useCreateWorkoutTemplate";
+import { useCreateWorkoutTemplate } from "@/api/workouttemplate/hooks/useCreateWorkoutTemplate";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";

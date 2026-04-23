@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { WorkoutTemplateApi } from "./WorkoutTemplateApi";
+import { WorkoutTemplateApi } from "../WorkoutTemplateApi";
 
 export type WorkoutTemplateExercise = {
   exercise: string;

@@ -1,63 +1,54 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { WorkoutTemplateApi } from "./WorkoutTemplateApi";
+import { WorkoutTemplateApi } from "../WorkoutTemplateApi";
 import type { WorkoutTemplate } from "@/types/WorkoutTemplateTypes";
 
-export const useEditWorkoutTemplateName = () => {
+export const useDeleteWorkoutTemplate = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async ({
       userId,
       workoutTemplateId,
-      newName,
     }: {
       userId: string;
       workoutTemplateId: string;
-      newName: string;
     }) => {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-      return WorkoutTemplateApi.editName(userId, workoutTemplateId, newName);
+      await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate network delay
+      return WorkoutTemplateApi.deleteWorkoutTemplate(
+        userId,
+        workoutTemplateId,
+      );
     },
-
     onMutate: async (variables) => {
-      const { userId, workoutTemplateId, newName } = variables;
+      const { userId, workoutTemplateId } = variables;
 
       await queryClient.cancelQueries({
         queryKey: ["AllWorkoutTemplates", userId],
       });
 
-      const previousWorkoutTemplates =
-        queryClient.getQueryData<WorkoutTemplate[]>([
-          "AllWorkoutTemplates",
-          userId,
-        ]);
+      const previousWorkoutTemplates = queryClient.getQueryData<
+        WorkoutTemplate[]
+      >(["AllWorkoutTemplates", userId]);
 
       queryClient.setQueryData(
         ["AllWorkoutTemplates", userId],
         (old: WorkoutTemplate[] | undefined) => {
           if (!old) return old;
 
-          return old.map((template) => {
-            if (template.id === workoutTemplateId) {
-              return { ...template, name: newName };
-            }
-            return template;
-          });
-        }
+          return old.filter((template) => template.id !== workoutTemplateId);
+        },
       );
 
       return { previousWorkoutTemplates };
     },
-
     onError: (_err, variables, context) => {
       if (context?.previousWorkoutTemplates) {
         queryClient.setQueryData(
           ["AllWorkoutTemplates", variables.userId],
-          context.previousWorkoutTemplates
+          context.previousWorkoutTemplates,
         );
       }
     },
-
     onSettled: (_data, _error, variables) => {
       queryClient.invalidateQueries({
         queryKey: ["AllWorkoutTemplates", variables.userId],

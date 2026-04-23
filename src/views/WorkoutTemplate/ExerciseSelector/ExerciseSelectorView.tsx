@@ -1,5 +1,5 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { ExerciseSelector } from "./utils/ExerciseSelector";
+import { ExerciseSelector } from "./components/ExerciseSelector";
 
 export const ExerciseSelectorView = () => {
   const navigate = useNavigate();
@@ -9,19 +9,19 @@ export const ExerciseSelectorView = () => {
   const [searchParams] = useSearchParams();
   const mode = searchParams.get("mode");
 
-  const onSelectExerciseClick = (id:string) => {
-     if (mode === "edit") {
-          navigate(
-            `/workout-template/${workoutTemplateId}/exercise/${order}?exerciseId=${id}`,
-          );
-        }
+  const onSelectExerciseClick = (id: string) => {
+    if (mode === "edit") {
+      navigate(
+        `/workout-template/${workoutTemplateId}/exercise/${order}?exerciseId=${id}`,
+      );
+    }
 
-        if (mode === "add") {
-          navigate(
-            `/workout-template/${workoutTemplateId}/add-exercise?exerciseId=${id}`,
-          );
-        }
-  }
+    if (mode === "add") {
+      navigate(
+        `/workout-template/${workoutTemplateId}/add-exercise?exerciseId=${id}`,
+      );
+    }
+  };
   return (
     <ExerciseSelector
       isPending={false}

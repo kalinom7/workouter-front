@@ -1,11 +1,11 @@
-import { useGetWorkoutTemplate } from "@/api/workouttemplate/useGetWorkoutTemplate";
+import { useGetWorkoutTemplate } from "@/api/workouttemplate/hooks/useGetWorkoutTemplate";
 import { WorkoutTemplateContext } from "@/contexts/workoutTemplate/WorkoutTemplateContext";
 import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { WorkoutTemplateExercisesList } from "./utils/WorkoutTemplateExercisesList";
-import { useRemoveWorkoutTemplateExerciseFromList } from "./utils/useRemoveWorkoutTemplateExerciseFromList";
-import { useGetAllExercises } from "@/api/exercise/useGetAllExercises";
+import { WorkoutTemplateExercisesList } from "./components/WorkoutTemplateExercisesList";
+import { useRemoveWorkoutTemplateExerciseFromList } from "./hooks/useRemoveWorkoutTemplateExerciseFromList";
+import { useGetAllExercises } from "@/api/exercise/hooks/useGetAllExercises";
 
 const someUuid = "123e4567-e89b-12d3-a456-426614174000";
 

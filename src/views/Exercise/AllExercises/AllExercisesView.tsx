@@ -1,7 +1,7 @@
-import { useGetAllExercises } from "@/api/exercise/useGetAllExercises";
+import { useGetAllExercises } from "@/api/exercise/hooks/useGetAllExercises";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router";
-import { ExercisesList } from "./utils/ExercisesList";
+import { ExercisesList } from "./components/ExercisesList";
 
 const someUuid = "123e4567-e89b-12d3-a456-426614174000";
 

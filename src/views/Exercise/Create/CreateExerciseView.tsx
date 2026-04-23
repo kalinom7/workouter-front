@@ -1,4 +1,4 @@
-import { useCreateExercise } from "@/api/exercise/useCreateExercise";
+import { useCreateExercise } from "@/api/exercise/hooks/useCreateExercise";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";

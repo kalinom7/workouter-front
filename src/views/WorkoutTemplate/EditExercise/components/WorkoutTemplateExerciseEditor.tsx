@@ -1,5 +1,5 @@
-import { useGetAllExercises } from "@/api/exercise/useGetAllExercises";
-import { useEditWorkoutTemplateExercise } from "@/api/workouttemplate/useEditWorkoutTemplateExercise";
+import { useGetAllExercises } from "@/api/exercise/hooks/useGetAllExercises";
+import { useEditWorkoutTemplateExercise } from "@/api/workouttemplate/hooks/useEditWorkoutTemplateExercise";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -22,7 +22,11 @@ export const WorkoutTemplateExerciseEditor = ({
   const [newSets, setNewSets] = useState(oldSets);
   const [newRestPeriod, setNewRestPeriod] = useState(oldRestPeriod);
   const [searchParams] = useSearchParams();
-  const {data: exercises, isLoading: isExercisesLoading, isError: isExercisesError} = useGetAllExercises(someUuid);
+  const {
+    data: exercises,
+    isLoading: isExercisesLoading,
+    isError: isExercisesError,
+  } = useGetAllExercises(someUuid);
   const exerciseId = searchParams.get("exerciseId") ?? "";
   const navigate = useNavigate();
   const onSelectExerciseClick = () => {
@@ -30,15 +34,13 @@ export const WorkoutTemplateExerciseEditor = ({
       `/workout-template/${templateId}/exercise/${order}/select?mode=edit`,
     );
   };
-  
+
   const { mutate, isPending } = useEditWorkoutTemplateExercise();
 
   if (isExercisesLoading) return <>Loading...</>;
   if (isExercisesError || !exercises) return <>Error loading exercise</>;
 
-  const exercise = exercises.find( (ex) => ex.id === exerciseId );
-   
-    
+  const exercise = exercises.find((ex) => ex.id === exerciseId);
 
   const onSuccess = () => {
     toast.success("Exercise successfully edited!");

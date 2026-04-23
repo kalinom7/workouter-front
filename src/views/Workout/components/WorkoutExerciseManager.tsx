@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useAddExerciseToWorkout } from "@/api/workout/hooks/useAddExerciseToWorkout";
 import { useContext, useState } from "react";
 import { WorkoutContext } from "@/contexts/workout/WorkoutContext";
-import { ExerciseSelector } from "@/views/WorkoutTemplate/ExerciseSelector/utils/ExerciseSelector";
+import { ExerciseSelector } from "@/views/WorkoutTemplate/ExerciseSelector/components/ExerciseSelector";
 import { useGetWorkout } from "@/api/workout/hooks/useGetWorkout";
 
 import { globalUserId } from "@/utils/globalUserId";

@@ -1,4 +1,4 @@
-import type { WorkoutTemplateExercise } from "@/api/workouttemplate/useAddWorkoutTemplateExercise";
+import type { WorkoutTemplateExercise } from "@/api/workouttemplate/hooks/useAddWorkoutTemplateExercise";
 import { Button } from "@/components/ui/button";
 import type { Exercise } from "@/types/ExerciseTypes";
 

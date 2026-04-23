@@ -1,4 +1,4 @@
-import { useRemoveWorkoutTemplateExercise } from "@/api/workouttemplate/useRemoveWorkoutTemplateExercise";
+import { useRemoveWorkoutTemplateExercise } from "@/api/workouttemplate/hooks/useRemoveWorkoutTemplateExercise";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 

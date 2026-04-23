@@ -1,7 +1,7 @@
 import { WorkoutTemplateContext } from "@/contexts/workoutTemplate/WorkoutTemplateContext";
 import { useContext } from "react";
-import { useGetWorkoutTemplate } from "@/api/workouttemplate/useGetWorkoutTemplate";
-import { WorkoutTemplateExerciseEditor } from "./utils/WorkoutTemplateExerciseEditor";
+import { useGetWorkoutTemplate } from "@/api/workouttemplate/hooks/useGetWorkoutTemplate";
+import { WorkoutTemplateExerciseEditor } from "./components/WorkoutTemplateExerciseEditor";
 import { useParams } from "react-router-dom";
 
 const someUuid = "123e4567-e89b-12d3-a456-426614174000"; // example of userId

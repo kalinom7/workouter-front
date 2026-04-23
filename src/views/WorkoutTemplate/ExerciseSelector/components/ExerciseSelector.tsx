@@ -1,4 +1,4 @@
-import { useGetAllExercises } from "@/api/exercise/useGetAllExercises";
+import { useGetAllExercises } from "@/api/exercise/hooks/useGetAllExercises";
 import { Button } from "@/components/ui/button";
 
 const someUuid = "123e4567-e89b-12d3-a456-426614174000";
@@ -25,7 +25,10 @@ export const ExerciseSelector = ({
       <ul>
         {exercises.map((exercise) => (
           <li key={exercise.id}>
-            <Button disabled={isPending} onClick={() => onSelectExerciseClick(exercise.id)}>
+            <Button
+              disabled={isPending}
+              onClick={() => onSelectExerciseClick(exercise.id)}
+            >
               {exercise.name}
             </Button>
           </li>

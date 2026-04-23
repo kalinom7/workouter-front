@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { ExerciseApi } from "./Exercise.api";
+import { ExerciseApi } from "../Exercise.api";
 
 export const useCreateExercise = () => {
   return useMutation({

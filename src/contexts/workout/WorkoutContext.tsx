@@ -1,4 +1,5 @@
 import { createContext } from "react";
 
 export const WorkoutContext = createContext<{
-    id: string;}>({id: ""});
+  id: string;
+}>({ id: "" });

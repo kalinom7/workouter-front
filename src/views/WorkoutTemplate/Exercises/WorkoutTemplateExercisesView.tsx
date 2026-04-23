@@ -1,5 +1,5 @@
 import { useGetWorkoutTemplate } from "@/api/workouttemplate/useGetWorkoutTemplate";
-import { WorkoutTemplateContext } from "@/routes/workoutTemplate/WorkoutTemplateContext";
+import { WorkoutTemplateContext } from "@/contexts/workoutTemplate/WorkoutTemplateContext";
 import { Button } from "@/components/ui/button";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,10 +15,15 @@ export const WorkoutTemplateExercisesView = () => {
   const { removeExercise, isPending } =
     useRemoveWorkoutTemplateExerciseFromList(id, someUuid);
   const navigate = useNavigate();
-  const {data: exercises, isLoading: isExercisesLoading, isError: isExercisesError } = useGetAllExercises(someUuid);
+  const {
+    data: exercises,
+    isLoading: isExercisesLoading,
+    isError: isExercisesError,
+  } = useGetAllExercises(someUuid);
 
   if (isError || isExercisesError) return <>Error loading workout template.</>;
-  if (isLoading || isExercisesLoading || !data || !exercises) return <>Loading...</>;
+  if (isLoading || isExercisesLoading || !data || !exercises)
+    return <>Loading...</>;
 
   const onAddExerciseClick = () => {
     navigate(`/workout-template/${id}/add-exercise`);
@@ -31,7 +36,8 @@ export const WorkoutTemplateExercisesView = () => {
     const exercise = data.exercises.find((e) => e.order === order);
     if (!exercise) return;
     navigate(
-      `/workout-template/${id}/exercise/${order}?exerciseId=${exercise.exercise}`);
+      `/workout-template/${id}/exercise/${order}?exerciseId=${exercise.exercise}`,
+    );
   };
 
   return (

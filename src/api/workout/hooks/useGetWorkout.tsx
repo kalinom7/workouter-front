@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { WorkoutApi } from "./WorkoutApi"
+import { WorkoutApi } from "../WorkoutApi"
 
 export const useGetWorkout = (userId:string, workoutId:string) => {
     return useQuery({

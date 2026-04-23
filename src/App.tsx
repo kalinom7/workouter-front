@@ -19,6 +19,7 @@ import { StartWorkoutView } from "./views/StartWorkoutMenu/StartWorkoutView";
 import { StartWorkoutFromTemplateView } from "./views/StartWorkoutFromTemplate/StartWorkoutFromTemplateView";
 import { WorkoutView } from "./views/Workout/WorkoutView";
 import { WorkoutProvider } from "./contexts/workout/WorkoutProvider";
+import { WorkoutScheduleMenuView } from "./views/WorkoutSchedule/WorkoutScheduleMenuView";
 import { WorkoutScheduleView } from "./views/WorkoutSchedule/WorkoutScheduleView";
 
 const queryClient = new QueryClient();
@@ -76,7 +77,14 @@ function App() {
               <Route path="ongoing" element={<WorkoutView />} />
             </Route>
           </Route>
-          <Route path="schedule" element={<WorkoutScheduleView />} />
+          <Route
+            path="workout-schedules"
+            element={<WorkoutScheduleMenuView />}
+          />
+          <Route
+            path="workout-schedules/:id"
+            element={<WorkoutScheduleView />}
+          />
         </Routes>
       </BrowserRouter>
       <Toaster />

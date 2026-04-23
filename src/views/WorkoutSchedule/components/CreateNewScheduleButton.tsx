@@ -1,9 +1,13 @@
 import { Button } from "@/components/ui/button";
 
-export const CreateNewScheduleButton = () => {
+export const CreateNewScheduleButton = ({
+  onClick,
+}: {
+  onClick: () => void;
+}) => {
   return (
     <div>
-      <Button>Create new</Button>
+      <Button onClick={onClick}>Create new</Button>
     </div>
   );
 };

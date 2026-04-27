@@ -37,6 +37,19 @@ export class WorkoutApi {
     return mapWorkout(workoutInDto);
   }
 
+  static async getAllFinishedWorkouts(userId: string) {
+    const workoutsInDto = await apiFetch<WorkoutDto[]>(
+      `/workoutsFinished?userId=${userId}`,
+      {
+        method: "GET",
+      },
+    );
+    const mappedWorkouts: Workout[] = workoutsInDto.map((workoutInDto) =>
+      mapWorkout(workoutInDto),
+    );
+    return mappedWorkouts;
+  }
+
   static async finishWorkout(userId: string, workoutId: string) {
     return apiFetch<Workout>(`/workouts/${workoutId}/finish?userId=${userId}`, {
       method: "PATCH",

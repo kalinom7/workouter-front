@@ -13,7 +13,7 @@ export const WorkoutTimer = () => {
   const endTime = data ? data.endTime?.getTime() : null;
 
   useEffect(() => {
-    if (!startTime || endTime) return;
+    if (!startTime || endTime) return; //TODO: if there is end time we can setTime to endTime to match te times.
 
     const update = () => {
       const now = Date.now();

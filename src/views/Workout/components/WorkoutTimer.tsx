@@ -13,12 +13,19 @@ export const WorkoutTimer = () => {
   const endTime = data ? data.endTime?.getTime() : null;
 
   useEffect(() => {
-    if (!startTime || endTime) return; //TODO: if there is end time we can setTime to endTime to match te times.
+    if (!startTime) return;
 
     const update = () => {
       const now = Date.now();
       const diff = Math.floor((now - startTime) / 1000);
-      setTime(diff);
+      //Fix situation where workoutTimer showed diffrent time than workoutSummary
+      if (endTime) {
+        const endDiff = Math.floor((endTime - startTime) / 1000);
+        if (diff > endDiff) {
+          setTime(endDiff);
+          return;
+        }
+      } else setTime(diff);
     };
 
     update();

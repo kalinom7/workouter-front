@@ -8,22 +8,31 @@ import type { WorkoutSchedule } from "@/types/WorkoutScheduleTypes";
 
 export const SchedulesCarousel = ({
   workoutSchedules,
+  selectedId,
+  onSelect,
 }: {
   workoutSchedules: WorkoutSchedule[];
+  selectedId?: string;
+  onSelect?: (schedule: WorkoutSchedule) => void;
 }) => {
   return (
-    <div>
-      <Carousel orientation="vertical">
-        <CarouselContent>
-          {workoutSchedules.map((schedule) => (
+    <Carousel orientation="vertical">
+      <CarouselContent>
+        {workoutSchedules.map((schedule) => {
+          const isSelected = schedule.id === selectedId;
+
+          return (
             <CarouselItem key={schedule.id}>
-              <Card>
+              <Card
+                onClick={() => onSelect?.(schedule)}
+                className={isSelected ? "border-primary bg-muted" : ""}
+              >
                 <CardContent>{schedule.name}</CardContent>
               </Card>
             </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
-    </div>
+          );
+        })}
+      </CarouselContent>
+    </Carousel>
   );
 };

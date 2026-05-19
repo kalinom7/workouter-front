@@ -13,7 +13,7 @@ export const WorkoutScheduleMainView = () => {
     return (
       <div className="flex flex-col items-center gap-4">
         <CreateNewScheduleDialog />
-        {(data === undefined || isPending) && (
+        {(data === undefined || isPending) && !isError && (
           <>
             <Spinner />
             <p>Loading active schedule...</p>

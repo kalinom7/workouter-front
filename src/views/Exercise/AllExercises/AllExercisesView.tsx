@@ -1,28 +1,31 @@
 import { useGetAllExercises } from "@/api/exercise/hooks/useGetAllExercises";
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router";
 import { ExercisesList } from "./components/ExercisesList";
-
-const someUuid = "123e4567-e89b-12d3-a456-426614174000";
+import { globalUserId } from "@/utils/globalUserId";
+import { CreateExerciseButton } from "./components/CreateExerciseButton";
+import { ExercisesSearchBar } from "./components/ExercisesSearchBar";
+import { Footer } from "@/views/Home/components/Footer";
+import { useState } from "react";
 
 export const AllExercisesView = () => {
-  const navigate = useNavigate();
-  const { data, isLoading, isError } = useGetAllExercises(someUuid);
+  const { data, isLoading, isError } = useGetAllExercises(globalUserId);
+  const [search, setSearch] = useState("");
 
   if (isError) return <>Error loading exercises.</>;
   if (isLoading || !data) return <>Loading...</>;
-
-  const onCreateExerciseClick = () => {
-    navigate("/exercise/create");
-  };
 
   const exercises = data;
 
   return (
     <>
-      <h2>Exercises:</h2>
-      <ExercisesList exercises={exercises} />
-      <Button onClick={onCreateExerciseClick}>Create New Exercise</Button>
+      <div className="relative min-h-screen pb-28">
+        <h1>Exercises</h1>
+        <ExercisesSearchBar search={search} setSearch={setSearch} />
+        <ExercisesList exercises={exercises} search={search} />
+        <div className="fixed bottom-20 left-1/2 -translate-x-1/2">
+          <CreateExerciseButton />
+        </div>
+      </div>
+      <Footer />
     </>
   );
 };

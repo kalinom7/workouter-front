@@ -2,39 +2,35 @@ import { useCreateWorkoutSchedule } from "@/api/workoutschedule/hooks/useCreateW
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { globalUserId } from "@/utils/globalUserId";
 import { useState } from "react";
 
-export const CreateNewScheduleDialog = ({
-  isOpen,
-  onOpenChange,
-}: {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-}) => {
+export const CreateNewScheduleDialog = () => {
   const [scheduleName, setScheduleName] = useState("");
   const { mutate, isPending } = useCreateWorkoutSchedule();
-
-  const onCancelClick = () => {
-    setScheduleName("");
-    onOpenChange(false);
-  };
 
   const onCreateClick = () => {
     mutate({ userId: globalUserId, name: scheduleName });
     setScheduleName("");
-    onOpenChange(false);
+  };
+  const onCancelClick = () => {
+    setScheduleName("");
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Create new</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-sm">
         <DialogTitle>Create new workout schedule</DialogTitle>
         <DialogDescription>Name your schedule</DialogDescription>
         <Input
@@ -42,13 +38,16 @@ export const CreateNewScheduleDialog = ({
           onChange={(e) => setScheduleName(e.target.value)}
         />
         <DialogFooter>
-          <Button
-            disabled={isPending}
-            variant="outline"
-            onClick={onCancelClick}
-          >
-            Cancel
-          </Button>
+          <DialogClose asChild>
+            <Button
+              disabled={isPending}
+              variant="outline"
+              onClick={onCancelClick}
+            >
+              Cancel
+            </Button>
+          </DialogClose>
+
           <Button
             disabled={scheduleName.trim() === "" || isPending}
             onClick={onCreateClick}

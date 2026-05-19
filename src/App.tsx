@@ -19,9 +19,8 @@ import { StartWorkoutView } from "./views/StartWorkoutMenu/StartWorkoutView";
 import { StartWorkoutFromTemplateView } from "./views/StartWorkoutFromTemplate/StartWorkoutFromTemplateView";
 import { WorkoutView } from "./views/Workout/WorkoutView";
 import { WorkoutProvider } from "./contexts/workout/WorkoutProvider";
-import { WorkoutScheduleMenuView } from "./views/WorkoutSchedule/WorkoutScheduleMenuView";
+import { WorkoutScheduleMainView } from "./views/WorkoutSchedule/WorkoutScheduleMainView";
 import { WorkoutScheduleView } from "./views/WorkoutSchedule/WorkoutScheduleView";
-
 const queryClient = new QueryClient();
 
 function App() {
@@ -79,7 +78,7 @@ function App() {
           </Route>
           <Route
             path="workout-schedules"
-            element={<WorkoutScheduleMenuView />}
+            element={<WorkoutScheduleMainView />}
           />
           <Route
             path="workout-schedules/:id"

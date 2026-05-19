@@ -1,3 +1,3 @@
 export const WorkoutScheduleView = () => {
-  return <></>;
+  return <div>specified schedule view</div>;
 };

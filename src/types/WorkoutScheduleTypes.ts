@@ -1,6 +1,6 @@
-export type WorkoutScheduleBlock =
-  | { blockItemId: string; order: number; type: 'workouttemplate'; WorkoutTemplateId: string }
-  | { blockItemId: string; order: number; type: 'rest'; period: number };
+export type WorkoutSchedulePatternItem =
+  | { patternItemId: string; order: number; useOrder: number, type: 'workouttemplate'; workoutTemplateId: string }
+  | { patternItemId: string; order: number; useOrder: number, type: 'rest'; workoutTemplateId: null };
 
 
 export type WorkoutSchedule = {
@@ -8,5 +8,5 @@ export type WorkoutSchedule = {
   id: string;
   name: string;
   userId: string;
-  block: WorkoutScheduleBlock[];
+  pattern: WorkoutSchedulePatternItem[];
 };

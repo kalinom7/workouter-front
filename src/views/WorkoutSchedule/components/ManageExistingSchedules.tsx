@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 export const ManageExistingSchedules = () => {
   return (
     <div>
-      <Button>Manage existing</Button>
+      <Button>Manage all existing</Button>
     </div>
   );
 };

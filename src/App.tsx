@@ -21,6 +21,8 @@ import { WorkoutView } from "./views/Workout/WorkoutView";
 import { WorkoutProvider } from "./contexts/workout/WorkoutProvider";
 import { WorkoutScheduleMainView } from "./views/WorkoutSchedule/WorkoutScheduleMainView";
 import { WorkoutScheduleView } from "./views/WorkoutSchedule/WorkoutScheduleView";
+import { WorkoutScheduleProvider } from "./contexts/workoutSchedule/WorkoutScheduleProvider";
+import { AddWorkoutPatternItemView } from "./views/WorkoutSchedule/components/AddWorkoutPatternItemView";
 const queryClient = new QueryClient();
 
 function App() {
@@ -81,9 +83,15 @@ function App() {
             element={<WorkoutScheduleMainView />}
           />
           <Route
-            path="workout-schedules/:id"
-            element={<WorkoutScheduleView />}
-          />
+            path="workout-schedule/:id"
+            element={<WorkoutScheduleProvider />}
+          >
+            <Route index element={<WorkoutScheduleView />} />
+            <Route
+              path="add-pattern-item"
+              element={<AddWorkoutPatternItemView />}
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
       <Toaster />

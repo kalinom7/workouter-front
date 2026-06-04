@@ -54,10 +54,12 @@ export const useSetWorkoutScheduleInactive = () => {
       }
     },
     onSettled: (_data, _error, { userId }) => {
-      toast.success("Schedule was set inactive.");
       queryClient.invalidateQueries({
         queryKey: ["AllWorkoutSchedules", userId],
       });
+    },
+    onSuccess: () => {
+      toast.success("Schedule was set inactive.");
     },
   });
 };

@@ -53,10 +53,12 @@ export const useSetWorkoutScheduleActive = () => {
       }
     },
     onSettled: (_data, _error, { userId }) => {
-      toast.success("Active schedule updated.");
       queryClient.invalidateQueries({
         queryKey: ["AllWorkoutSchedules", userId],
       });
+    },
+    onSuccess: () => {
+      toast.success("Active schedule updated.");
     },
   });
 };

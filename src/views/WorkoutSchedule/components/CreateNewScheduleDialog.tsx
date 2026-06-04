@@ -47,13 +47,14 @@ export const CreateNewScheduleDialog = () => {
               Cancel
             </Button>
           </DialogClose>
-
-          <Button
-            disabled={scheduleName.trim() === "" || isPending}
-            onClick={onCreateClick}
-          >
-            Create
-          </Button>
+          <DialogClose asChild>
+            <Button
+              disabled={scheduleName.trim() === "" || isPending}
+              onClick={onCreateClick}
+            >
+              Create
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

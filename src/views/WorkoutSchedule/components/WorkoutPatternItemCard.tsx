@@ -11,7 +11,9 @@ export const WorkoutPatternItemCard = ({
   if (!found) {
     return (
       <Card>
-        <CardContent>"Workout template not found."</CardContent>
+        <CardContent>
+          "Workout template: {template?.name || "Unknown"} not found."
+        </CardContent>
       </Card>
     );
   }

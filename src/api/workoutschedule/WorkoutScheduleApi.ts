@@ -57,9 +57,9 @@ export class WorkoutScheduleApi {
     patternItemId: string,    
   ) {
     return apiFetch<WorkoutSchedule>(
-      `/workout-schedules/${workoutScheduleId}/pattern/${patternItemId}userId=${userId}`,
+      `/workout-schedules/${workoutScheduleId}/pattern/${patternItemId}?userId=${userId}`,
       {
-        method: "POST",
+        method: "PATCH",
         body: JSON.stringify({ restDays }),
       },
     );

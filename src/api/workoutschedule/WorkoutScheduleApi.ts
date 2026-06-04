@@ -36,13 +36,13 @@ export class WorkoutScheduleApi {
     );
   }
 
-  static async addWorkoutToBlock(
+  static async addWorkoutToPattern(
     userId: string,
     workoutTemplateId: string,
     workoutScheduleId: string,
   ) {
     return apiFetch<WorkoutSchedule>(
-      `/workout-schedules/${workoutScheduleId}/block/workout?userId=${userId}`,
+      `/workout-schedules/${workoutScheduleId}/pattern/workout?userId=${userId}`,
       {
         method: "POST",
         body: JSON.stringify({ workoutTemplateId }),
@@ -50,27 +50,28 @@ export class WorkoutScheduleApi {
     );
   }
 
-  static async addRestToBlock(
+  static async addRestToPatternWorkout(
     userId: string,
-    restPeriod: number,
     workoutScheduleId: string,
+    restDays: number,
+    patternItemId: string,    
   ) {
     return apiFetch<WorkoutSchedule>(
-      `/workout-schedules/${workoutScheduleId}/block/rest?userId=${userId}`,
+      `/workout-schedules/${workoutScheduleId}/pattern/${patternItemId}userId=${userId}`,
       {
         method: "POST",
-        body: JSON.stringify({ restPeriod }),
+        body: JSON.stringify({ restDays }),
       },
     );
   }
 
-  static async removeBlockItem(
+  static async removePatternItem(
     userId: string,
-    blockItemId: string,
+    patternItemId: string,
     workoutScheduleId: string,
   ) {
     return apiFetch<WorkoutSchedule>(
-      `/workout-schedules/${workoutScheduleId}/block/${blockItemId}?userId=${userId}`,
+      `/workout-schedules/${workoutScheduleId}/pattern/${patternItemId}?userId=${userId}`,
       {
         method: "DELETE",
       },

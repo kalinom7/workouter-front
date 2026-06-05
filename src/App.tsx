@@ -22,6 +22,7 @@ import { WorkoutProvider } from "./contexts/workout/WorkoutProvider";
 import { WorkoutScheduleMainView } from "./views/WorkoutSchedule/WorkoutScheduleMainView";
 import { WorkoutScheduleView } from "./views/WorkoutSchedule/WorkoutScheduleView";
 import { WorkoutScheduleProvider } from "./contexts/workoutSchedule/WorkoutScheduleProvider";
+import { ManageExistingSchedulesView } from "./views/WorkoutSchedule/components/ManageExistingSchedulesView";
 const queryClient = new QueryClient();
 
 function App() {
@@ -78,8 +79,12 @@ function App() {
             </Route>
           </Route>
           <Route
-            path="workout-schedules"
+            path="workout-schedules/main"
             element={<WorkoutScheduleMainView />}
+          />
+          <Route
+            path="workout-schedules/manage"
+            element={<ManageExistingSchedulesView />}
           />
           <Route
             path="workout-schedule/:id"

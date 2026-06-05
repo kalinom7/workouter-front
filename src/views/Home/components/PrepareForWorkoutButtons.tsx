@@ -9,7 +9,7 @@ export const PrepareForWorkoutButtons = () => {
     navigate(`/exercises?userId=${userId}`);
   };
   const onScheduleClick = () => {
-    navigate(`/workout-schedules?userId=${userId}`);
+    navigate(`/workout-schedules/main?userId=${userId}`);
   };
   const onTemplatesClick = () => {
     navigate(`/workout-templates?userId=${userId}`);

@@ -101,4 +101,18 @@ export class WorkoutScheduleApi {
       },
     );
   }
+
+  static async renameWorkoutSchedule(
+    userId: string,
+    workoutScheduleId: string,
+    newName: string,
+  ) {
+    return apiFetch<WorkoutSchedule>(
+      `/workout-schedules/${workoutScheduleId}/rename?userId=${userId}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({ newName }),
+      },
+    );
+  }
 }

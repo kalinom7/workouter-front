@@ -4,9 +4,15 @@ import { WorkoutScheduleContext } from "@/contexts/workoutSchedule/WorkoutSchedu
 import { globalUserId } from "@/utils/globalUserId";
 import { useContext } from "react";
 import { WorkoutPatternList } from "./components/WorkoutPatternList";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import { RenameWorkoutScheduleDialog } from "./components/RenameWorkoutScheduleDialog";
+import { DeleteWorkoutScheduleDialog } from "./components/DeleteWorkoutScheduleDialog";
 
 export const WorkoutScheduleView = () => {
   const { id } = useContext(WorkoutScheduleContext);
+  const navigate = useNavigate();
+
   const {
     data: workoutTemplates,
     isLoading: isWorkoutTemplatesLoading,
@@ -31,11 +37,20 @@ export const WorkoutScheduleView = () => {
   return (
     <div>
       <h1>{workoutSchedule.name}</h1>
+      <RenameWorkoutScheduleDialog currentName={workoutSchedule.name} />
       {isWorkoutTemplatesLoaded ? (
         <WorkoutPatternList templates={workoutTemplates} />
       ) : (
         "Loading schedule pattern..."
       )}
+      <Button
+        onClick={() =>
+          navigate("/workout-schedules/main?userId=" + globalUserId)
+        }
+      >
+        Save
+      </Button>
+      <DeleteWorkoutScheduleDialog workoutSchedule={workoutSchedule} />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { Footer } from "../Home/components/Footer";
-import { ManageExistingSchedules } from "./components/ManageExistingSchedules";
+import { ManageExistingSchedulesButton } from "./components/ManageExistingSchedulesButton";
 import { SchedulesCarousel } from "./components/SchedulesCarousel";
 import { SelectActiveScheduleDialog } from "./components/SelectActiveScheduleDialog";
 import { CreateNewScheduleDialog } from "./components/CreateNewScheduleDialog";
@@ -20,7 +20,7 @@ export const WorkoutScheduleMainView = () => {
           <>
             <Spinner />
             <p>Loading active schedule...</p>
-            <ManageExistingSchedules />
+            <ManageExistingSchedulesButton />
             <Spinner />
             <p>Loading workout schedules...</p>
           </>
@@ -36,7 +36,7 @@ export const WorkoutScheduleMainView = () => {
     <div className="flex flex-col items-center gap-4">
       <CreateNewScheduleDialog />
       <SelectActiveScheduleDialog workoutSchedules={data} />
-      <ManageExistingSchedules />
+      <ManageExistingSchedulesButton />
       <SchedulesCarousel
         workoutSchedules={data}
         onSelect={(schedule: WorkoutSchedule) =>

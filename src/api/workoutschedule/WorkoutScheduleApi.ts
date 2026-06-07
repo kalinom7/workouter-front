@@ -2,55 +2,117 @@ import type { WorkoutSchedule } from "../../types/WorkoutScheduleTypes";
 import { apiFetch } from "../fetch";
 
 export class WorkoutScheduleApi {
+  static async createWorkoutSchedule(userId: string, name: string) {
+    return apiFetch<WorkoutSchedule>(`/workout-schedules?userId=${userId}`, {
+      method: "POST",
+      body: JSON.stringify({ name }),
+    });
+  }
 
-    static async createWorkoutSchedule(userId: string, name: string){
-        return apiFetch<WorkoutSchedule>(`/workout-schedules?userId=${userId}`, {
-            method: "POST",
-            body: JSON.stringify({ name }),
-        });
-    }
+  static async getWorkoutSchedule(userId: string, workoutScheduleId: string) {
+    return apiFetch<WorkoutSchedule>(
+      `/workout-schedules/${workoutScheduleId}?userId=${userId}`,
+      {
+        method: "GET",
+      },
+    );
+  }
 
-    static async getWorkoutSchedule(userId: string, workoutScheduleId: string){
-        return apiFetch<WorkoutSchedule>(`/workout-schedules/${workoutScheduleId}?userId=${userId}`, {
-            method: "GET",
-        });
-    }
-    
-    static async deleteWorkoutSchedule(userId: string, workoutScheduleId: string) {
-        return apiFetch<void>(`/workout-schedules/${workoutScheduleId}?userId=${userId}`, {
-            method: "DELETE",
-        });
-    }
+  static async getAllWorkoutSchedules(userId: string) {
+    return apiFetch<WorkoutSchedule[]>(`/workout-schedules?userId=${userId}`, {
+      method: "GET",
+    });
+  }
 
-    static async addWorkoutToBlock(userId: string, workoutTemplateId: string, workoutScheduleId: string){
-        return apiFetch<WorkoutSchedule>(`/workout-schedules/${workoutScheduleId}/block/workout?userId=${userId}`, {
-            method: "POST",
-            body: JSON.stringify({ workoutTemplateId }),
-        });
-    }
+  static async deleteWorkoutSchedule(
+    userId: string,
+    workoutScheduleId: string,
+  ) {
+    return apiFetch<void>(
+      `/workout-schedules/${workoutScheduleId}?userId=${userId}`,
+      {
+        method: "DELETE",
+      },
+    );
+  }
 
-    static async addRestToBlock(userId: string, restPeriod: number, workoutScheduleId: string){
-        return apiFetch<WorkoutSchedule>(`/workout-schedules/${workoutScheduleId}/block/rest?userId=${userId}`, {
-            method: "POST",
-            body: JSON.stringify({ restPeriod }),
-        });
-    }
+  static async addWorkoutToPattern(
+    userId: string,
+    workoutTemplateId: string,
+    workoutScheduleId: string,
+  ) {
+    return apiFetch<WorkoutSchedule>(
+      `/workout-schedules/${workoutScheduleId}/pattern/workout?userId=${userId}`,
+      {
+        method: "POST",
+        body: JSON.stringify({ workoutTemplateId }),
+      },
+    );
+  }
 
-    static async removeBlockItem(userId: string, blockItemId: string, workoutScheduleId: string){
-        return apiFetch<WorkoutSchedule>(`/workout-schedules/${workoutScheduleId}/block/${blockItemId}?userId=${userId}`, {
-            method: "DELETE",
-        });
-    }
+  static async addRestToPatternWorkout(
+    userId: string,
+    workoutScheduleId: string,
+    restDays: number,
+    patternItemId: string,    
+  ) {
+    return apiFetch<WorkoutSchedule>(
+      `/workout-schedules/${workoutScheduleId}/pattern/${patternItemId}?userId=${userId}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({ restDays }),
+      },
+    );
+  }
 
-    static async setWorkoutScheduleActive(userId: string, workoutScheduleId: string){
-        return apiFetch<WorkoutSchedule>(`/workout-schedules/${workoutScheduleId}/activate?userId=${userId}`, {
-            method: "PATCH",
-        });
-    }
-    
-    static async setWorkoutScheduleInactive(userId: string, workoutScheduleId: string){
-        return apiFetch<WorkoutSchedule>(`/workout-schedules/${workoutScheduleId}/deactivate?userId=${userId}`, {
-            method: "PATCH",
-        });
-    }
+  static async removePatternItem(
+    userId: string,
+    patternItemId: string,
+    workoutScheduleId: string,
+  ) {
+    return apiFetch<WorkoutSchedule>(
+      `/workout-schedules/${workoutScheduleId}/pattern/${patternItemId}?userId=${userId}`,
+      {
+        method: "DELETE",
+      },
+    );
+  }
+
+  static async setWorkoutScheduleActive(
+    userId: string,
+    workoutScheduleId: string,
+  ) {
+    return apiFetch<WorkoutSchedule>(
+      `/workout-schedules/${workoutScheduleId}/activate?userId=${userId}`,
+      {
+        method: "PATCH",
+      },
+    );
+  }
+
+  static async setWorkoutScheduleInactive(
+    userId: string,
+    workoutScheduleId: string,
+  ) {
+    return apiFetch<WorkoutSchedule>(
+      `/workout-schedules/${workoutScheduleId}/deactivate?userId=${userId}`,
+      {
+        method: "PATCH",
+      },
+    );
+  }
+
+  static async renameWorkoutSchedule(
+    userId: string,
+    workoutScheduleId: string,
+    newName: string,
+  ) {
+    return apiFetch<WorkoutSchedule>(
+      `/workout-schedules/${workoutScheduleId}/rename?userId=${userId}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({ newName }),
+      },
+    );
+  }
 }

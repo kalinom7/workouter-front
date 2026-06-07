@@ -19,7 +19,10 @@ import { StartWorkoutView } from "./views/StartWorkoutMenu/StartWorkoutView";
 import { StartWorkoutFromTemplateView } from "./views/StartWorkoutFromTemplate/StartWorkoutFromTemplateView";
 import { WorkoutView } from "./views/Workout/WorkoutView";
 import { WorkoutProvider } from "./contexts/workout/WorkoutProvider";
-
+import { WorkoutScheduleMainView } from "./views/WorkoutSchedule/WorkoutScheduleMainView";
+import { WorkoutScheduleView } from "./views/WorkoutSchedule/WorkoutScheduleView";
+import { WorkoutScheduleProvider } from "./contexts/workoutSchedule/WorkoutScheduleProvider";
+import { ManageExistingSchedulesView } from "./views/WorkoutSchedule/components/ManageExistingSchedulesView";
 const queryClient = new QueryClient();
 
 function App() {
@@ -74,6 +77,20 @@ function App() {
             <Route path=":id" element={<WorkoutProvider />}>
               <Route path="ongoing" element={<WorkoutView />} />
             </Route>
+          </Route>
+          <Route
+            path="workout-schedules/main"
+            element={<WorkoutScheduleMainView />}
+          />
+          <Route
+            path="workout-schedules/manage"
+            element={<ManageExistingSchedulesView />}
+          />
+          <Route
+            path="workout-schedule/:id"
+            element={<WorkoutScheduleProvider />}
+          >
+            <Route index element={<WorkoutScheduleView />} />
           </Route>
         </Routes>
       </BrowserRouter>

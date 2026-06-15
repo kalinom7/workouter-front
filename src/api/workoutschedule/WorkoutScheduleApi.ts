@@ -115,4 +115,12 @@ export class WorkoutScheduleApi {
       },
     );
   }
+
+  static async getScheduledActivity(userId: string){
+    return apiFetch<string | null>(`/workout-schedules/getScheduledActivity?userId=${userId}`,
+      {
+        method: "GET",
+      }
+    )
+  }
 }

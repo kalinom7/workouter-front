@@ -1,3 +1,5 @@
+import { HttpError } from "./errors/HttpError";
+
 const API_URL = "http://localhost:3000";
 
 export async function apiFetch<T>(
@@ -12,17 +14,23 @@ export async function apiFetch<T>(
     ...options,
   });
 
+  const contentType = response.headers.get("content-type");
+
+  const isJson = contentType?.includes("application/json");
+
   if (!response.ok) {
-    throw new Error(`API error: ${response.status}`);
+    let responseMessage = `Request failed with status ${response.status}`
+    if(isJson){
+      const reponseData = await response.json(); 
+      responseMessage = reponseData?.message;
+    }
+    throw new HttpError(response.status, responseMessage, endpoint);
   }
 
   if (response.status === 204) {
     return undefined as T;
   }
-  const contentType = response.headers.get("content-type");
-
-  const isJson = contentType?.includes("application/json");
-
+  
   if (!isJson) {
     return undefined as T;
   }

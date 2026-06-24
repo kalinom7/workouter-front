@@ -3,7 +3,10 @@ import { useGetWorkoutTemplate } from "@/api/workouttemplate/hooks/useGetWorkout
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
+  DialogDescription,
+  DialogFooter,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -11,8 +14,12 @@ import { globalUserId } from "@/utils/globalUserId";
 
 export const StartWorkoutFromScheduleDialog = () => {
   const scheduledActivity = useGetScheduledActivity(globalUserId);
+  const scheduledActivityData = scheduledActivity.data;
   const scheduledWorkoutTemplate = useGetWorkoutTemplate(
-    scheduledActivity.data ?? "",
+    scheduledActivityData?.status === "active" &&
+      scheduledActivityData.activityId
+      ? scheduledActivityData.activityId
+      : "",
     globalUserId,
   );
 
@@ -21,11 +28,47 @@ export const StartWorkoutFromScheduleDialog = () => {
       <DialogTrigger asChild>
         <Button>Start scheduled workout</Button>
       </DialogTrigger>
-      {scheduledActivity != null && (
+      {scheduledActivityData?.status === "active" &&
+        scheduledActivityData.activityId != null && (
+          <DialogContent>
+            <DialogTitle>
+              Scheduled workout: {scheduledWorkoutTemplate.data?.name}
+            </DialogTitle>
+          </DialogContent>
+        )}
+      {scheduledActivityData?.status === "active" &&
+        scheduledActivityData.activityId == null && (
+          <DialogContent>
+            <DialogTitle>Take some rest!</DialogTitle>
+            <DialogDescription>
+              Your today's scheduled activity is rest day.
+            </DialogDescription>
+            <DialogFooter className="flex flex-row justify-center">
+              <DialogClose asChild>
+                <Button className="w-auto">Okay</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        )}
+      {scheduledActivityData?.status === "no-schedule" && (
         <DialogContent>
-          <DialogTitle>
-            Scheduled workout: {scheduledWorkoutTemplate.data?.name}
-          </DialogTitle>
+          <DialogTitle>You dont have an active workout schedule</DialogTitle>
+          <DialogDescription>
+            Go create and set workout schedule as active.
+          </DialogDescription>
+          <DialogFooter className="flex flex-row justify-center">
+            <DialogClose asChild>
+              <Button className="w-auto">Okay</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      )}
+      {scheduledActivityData?.status === "skipped" && (
+        <DialogContent>
+          <DialogTitle>You skipped your scheduled workout</DialogTitle>
+          <DialogDescription>
+            Select one of workouts in your schedule to continue
+          </DialogDescription>
         </DialogContent>
       )}
     </Dialog>

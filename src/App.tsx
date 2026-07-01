@@ -22,7 +22,7 @@ import { WorkoutProvider } from "./contexts/workout/WorkoutProvider";
 import { WorkoutScheduleMainView } from "./views/WorkoutSchedule/WorkoutScheduleMainView";
 import { WorkoutScheduleView } from "./views/WorkoutSchedule/WorkoutScheduleView";
 import { WorkoutScheduleProvider } from "./contexts/workoutSchedule/WorkoutScheduleProvider";
-import { ManageExistingSchedulesView } from "./views/WorkoutSchedule/components/ManageExistingSchedulesView";
+import { ManageExistingSchedulesView } from "./views/WorkoutSchedule/ManageExistingSchedulesView";
 const queryClient = new QueryClient();
 
 function App() {

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { RenameWorkoutScheduleDialog } from "./components/RenameWorkoutScheduleDialog";
 import { DeleteWorkoutScheduleDialog } from "./components/DeleteWorkoutScheduleDialog";
+import { GoBackArrow } from "@/utils/GoBackArrow";
 
 export const WorkoutScheduleView = () => {
   const { id } = useContext(WorkoutScheduleContext);
@@ -36,6 +37,7 @@ export const WorkoutScheduleView = () => {
 
   return (
     <div>
+      <GoBackArrow />
       <h1>{workoutSchedule.name}</h1>
       <RenameWorkoutScheduleDialog currentName={workoutSchedule.name} />
       {isWorkoutTemplatesLoaded ? (
@@ -43,13 +45,7 @@ export const WorkoutScheduleView = () => {
       ) : (
         "Loading schedule pattern..."
       )}
-      <Button
-        onClick={() =>
-          navigate("/workout-schedules/main?userId=" + globalUserId)
-        }
-      >
-        Save
-      </Button>
+      <Button onClick={() => navigate(-1)}>Save</Button>
       <DeleteWorkoutScheduleDialog workoutSchedule={workoutSchedule} />
     </div>
   );

@@ -1,17 +1,14 @@
 import { Footer } from "../Home/components/Footer";
 import { ManageExistingSchedulesButton } from "./components/ManageExistingSchedulesButton";
-import { SchedulesCarousel } from "./components/SchedulesCarousel";
 import { SelectActiveScheduleDialog } from "./components/SelectActiveScheduleDialog";
 import { CreateNewScheduleDialog } from "./components/CreateNewScheduleDialog";
 import { useGetAllWorkoutSchedules } from "@/api/workoutschedule/hooks/useGetAllWorkoutSchedules";
 import { globalUserId } from "@/utils/globalUserId";
 import { Spinner } from "@/components/ui/spinner";
-import { useNavigate } from "react-router-dom";
-import type { WorkoutSchedule } from "@/types/WorkoutScheduleTypes";
+import { GoBackArrow } from "@/utils/GoBackArrow";
 
 export const WorkoutScheduleMainView = () => {
   const { data, isPending, isError } = useGetAllWorkoutSchedules(globalUserId);
-  const navigate = useNavigate();
   if (data === undefined || isPending || isError) {
     return (
       <div className="flex flex-col items-center gap-4">
@@ -34,15 +31,10 @@ export const WorkoutScheduleMainView = () => {
 
   return (
     <div className="flex flex-col items-center gap-4">
+      <GoBackArrow />
       <CreateNewScheduleDialog />
       <SelectActiveScheduleDialog workoutSchedules={data} />
       <ManageExistingSchedulesButton />
-      <SchedulesCarousel
-        workoutSchedules={data}
-        onSelect={(schedule: WorkoutSchedule) =>
-          navigate(`/workout-schedule/${schedule.id}`)
-        }
-      />
       <Footer />
     </div>
   );

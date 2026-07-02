@@ -23,6 +23,7 @@ import { WorkoutScheduleMainView } from "./views/WorkoutSchedule/WorkoutSchedule
 import { WorkoutScheduleView } from "./views/WorkoutSchedule/WorkoutScheduleView";
 import { WorkoutScheduleProvider } from "./contexts/workoutSchedule/WorkoutScheduleProvider";
 import { ManageExistingSchedulesView } from "./views/WorkoutSchedule/ManageExistingSchedulesView";
+import { ViewLayout } from "./views/sharedComponents/ViewLayout";
 const queryClient = new QueryClient();
 
 function App() {
@@ -31,66 +32,82 @@ function App() {
       <ReactQueryDevtools />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginView />} />
-          <Route path="/register" element={<RegisterView />} />
-          <Route path="/home" element={<HomeView />} />
-          <Route path="exercise">
-            <Route path="create" element={<CreateExerciseView />} />
+          <Route element={<ViewLayout showHeader={false} showFooter={false} />}>
+            <Route path="/" element={<LoginView />} />
+            <Route path="/register" element={<RegisterView />} />
           </Route>
-          <Route path="exercises" element={<AllExercisesView />} />
 
-          <Route path="workout-template">
-            <Route path="create" element={<WorkoutTemplateCreateView />} />
-            <Route path=":id" element={<WorkoutTemplateProvider />}>
+          <Route element={<ViewLayout showHeader={false} showFooter={true} />}>
+            <Route path="/home" element={<HomeView />} />
+          </Route>
+
+          <Route element={<ViewLayout />}>
+            <Route path="exercise">
+              <Route path="create" element={<CreateExerciseView />} />
+            </Route>
+            <Route path="exercises" element={<AllExercisesView />} />
+          </Route>
+
+          <Route element={<ViewLayout />}>
+            <Route path="workout-template">
+              <Route path="create" element={<WorkoutTemplateCreateView />} />
+              <Route path=":id" element={<WorkoutTemplateProvider />}>
+                <Route
+                  path="add-exercise"
+                  element={<WorkoutTemplateAddExerciseView />}
+                />
+                <Route
+                  path="exercises"
+                  element={<WorkoutTemplateExercisesView />}
+                />
+                <Route
+                  path="exercise/:order"
+                  element={<WorkoutTemplateEditExerciseView />}
+                />
+                <Route
+                  path="exercise/:order/select"
+                  element={<ExerciseSelectorView />}
+                />
+                <Route
+                  path="add-exercise/select"
+                  element={<ExerciseSelectorView />}
+                />
+              </Route>
+            </Route>
+            <Route
+              path="workout-templates"
+              element={<AllWorkoutTemplatesView />}
+            />
+          </Route>
+
+          <Route path="workout">
+            <Route element={<ViewLayout />}>
+              <Route path="start-menu" element={<StartWorkoutView />} />
               <Route
-                path="add-exercise"
-                element={<WorkoutTemplateAddExerciseView />}
-              />
-              <Route
-                path="exercises"
-                element={<WorkoutTemplateExercisesView />}
-              />
-              <Route
-                path="exercise/:order"
-                element={<WorkoutTemplateEditExerciseView />}
-              />
-              <Route
-                path="exercise/:order/select"
-                element={<ExerciseSelectorView />}
-              />
-              <Route
-                path="add-exercise/select"
-                element={<ExerciseSelectorView />}
+                path="startFromTemplate"
+                element={<StartWorkoutFromTemplateView />}
               />
             </Route>
-          </Route>
-          <Route
-            path="workout-templates"
-            element={<AllWorkoutTemplatesView />}
-          />
-          <Route path="workout">
-            <Route path="start-menu" element={<StartWorkoutView />} />
-            <Route
-              path="startFromTemplate"
-              element={<StartWorkoutFromTemplateView />}
-            />
             <Route path=":id" element={<WorkoutProvider />}>
               <Route path="ongoing" element={<WorkoutView />} />
             </Route>
           </Route>
-          <Route
-            path="workout-schedules/main"
-            element={<WorkoutScheduleMainView />}
-          />
-          <Route
-            path="workout-schedules/manage"
-            element={<ManageExistingSchedulesView />}
-          />
-          <Route
-            path="workout-schedule/:id"
-            element={<WorkoutScheduleProvider />}
-          >
-            <Route index element={<WorkoutScheduleView />} />
+
+          <Route element={<ViewLayout />}>
+            <Route
+              path="workout-schedules/main"
+              element={<WorkoutScheduleMainView />}
+            />
+            <Route
+              path="workout-schedules/manage"
+              element={<ManageExistingSchedulesView />}
+            />
+            <Route
+              path="workout-schedule/:id"
+              element={<WorkoutScheduleProvider />}
+            >
+              <Route index element={<WorkoutScheduleView />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

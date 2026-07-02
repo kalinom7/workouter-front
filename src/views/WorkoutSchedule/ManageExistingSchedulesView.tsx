@@ -3,7 +3,6 @@ import { SchedulesCarousel } from "./components/SchedulesCarousel";
 import { Spinner } from "@/components/ui/spinner";
 import { globalUserId } from "@/utils/globalUserId";
 import { CreateNewScheduleDialog } from "./components/CreateNewScheduleDialog";
-import { GoBackArrow } from "@/views/sharedComponents/GoBackArrow";
 import type { WorkoutSchedule } from "@/types/WorkoutScheduleTypes";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -36,7 +35,6 @@ export const ManageExistingSchedulesView = () => {
 
   return (
     <div>
-      <GoBackArrow />
       <h1>Manage All Existing Workout Schedules</h1>
       <SearchBar
         searched="workout schedule"

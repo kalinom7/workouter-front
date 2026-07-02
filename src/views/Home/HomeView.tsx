@@ -1,4 +1,3 @@
-import { Footer } from "./components/Footer";
 import { GoToWorkoutHistoryButton } from "./components/GoToWorkoutHistoryButton";
 import { HelpButton } from "./components/HelpButton";
 import { NotificationButton } from "./components/NotificationsButton";
@@ -36,8 +35,6 @@ export const HomeView = () => {
       </div>
 
       <WorkoutHistoryGallery />
-
-      <Footer />
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Footer } from "../Home/components/Footer";
 import { WorkoutTemplatePreview } from "./components/WorkoutTemplatePreview";
 import { WorkoutTemplateSelector } from "../sharedComponents/WorkoutTemplateSelector";
 import { useStartWorkoutFromTemplate } from "@/api/workout/hooks/useStartWorkoutFromTemplate";
@@ -51,7 +50,6 @@ export const StartWorkoutFromTemplateView = () => {
           />
         </div>
       )}
-      <Footer />
     </div>
   );
 };

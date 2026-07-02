@@ -105,13 +105,13 @@ export class WorkoutScheduleApi {
   static async renameWorkoutSchedule(
     userId: string,
     workoutScheduleId: string,
-    newName: string,
+    name: string,
   ) {
     return apiFetch<WorkoutSchedule>(
       `/workout-schedules/${workoutScheduleId}/rename?userId=${userId}`,
       {
         method: "PATCH",
-        body: JSON.stringify({ newName }),
+        body: JSON.stringify({ name }),
       },
     );
   }

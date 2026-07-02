@@ -12,7 +12,7 @@ export const GoBackArrow = () => {
     <Button
       variant="ghost"
       size="icon-lg"
-      className="rounded-full"
+      className="rounded-full justify-start"
       onClick={handleGoBack}
       asChild
     >

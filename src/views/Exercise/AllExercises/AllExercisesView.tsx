@@ -2,7 +2,7 @@ import { useGetAllExercises } from "@/api/exercise/hooks/useGetAllExercises";
 import { ExercisesList } from "./components/ExercisesList";
 import { globalUserId } from "@/utils/globalUserId";
 import { CreateExerciseButton } from "./components/CreateExerciseButton";
-import { SearchBar } from "../../../utils/SearchBar";
+import { SearchBar } from "../../sharedComponents/SearchBar";
 import { Footer } from "@/views/Home/components/Footer";
 import { useState } from "react";
 

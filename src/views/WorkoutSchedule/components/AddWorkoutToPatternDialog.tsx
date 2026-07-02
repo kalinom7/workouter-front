@@ -4,41 +4,55 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
+  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { WorkoutScheduleContext } from "@/contexts/workoutSchedule/WorkoutScheduleContext";
 import { globalUserId } from "@/utils/globalUserId";
-import { WorkoutTemplateSelector } from "@/views/StartWorkoutFromTemplate/components/WorkoutTemplateSelector";
+import { SearchBar } from "@/views/sharedComponents/SearchBar";
+import { WorkoutTemplateSelector } from "@/views/sharedComponents/WorkoutTemplateSelector";
 import { useContext, useState } from "react";
 
 export const AddWorkoutToPatternDialog = () => {
-  const [workoutTemplateId, setWorkoutTemplateId] = useState<string | null>(
-    null,
-  );
+  const [selectedWorkoutTemplateId, setSelectedWorkoutTemplateId] =
+    useState<string>("");
+  const [search, setSearch] = useState("");
   const { id } = useContext(WorkoutScheduleContext);
   const { mutate, isPending } = useAddWorkoutToPattern();
 
   const onAddClick = () => {
-    if (!workoutTemplateId) return;
+    if (!selectedWorkoutTemplateId) return;
     return mutate({
       userId: globalUserId,
-      workoutTemplateId: workoutTemplateId,
+      workoutTemplateId: selectedWorkoutTemplateId,
       workoutScheduleId: id,
     });
   };
 
   return (
-    <Dialog onOpenChange={() => setWorkoutTemplateId(null)}>
+    <Dialog onOpenChange={() => setSelectedWorkoutTemplateId("")}>
       <DialogTrigger asChild>
         <Button> Add Workout</Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogTitle>Select workout template</DialogTitle>
+        <DialogHeader>
+          <DialogTitle>Select workout template</DialogTitle>
+          <DialogDescription>
+            Select a workout template to add to your workout schedule.
+          </DialogDescription>
+        </DialogHeader>
+        <SearchBar
+          search={search}
+          setSearch={setSearch}
+          searched="workout template"
+        />
         <WorkoutTemplateSelector
-          setPreviewedTemplateId={setWorkoutTemplateId}
-          disabled={isPending}
+          selectedTemplateId={selectedWorkoutTemplateId}
+          search={search}
+          setSelectedTemplateId={setSelectedWorkoutTemplateId}
         />
         <DialogFooter>
           <DialogClose asChild>
@@ -46,7 +60,7 @@ export const AddWorkoutToPatternDialog = () => {
           </DialogClose>
           <DialogClose asChild>
             <Button
-              disabled={!workoutTemplateId || isPending}
+              disabled={!selectedWorkoutTemplateId || isPending}
               onClick={onAddClick}
             >
               Add

@@ -3,11 +3,11 @@ import { SchedulesCarousel } from "./components/SchedulesCarousel";
 import { Spinner } from "@/components/ui/spinner";
 import { globalUserId } from "@/utils/globalUserId";
 import { CreateNewScheduleDialog } from "./components/CreateNewScheduleDialog";
-import { GoBackArrow } from "@/utils/GoBackArrow";
+import { GoBackArrow } from "@/views/sharedComponents/GoBackArrow";
 import type { WorkoutSchedule } from "@/types/WorkoutScheduleTypes";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { SearchBar } from "@/utils/SearchBar";
+import { SearchBar } from "@/views/sharedComponents/SearchBar";
 
 export const ManageExistingSchedulesView = () => {
   const { data, isPending, isError } = useGetAllWorkoutSchedules(globalUserId);

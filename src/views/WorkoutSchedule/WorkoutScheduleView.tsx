@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { RenameWorkoutScheduleDialog } from "./components/RenameWorkoutScheduleDialog";
 import { DeleteWorkoutScheduleDialog } from "./components/DeleteWorkoutScheduleDialog";
-import { GoBackArrow } from "@/utils/GoBackArrow";
+import { GoBackArrow } from "@/views/sharedComponents/GoBackArrow";
 
 export const WorkoutScheduleView = () => {
   const { id } = useContext(WorkoutScheduleContext);

@@ -5,7 +5,7 @@ import { CreateNewScheduleDialog } from "./components/CreateNewScheduleDialog";
 import { useGetAllWorkoutSchedules } from "@/api/workoutschedule/hooks/useGetAllWorkoutSchedules";
 import { globalUserId } from "@/utils/globalUserId";
 import { Spinner } from "@/components/ui/spinner";
-import { GoBackArrow } from "@/utils/GoBackArrow";
+import { GoBackArrow } from "@/views/sharedComponents/GoBackArrow";
 
 export const WorkoutScheduleMainView = () => {
   const { data, isPending, isError } = useGetAllWorkoutSchedules(globalUserId);

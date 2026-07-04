@@ -24,12 +24,20 @@ export const AddWorkoutToPatternDialog = () => {
   const { mutate, isPending } = useAddWorkoutToPattern();
 
   const onAddClick = () => {
-    if (!selectedWorkoutTemplateId) return;
-    return mutate({
-      userId: globalUserId,
-      workoutTemplateId: selectedWorkoutTemplateId,
-      workoutScheduleId: id,
-    });
+    if (!selectedWorkoutTemplateId) return null;
+    return mutate(
+      {
+        userId: globalUserId,
+        workoutTemplateId: selectedWorkoutTemplateId,
+        workoutScheduleId: id,
+      },
+      {
+        onSuccess: () => {
+          setSelectedWorkoutTemplateId("");
+          setSearch("");
+        },
+      },
+    );
   };
 
   return (
@@ -37,7 +45,7 @@ export const AddWorkoutToPatternDialog = () => {
       <DialogTrigger asChild>
         <Button> Add Workout</Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="max-h-[85vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Select workout template</DialogTitle>
           <DialogDescription>

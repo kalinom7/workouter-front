@@ -4,7 +4,6 @@ import { WorkoutScheduleContext } from "@/contexts/workoutSchedule/WorkoutSchedu
 import { globalUserId } from "@/utils/globalUserId";
 import { Fragment, useContext } from "react";
 import { WorkoutPatternItemCard } from "./WorkoutPatternItemCard";
-import { AddWorkoutToPatternDialog } from "./AddWorkoutToPatternDialog";
 import { RestDaysDialog } from "./RestDaysDialog";
 
 export const WorkoutPatternList = ({
@@ -51,7 +50,6 @@ export const WorkoutPatternList = ({
           );
         })}
       </ul>
-      <AddWorkoutToPatternDialog />
     </div>
   );
 };

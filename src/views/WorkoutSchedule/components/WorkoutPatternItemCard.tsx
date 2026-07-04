@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import type { WorkoutTemplate } from "@/types/WorkoutTemplateTypes";
+import { WorkoutTemplateCard } from "@/views/sharedComponents/WorkoutTemplateCard";
 
 export const WorkoutPatternItemCard = ({
   template,
@@ -18,9 +19,15 @@ export const WorkoutPatternItemCard = ({
     );
   }
 
-  return (
+  return template ? (
+    <WorkoutTemplateCard
+      template={template}
+      isSelected={false}
+      onClick={() => {}}
+    />
+  ) : (
     <Card>
-      <CardContent>{template ? template.name : "Rest day"}</CardContent>
+      <CardContent>Rest Day</CardContent>
     </Card>
   );
 };

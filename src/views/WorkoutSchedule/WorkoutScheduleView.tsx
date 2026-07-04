@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { RenameWorkoutScheduleDialog } from "./components/RenameWorkoutScheduleDialog";
 import { DeleteWorkoutScheduleDialog } from "./components/DeleteWorkoutScheduleDialog";
+import { Spinner } from "@/components/ui/spinner";
+import { AddWorkoutToPatternDialog } from "./components/AddWorkoutToPatternDialog";
 
 export const WorkoutScheduleView = () => {
   const { id } = useContext(WorkoutScheduleContext);
@@ -29,7 +31,12 @@ export const WorkoutScheduleView = () => {
   }
 
   if (isWorkoutScheduleLoading || !workoutSchedule) {
-    return <>Loading...</>;
+    return (
+      <div>
+        Loading...
+        <Spinner />
+      </div>
+    );
   }
   const isWorkoutTemplatesLoaded =
     !isWorkoutTemplatesLoading && !isWorkoutTemplatesError && workoutTemplates;
@@ -44,8 +51,14 @@ export const WorkoutScheduleView = () => {
         {isWorkoutTemplatesLoaded ? (
           <WorkoutPatternList templates={workoutTemplates} />
         ) : (
-          "Loading schedule pattern..."
+          <div>
+            "Loading schedule pattern..."
+            <Spinner />
+          </div>
         )}
+      </div>
+      <div>
+        <AddWorkoutToPatternDialog />
         <Button onClick={() => navigate(-1)}>Save</Button>
         <DeleteWorkoutScheduleDialog workoutSchedule={workoutSchedule} />
       </div>

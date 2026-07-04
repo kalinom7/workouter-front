@@ -8,11 +8,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import type { WorkoutSchedule } from "@/types/WorkoutScheduleTypes";
-import { SchedulesCarousel } from "./SchedulesCarousel";
+import { SchedulesList } from "./SchedulesList";
 import { useState } from "react";
 import { globalUserId } from "@/utils/globalUserId";
 import { useSetWorkoutScheduleActive } from "@/api/workoutschedule/hooks/useSetWorkoutScheduleActive";
 import { useSetWorkoutScheduleInactive } from "@/api/workoutschedule/hooks/useSetWorkoutScheduleInactive";
+import { SearchBar } from "@/views/sharedComponents/SearchBar";
 
 export const SelectActiveScheduleDialog = ({
   workoutSchedules,
@@ -21,6 +22,8 @@ export const SelectActiveScheduleDialog = ({
 }) => {
   const [selectedSchedule, setSelectedSchedule] =
     useState<WorkoutSchedule | null>(null);
+  const [search, setSearch] = useState<string>("");
+
   const { mutate: setActive, isPending: isActivePending } =
     useSetWorkoutScheduleActive();
   const { mutate: setInactive, isPending: isInactivePending } =
@@ -59,16 +62,22 @@ export const SelectActiveScheduleDialog = ({
             : "Select Active Schedule"}
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="w-[90vw]  h-[150vw] flex flex-col">
         <DialogTitle className="text-center">
           {activeSchedule
             ? `Current Active Schedule: ${activeSchedule.name}`
             : "Select schedule to set as active"}
         </DialogTitle>
-        <SchedulesCarousel
+        <SearchBar
+          searched="workout schedule"
+          search={search}
+          setSearch={setSearch}
+        />
+        <SchedulesList
           workoutSchedules={workoutSchedules}
           selectedId={selectedSchedule?.id}
           onSelect={setSelectedSchedule}
+          search={search}
         />
         <DialogFooter>
           <DialogClose asChild>

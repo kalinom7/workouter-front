@@ -1,5 +1,5 @@
 import { useGetAllWorkoutSchedules } from "@/api/workoutschedule/hooks/useGetAllWorkoutSchedules";
-import { SchedulesCarousel } from "./components/SchedulesCarousel";
+import { SchedulesList } from "./components/SchedulesList";
 import { Spinner } from "@/components/ui/spinner";
 import { globalUserId } from "@/utils/globalUserId";
 import { CreateNewScheduleDialog } from "./components/CreateNewScheduleDialog";
@@ -34,18 +34,25 @@ export const ManageExistingSchedulesView = () => {
   };
 
   return (
-    <div>
-      <h1>Manage All Existing Workout Schedules</h1>
+    <div className="flex flex-col gap-4 max-h-[80dvh]">
+      <h1 className="text-2xl font-bold">
+        Manage All Existing Workout Schedules
+      </h1>
+
       <SearchBar
         searched="workout schedule"
         search={search}
         setSearch={setSearch}
       />
-      <SchedulesCarousel
-        workoutSchedules={data}
-        onSelect={onSelectSchedule}
-        search={search}
-      />
+
+      <div className="flex-1 min-h-0 overflow-y-auto">
+        <SchedulesList
+          workoutSchedules={data}
+          onSelect={onSelectSchedule}
+          search={search}
+        />
+      </div>
+
       <CreateNewScheduleDialog />
     </div>
   );

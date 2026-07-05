@@ -5,6 +5,7 @@ import { globalUserId } from "@/utils/globalUserId";
 import { Fragment, useContext } from "react";
 import { WorkoutPatternItemCard } from "./WorkoutPatternItemCard";
 import { RestDaysDialog } from "./RestDaysDialog";
+import { RemovePatternItemDialog } from "./RemovePatternItemDialog";
 
 export const WorkoutPatternList = ({
   templates,
@@ -39,6 +40,9 @@ export const WorkoutPatternList = ({
                   found={template !== null}
                 />
                 <RestDaysDialog patternItemId={patternItem.patternItemId} />
+                <RemovePatternItemDialog
+                  patternItemId={patternItem.patternItemId}
+                />
               </li>
 
               {Array.from({ length: patternItem.restDays }).map((_, index) => (

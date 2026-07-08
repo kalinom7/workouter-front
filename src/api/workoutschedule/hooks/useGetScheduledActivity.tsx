@@ -13,7 +13,7 @@ export const useGetScheduledActivity = (userId: string) => {
     queryFn: async () => {
       try {
         const data = await WorkoutScheduleApi.getScheduledActivity(userId);
-        return { status: "active", activityId: data };
+        return { status: "active", activityId: data.scheduledActivity };
       } catch (error) {
         if (error instanceof HttpError && error.status === 409) {
           return { status: "skipped" };

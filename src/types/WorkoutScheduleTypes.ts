@@ -17,3 +17,7 @@ export type WorkoutSchedule = {
   lastOrder: number | null;
   lastFinishedWorkoutDate: Date | null;
 };
+
+export type ScheduledActivity = {
+  scheduledActivity: string | null;
+}

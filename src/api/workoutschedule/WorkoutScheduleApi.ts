@@ -1,4 +1,4 @@
-import type { WorkoutSchedule } from "../../types/WorkoutScheduleTypes";
+import type { ScheduledActivity, WorkoutSchedule } from "../../types/WorkoutScheduleTypes";
 import { apiFetch } from "../fetch";
 
 export class WorkoutScheduleApi {
@@ -117,7 +117,7 @@ export class WorkoutScheduleApi {
   }
 
   static async getScheduledActivity(userId: string){
-    return apiFetch<string | null>(`/workout-schedules/getScheduledActivity?userId=${userId}`,
+    return apiFetch<ScheduledActivity>(`/workout-schedules/active/scheduled-activity?userId=${userId}`,
       {
         method: "GET",
       }

@@ -2,6 +2,7 @@ import { useCreateExercise } from "@/api/exercise/hooks/useCreateExercise";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
+import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
@@ -38,12 +39,16 @@ export const CreateExerciseView = () => {
         placeholder="Exercise Name"
         disabled={isPending}
       />
-      <Input
+      <Textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="description (optional)"
         disabled={isPending}
+        maxLength={256}
       />
+      <p className="text-sm text-muted-foreground text-right">
+        {description.length}/{256}
+      </p>
       <Button
         onClick={onCreateClick}
         disabled={isPending || name.trim() === ""}

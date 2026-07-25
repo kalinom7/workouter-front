@@ -10,8 +10,7 @@ export const useGetExercise = ({
 }) => {
   return useQuery({
     queryKey: ["exercises", exerciseId, userId],
-    queryFn: async () => {
-      ExerciseApi.getExercise(userId, exerciseId);
-    },
+    enabled: !!exerciseId,
+    queryFn: async () => ExerciseApi.getExercise(userId, exerciseId),
   });
 };

@@ -26,8 +26,8 @@ export const ExerciseView = () => {
     userId: globalUserId,
     exerciseId: id ?? "",
   });
-  const [name, setName] = useState(exercise?.name ?? "");
-  const [description, setDescription] = useState(exercise?.description ?? "");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   if (isLoading) {
     return (
@@ -41,7 +41,11 @@ export const ExerciseView = () => {
     return <div>Failed to load exercise.</div>;
   }
 
-  const onEditClick = () => setEditable(true);
+  const onEditClick = () => {
+    setName(exercise.name);
+    setDescription(exercise.description ?? "");
+    setEditable(true);
+  };
   const onCancelClick = () => {
     setName(exercise.name);
     setDescription(exercise.description ?? "");

@@ -25,7 +25,10 @@ export type WorkoutExerciseSet = {
 };
 
 export type WorkoutExercise = {
-  exerciseId: string;
+  exercise: {
+    id: string;
+    name: string;
+  };
   sets: WorkoutExerciseSet[];
   restPeriod?: number; //seconds
   order: number;

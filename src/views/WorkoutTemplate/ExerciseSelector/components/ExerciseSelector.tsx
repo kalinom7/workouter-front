@@ -1,12 +1,13 @@
 import { useGetAllExercises } from "@/api/exercise/hooks/useGetAllExercises";
 import { Button } from "@/components/ui/button";
+import type { Exercise } from "@/types/ExerciseTypes";
 import { globalUserId } from "@/utils/globalUserId";
 
 export const ExerciseSelector = ({
   onSelectExerciseClick,
   isPending,
 }: {
-  onSelectExerciseClick: (exerciseId: string) => void;
+  onSelectExerciseClick: (exercise: Exercise) => void;
   isPending: boolean;
 }) => {
   const { data, isLoading, isError } = useGetAllExercises(globalUserId);
@@ -26,7 +27,7 @@ export const ExerciseSelector = ({
           <li key={exercise.id}>
             <Button
               disabled={isPending}
-              onClick={() => onSelectExerciseClick(exercise.id)}
+              onClick={() => onSelectExerciseClick(exercise)}
             >
               {exercise.name}
             </Button>

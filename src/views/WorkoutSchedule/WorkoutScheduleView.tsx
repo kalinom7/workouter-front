@@ -38,9 +38,7 @@ export const WorkoutScheduleView = () => {
         <h1 className="text-2xl font-bold">{workoutSchedule.name}</h1>
         <RenameWorkoutScheduleDialog currentName={workoutSchedule.name} />
       </div>
-      <div>
-        <WorkoutPatternList workoutSchedule={workoutSchedule} />
-      </div>
+      <WorkoutPatternList workoutSchedule={workoutSchedule} />
       <div>
         <AddWorkoutToPatternDialog />
         <Button onClick={() => navigate(-1)}>Save</Button>

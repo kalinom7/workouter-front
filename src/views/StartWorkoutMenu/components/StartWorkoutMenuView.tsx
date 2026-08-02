@@ -1,4 +1,4 @@
-import { StartEmptyWorkoutButton } from "./StartEmptyWorkoutButton";
+import { StartEmptyWorkoutDialog } from "./StartEmptyWorkoutDialog";
 import { StartWorkoutFromScheduleDialog } from "./StartWorkoutFromScheduleDialog";
 import { StartWorkoutFromTemplateButton } from "./StartWorkoutFromTemplateButton";
 
@@ -6,7 +6,7 @@ export const StartWorkoutMenu = () => {
   return (
     <>
       <h1>Start Workout</h1>
-      <StartEmptyWorkoutButton />
+      <StartEmptyWorkoutDialog />
       <StartWorkoutFromTemplateButton />
       <StartWorkoutFromScheduleDialog />
     </>

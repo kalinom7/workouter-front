@@ -8,7 +8,7 @@ export const GoToWorkoutHistoryButton = () => {
   const navigate = useNavigate();
 
   const onGoToWorkoutHistoryClick = () => {
-    navigate(`/workout/history?userId=${userId}`);
+    navigate(`/workouts/history?userId=${userId}`);
   };
 
   return (

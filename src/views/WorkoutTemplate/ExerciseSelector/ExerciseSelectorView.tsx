@@ -1,5 +1,6 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ExerciseSelector } from "./components/ExerciseSelector";
+import type { Exercise } from "@/types/ExerciseTypes";
 
 export const ExerciseSelectorView = () => {
   const navigate = useNavigate();
@@ -9,16 +10,16 @@ export const ExerciseSelectorView = () => {
   const [searchParams] = useSearchParams();
   const mode = searchParams.get("mode");
 
-  const onSelectExerciseClick = (id: string) => {
+  const onSelectExerciseClick = (exercise: Exercise) => {
     if (mode === "edit") {
       navigate(
-        `/workout-templates/${workoutTemplateId}/exercise/${order}?exerciseId=${id}`,
+        `/workout-templates/${workoutTemplateId}/exercise/${order}?exerciseId=${exercise.id}`,
       );
     }
 
     if (mode === "add") {
       navigate(
-        `/workout-templates/${workoutTemplateId}/add-exercise?exerciseId=${id}`,
+        `/workout-templates/${workoutTemplateId}/add-exercise?exerciseId=${exercise.id}`,
       );
     }
   };

@@ -1,4 +1,3 @@
-import { useGetAllExercises } from "@/api/exercise/hooks/useGetAllExercises";
 import { useGetAllFinishedWorkouts } from "@/api/workout/hooks/useGetAllFinishedWorkouts";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
@@ -16,20 +15,11 @@ export const WorkoutHistoryGallery = () => {
     isLoading: isLoadingFinishedWorkouts,
     isError: isFinishedWorkoutsError,
   } = useGetAllFinishedWorkouts(globalUserId);
-  const {
-    data: exercises,
-    isLoading: isLoadingExercises,
-    isError: isExercisesError,
-  } = useGetAllExercises(globalUserId);
 
-  if (isLoadingFinishedWorkouts || isLoadingExercises) {
+  if (isLoadingFinishedWorkouts) {
     return <Spinner></Spinner>;
   }
-  if (
-    finishedWorkouts === undefined ||
-    isFinishedWorkoutsError ||
-    isExercisesError
-  ) {
+  if (finishedWorkouts === undefined || isFinishedWorkoutsError) {
     return <div>Error loading workout history</div>;
   }
   if (finishedWorkouts.length == 0) {
@@ -60,15 +50,7 @@ export const WorkoutHistoryGallery = () => {
                 <CardContent>
                   <div className="">
                     {workout.exercises.map((ex) => {
-                      return (
-                        <p key={ex.exerciseId}>
-                          {
-                            exercises?.find(
-                              (describedEx) => describedEx.id == ex.exerciseId,
-                            )?.name
-                          }
-                        </p>
-                      );
+                      return <p key={ex.exercise.id}>{ex.exercise.name}</p>;
                     })}
                   </div>
                 </CardContent>

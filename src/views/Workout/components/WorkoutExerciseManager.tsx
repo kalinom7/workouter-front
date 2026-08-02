@@ -7,6 +7,7 @@ import { ExerciseSelector } from "@/views/WorkoutTemplate/ExerciseSelector/compo
 import { useGetWorkout } from "@/api/workout/hooks/useGetWorkout";
 
 import { globalUserId } from "@/utils/globalUserId";
+import type { Exercise } from "@/types/ExerciseTypes";
 
 export const WorkoutExerciseManager = () => {
   const { mutate, isPending } = useAddExerciseToWorkout();
@@ -20,11 +21,11 @@ export const WorkoutExerciseManager = () => {
   if (!data) return <p>Workout not found</p>;
   const workout = data;
 
-  const onAddSelectedExerciseClick = (exerciseId: string) => {
+  const onAddSelectedExerciseClick = (exercise: Exercise) => {
     mutate({
       userId: globalUserId,
       workoutId: id,
-      exerciseId: exerciseId,
+      exercise,
     });
 
     setShowExerciseSelector(false);

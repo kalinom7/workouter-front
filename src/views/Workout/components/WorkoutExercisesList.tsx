@@ -5,7 +5,6 @@ import { useAddSetToWorkoutExercise } from "@/api/workout/hooks/useAddSetToWorko
 import { useContext } from "react";
 import { globalUserId } from "@/utils/globalUserId";
 import { WorkoutContext } from "@/contexts/workout/WorkoutContext";
-import { useGetAllExercises } from "@/api/exercise/hooks/useGetAllExercises";
 import { useRemoveExerciseFromWorkout } from "@/api/workout/hooks/useRemoveExerciseFromWorkout";
 import { RestPeriodSetter } from "./RestPeriodSetter";
 
@@ -21,14 +20,6 @@ export const WorkoutExercisesList = ({
 
   const sorted = [...workoutExercises].sort((a, b) => a.order - b.order);
   const { id } = useContext(WorkoutContext);
-  const { data, isLoading, isError } = useGetAllExercises(globalUserId);
-  if (isError) {
-    return <>Error loading workout template.</>;
-  }
-
-  if (isLoading || !data) {
-    return <>Loading...</>;
-  }
 
   const onAddSetClick = (exerciseOrder: number) => {
     addSet({ userId: globalUserId, workoutId: id, exerciseOrder });
@@ -40,28 +31,26 @@ export const WorkoutExercisesList = ({
 
   return (
     <ul>
-      {sorted.map((exercise) => (
-        <li key={exercise.order}>
-          <p>
-            exercise:{data.find((ex) => ex.id === exercise.exerciseId)?.name}
-          </p>
+      {sorted.map((workoutExercise) => (
+        <li key={workoutExercise.order}>
+          <p>exercise:{workoutExercise.exercise.name}</p>
           <WorkoutSetsList
-            workoutSets={exercise.sets}
-            exerciseOrder={exercise.order}
+            workoutSets={workoutExercise.sets}
+            exerciseOrder={workoutExercise.order}
           />
           <Button
             disabled={isAddingSet}
-            onClick={() => onAddSetClick(exercise.order)}
+            onClick={() => onAddSetClick(workoutExercise.order)}
           >
             Add set
           </Button>
           <Button
-            onClick={() => onRemoveExerciseClick(exercise.order)}
+            onClick={() => onRemoveExerciseClick(workoutExercise.order)}
             disabled={isRemovingExercise}
           >
             Remove Exercise
           </Button>
-          <RestPeriodSetter exerciseOrder={exercise.order} />
+          <RestPeriodSetter exerciseOrder={workoutExercise.order} />
         </li>
       ))}
     </ul>

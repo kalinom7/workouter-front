@@ -1,7 +1,6 @@
 import { useGetAllExercises } from "@/api/exercise/hooks/useGetAllExercises";
 import { Button } from "@/components/ui/button";
-
-const someUuid = "123e4567-e89b-12d3-a456-426614174000";
+import { globalUserId } from "@/utils/globalUserId";
 
 export const ExerciseSelector = ({
   onSelectExerciseClick,
@@ -10,7 +9,7 @@ export const ExerciseSelector = ({
   onSelectExerciseClick: (exerciseId: string) => void;
   isPending: boolean;
 }) => {
-  const { data, isLoading, isError } = useGetAllExercises(someUuid);
+  const { data, isLoading, isError } = useGetAllExercises(globalUserId);
 
   if (isError) return <>Error loading exercises.</>;
   if (isLoading || !data) return <>Loading...</>;

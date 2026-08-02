@@ -1,20 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { WorkoutTemplateApi } from "../WorkoutTemplateApi";
 
-export type WorkoutTemplateExercise = {
-  exercise: string;
-  sets: number;
-  restPeriod: number; //seconds
-  order: number;
-};
-
-export type WorkoutTemplate = {
-  id: string;
-  name: string;
-  userId: string;
-  exercises: WorkoutTemplateExercise[];
-};
-
 export const useAddWorkoutTemplateExercise = () => {
   return useMutation({
     mutationFn: async ({

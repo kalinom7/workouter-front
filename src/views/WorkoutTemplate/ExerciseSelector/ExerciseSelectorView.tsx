@@ -12,13 +12,13 @@ export const ExerciseSelectorView = () => {
   const onSelectExerciseClick = (id: string) => {
     if (mode === "edit") {
       navigate(
-        `/workout-template/${workoutTemplateId}/exercise/${order}?exerciseId=${id}`,
+        `/workout-templates/${workoutTemplateId}/exercise/${order}?exerciseId=${id}`,
       );
     }
 
     if (mode === "add") {
       navigate(
-        `/workout-template/${workoutTemplateId}/add-exercise?exerciseId=${id}`,
+        `/workout-templates/${workoutTemplateId}/add-exercise?exerciseId=${id}`,
       );
     }
   };

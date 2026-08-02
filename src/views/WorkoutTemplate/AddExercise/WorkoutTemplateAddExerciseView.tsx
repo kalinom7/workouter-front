@@ -38,7 +38,7 @@ export const WorkoutTemplateAddExerciseView = () => {
 
   const onSuccess = () => {
     toast.success("Exercise added to workout template!");
-    navigate(`/workout-template/${id}/exercises`);
+    navigate(`/workout-templates/${id}`);
   };
 
   const onError = () => {
@@ -60,7 +60,7 @@ export const WorkoutTemplateAddExerciseView = () => {
     );
   };
   const onSelectExerciseClick = () => {
-    navigate(`/workout-template/${id}/add-exercise/select?mode=add`);
+    navigate(`/workout-templates/${id}/add-exercise/select?mode=add`);
   };
 
   return (

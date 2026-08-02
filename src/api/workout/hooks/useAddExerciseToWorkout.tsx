@@ -17,7 +17,7 @@ export const useAddExerciseToWorkout = () => {
     }) => {
       return WorkoutApi.addExerciseToWorkout(userId, workoutId, exercise.id);
     },
-    onMutate: async ({ userId, workoutId, exerciseId }) => {
+    onMutate: async ({ userId, workoutId, exercise }) => {
       await queryClient.cancelQueries({
         queryKey: ["workout", workoutId, userId],
       });
@@ -38,7 +38,10 @@ export const useAddExerciseToWorkout = () => {
             exercises: [
               ...old.exercises,
               {
-                exercise: {},
+                exercise: {
+                  id: exercise.id,
+                  name: exercise.name,
+                },
                 order: old.exercises.length,
                 sets: [],
               },

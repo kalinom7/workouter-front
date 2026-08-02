@@ -83,10 +83,10 @@ function App() {
                 path="startFromTemplate"
                 element={<StartWorkoutFromTemplateView />}
               />
-              <Route path=":id" element={<WorkoutProvider />}>
-                <Route path="ongoing" element={<WorkoutView />} />
-              </Route>
             </Route>
+          </Route>
+          <Route element={<WorkoutProvider />}>
+            <Route path="workouts/:id/ongoing" element={<WorkoutView />} />
           </Route>
 
           <Route element={<ViewLayout />}>

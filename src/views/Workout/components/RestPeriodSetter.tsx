@@ -11,6 +11,7 @@ import {
   DialogContent,
   DialogFooter,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 
@@ -44,8 +45,10 @@ export const RestPeriodSetter = ({
           {exercise?.restPeriod ? formatTime(exercise?.restPeriod) : 0}
         </Button>
       </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>Set rest period</DialogHeader>
+      <DialogContent aria-describedby={undefined}>
+        <DialogTitle>
+          <DialogHeader> Set rest period</DialogHeader>
+        </DialogTitle>
         <RestTimePicker
           initialMinutes={
             exercise?.restPeriod ? Math.floor(exercise.restPeriod / 60) : 0

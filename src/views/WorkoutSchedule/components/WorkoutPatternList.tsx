@@ -1,11 +1,11 @@
 import { useGetWorkoutSchedule } from "@/api/workoutschedule/hooks/useGetWorkoutSchedule";
-import type { WorkoutTemplate } from "@/api/workouttemplate/hooks/useAddWorkoutTemplateExercise";
 import { WorkoutScheduleContext } from "@/contexts/workoutSchedule/WorkoutScheduleContext";
 import { globalUserId } from "@/utils/globalUserId";
 import { Fragment, useContext } from "react";
 import { WorkoutPatternItemCard } from "./WorkoutPatternItemCard";
 import { RestDaysDialog } from "./RestDaysDialog";
 import { RemovePatternItemDialog } from "./RemovePatternItemDialog";
+import type { WorkoutTemplate } from "@/types/WorkoutTemplateTypes";
 
 export const WorkoutPatternList = ({
   templates,

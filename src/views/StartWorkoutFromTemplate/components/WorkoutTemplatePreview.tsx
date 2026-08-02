@@ -1,4 +1,3 @@
-import { useGetAllExercises } from "@/api/exercise/hooks/useGetAllExercises";
 import { useGetWorkoutTemplate } from "@/api/workouttemplate/hooks/useGetWorkoutTemplate";
 import { Button } from "@/components/ui/button";
 import { globalUserId } from "@/utils/globalUserId";
@@ -16,25 +15,20 @@ export const WorkoutTemplatePreview = ({
     templateId,
     globalUserId,
   );
-  const {
-    data: exercises,
-    isLoading: isExercisesLoading,
-    isError: isExercisesError,
-  } = useGetAllExercises(globalUserId);
-  if (isError || isExercisesError) return <>Error loading workout template.</>;
-  if (isLoading || !data || isExercisesLoading || !exercises)
-    return <>Loading...</>;
+
+  if (isError) return <>Error loading workout template.</>;
+  if (isLoading || !data) return <>Loading...</>;
   const template = data;
 
   return (
     <>
       <h1>{template.name}</h1>
       <ul>
-        {template.exercises.map((exercise) => (
-          <li key={exercise.exercise}>
-            exercise:{" "}
-            {exercises.find((ex) => ex.id === exercise.exercise)?.name}, sets:{" "}
-            {exercise.sets}, restPeriod: {exercise.restPeriod} seconds
+        {template.exercises.map((workoutTemplateExercise) => (
+          <li key={workoutTemplateExercise.exercise.id}>
+            exercise: {workoutTemplateExercise.exercise.name}, sets:{" "}
+            {workoutTemplateExercise.sets}, restPeriod:{" "}
+            {workoutTemplateExercise.restPeriod} seconds
           </li>
         ))}
       </ul>

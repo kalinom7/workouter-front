@@ -43,8 +43,7 @@ export const useRemovePatternItem = () => {
           return {
             ...oldData,
             patternItems: oldData.pattern.filter(
-              (item: WorkoutPatternItem) =>
-                item.patternItemId !== patternItemId,
+              (item: WorkoutPatternItem) => item.id !== patternItemId,
             ),
           };
         },

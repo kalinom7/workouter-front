@@ -1,52 +1,32 @@
-import { useGetWorkoutSchedule } from "@/api/workoutschedule/hooks/useGetWorkoutSchedule";
-import { WorkoutScheduleContext } from "@/contexts/workoutSchedule/WorkoutScheduleContext";
-import { globalUserId } from "@/utils/globalUserId";
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import { WorkoutPatternItemCard } from "./WorkoutPatternItemCard";
 import { RestDaysDialog } from "./RestDaysDialog";
 import { RemovePatternItemDialog } from "./RemovePatternItemDialog";
-import type { WorkoutTemplate } from "@/types/WorkoutTemplateTypes";
+import type { WorkoutSchedule } from "@/types/WorkoutScheduleTypes";
 
 export const WorkoutPatternList = ({
-  templates,
+  workoutSchedule,
 }: {
-  templates: WorkoutTemplate[];
+  workoutSchedule: WorkoutSchedule;
 }) => {
-  const { id } = useContext(WorkoutScheduleContext);
-  const { data, isLoading, isError } = useGetWorkoutSchedule(globalUserId, id);
-  if (isError) {
-    return <>Error loading workout schedule.</>;
-  }
-
-  if (isLoading || !data) {
-    return <>Loading...</>;
-  }
-  const workoutPattern = data.pattern;
-
   return (
     <div>
       <h2>Workout Pattern:</h2>
       <ul>
-        {workoutPattern.map((patternItem) => {
-          const template =
-            templates.find((t) => t.id === patternItem.workoutTemplateId) ??
-            null;
-
+        {workoutSchedule.pattern.map((patternItem) => {
           return (
-            <Fragment key={patternItem.patternItemId}>
+            <Fragment key={patternItem.id}>
               <li>
                 <WorkoutPatternItemCard
-                  template={template}
-                  found={template !== null}
+                  template={patternItem.workoutTemplate}
+                  found={patternItem.workoutTemplate !== null}
                 />
-                <RestDaysDialog patternItemId={patternItem.patternItemId} />
-                <RemovePatternItemDialog
-                  patternItemId={patternItem.patternItemId}
-                />
+                <RestDaysDialog patternItemId={patternItem.id} />
+                <RemovePatternItemDialog patternItemId={patternItem.id} />
               </li>
 
               {Array.from({ length: patternItem.restDays }).map((_, index) => (
-                <li key={`${patternItem.patternItemId}-rest-${index}`}>
+                <li key={`${patternItem.id}-rest-${index}`}>
                   <WorkoutPatternItemCard template={null} found={true} />
                 </li>
               ))}

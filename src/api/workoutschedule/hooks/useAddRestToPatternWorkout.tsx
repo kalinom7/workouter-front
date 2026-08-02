@@ -52,7 +52,7 @@ export const useAddRestToPatternWorkout = () => {
           return {
             ...old,
             pattern: old.pattern.map((patternItem: WorkoutPatternItem) =>
-              patternItem.patternItemId == patternItemId
+              patternItem.id == patternItemId
                 ? {
                     ...patternItem,
                     restDays: restDays,

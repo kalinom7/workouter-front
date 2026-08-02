@@ -1,8 +1,10 @@
+import type { WorkoutTemplate } from "./WorkoutTemplateTypes";
+
 export type WorkoutPatternItem = {
-  patternItemId: string;
+  id: string;
   order: number;
   useOrder: number;
-  workoutTemplateId: string;
+  workoutTemplate: WorkoutTemplate;
   restDays: number;
 };
 
@@ -19,5 +21,5 @@ export type WorkoutSchedule = {
 };
 
 export type ScheduledActivity = {
-  scheduledActivity: string | null;
+  scheduledActivity: WorkoutTemplate | null;
 }

@@ -1,5 +1,4 @@
 import { useGetWorkoutSchedule } from "@/api/workoutschedule/hooks/useGetWorkoutSchedule";
-import { useGetAllWorkoutTemplates } from "@/api/workouttemplate/hooks/useGetAllWorkoutTemplates";
 import { WorkoutScheduleContext } from "@/contexts/workoutSchedule/WorkoutScheduleContext";
 import { globalUserId } from "@/utils/globalUserId";
 import { useContext } from "react";
@@ -14,12 +13,6 @@ import { AddWorkoutToPatternDialog } from "./components/AddWorkoutToPatternDialo
 export const WorkoutScheduleView = () => {
   const { id } = useContext(WorkoutScheduleContext);
   const navigate = useNavigate();
-
-  const {
-    data: workoutTemplates,
-    isLoading: isWorkoutTemplatesLoading,
-    isError: isWorkoutTemplatesError,
-  } = useGetAllWorkoutTemplates(globalUserId);
 
   const {
     data: workoutSchedule,
@@ -38,8 +31,6 @@ export const WorkoutScheduleView = () => {
       </div>
     );
   }
-  const isWorkoutTemplatesLoaded =
-    !isWorkoutTemplatesLoading && !isWorkoutTemplatesError && workoutTemplates;
 
   return (
     <div>
@@ -48,14 +39,7 @@ export const WorkoutScheduleView = () => {
         <RenameWorkoutScheduleDialog currentName={workoutSchedule.name} />
       </div>
       <div>
-        {isWorkoutTemplatesLoaded ? (
-          <WorkoutPatternList templates={workoutTemplates} />
-        ) : (
-          <div>
-            "Loading schedule pattern..."
-            <Spinner />
-          </div>
-        )}
+        <WorkoutPatternList workoutSchedule={workoutSchedule} />
       </div>
       <div>
         <AddWorkoutToPatternDialog />

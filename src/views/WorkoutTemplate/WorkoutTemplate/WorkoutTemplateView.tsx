@@ -9,7 +9,7 @@ import { useGetAllExercises } from "@/api/exercise/hooks/useGetAllExercises";
 
 const someUuid = "123e4567-e89b-12d3-a456-426614174000";
 
-export const WorkoutTemplateExercisesView = () => {
+export const WorkoutTemplateView = () => {
   const { id } = useContext(WorkoutTemplateContext);
   const { data, isLoading, isError } = useGetWorkoutTemplate(id, someUuid);
   const { removeExercise, isPending } =

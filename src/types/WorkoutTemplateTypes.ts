@@ -1,5 +1,7 @@
+import type { Exercise } from "./ExerciseTypes";
+
 export type WorkoutTemplateExercise = {
-  exercise: string;
+  exercise: Exercise;
   sets: number;
   restPeriod: number; //seconds
   order: number;

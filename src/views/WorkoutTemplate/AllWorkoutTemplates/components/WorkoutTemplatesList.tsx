@@ -11,7 +11,7 @@ export const WorkoutTemplatesList = ({
 }) => {
   const navigate = useNavigate();
   const onWorkoutTemplateClick = (workoutTemplateId: string) => {
-    navigate(`/workout-template/${workoutTemplateId}/exercises`);
+    navigate(`/workout-templates/${workoutTemplateId}`);
   };
   const { mutate, isPending } = useDeleteWorkoutTemplate();
   const workoutTemplates = templates;
@@ -42,7 +42,7 @@ export const WorkoutTemplatesList = ({
       </ul>
       <Button
         disabled={isPending}
-        onClick={() => navigate("/workout-template/create")}
+        onClick={() => navigate("/workout-templates/create")}
       >
         Add new workout template
       </Button>

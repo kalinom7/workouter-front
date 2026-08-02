@@ -5,7 +5,7 @@ import { CreateExerciseView } from "./views/Exercise/Create/CreateExerciseView";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 import { WorkoutTemplateAddExerciseView } from "./views/WorkoutTemplate/AddExercise/WorkoutTemplateAddExerciseView";
-import { WorkoutTemplateExercisesView } from "./views/WorkoutTemplate/Exercises/WorkoutTemplateExercisesView";
+import { WorkoutTemplateView } from "./views/WorkoutTemplate/WorkoutTemplate/WorkoutTemplateView";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { WorkoutTemplateProvider } from "./contexts/workoutTemplate/WorkoutTemplateProvider";
 import { AllExercisesView } from "./views/Exercise/AllExercises/AllExercisesView";
@@ -51,16 +51,14 @@ function App() {
           </Route>
 
           <Route element={<ViewLayout />}>
-            <Route path="workout-template">
+            <Route path="workout-templates">
+              <Route index element={<AllWorkoutTemplatesView />} />
               <Route path="create" element={<WorkoutTemplateCreateView />} />
               <Route path=":id" element={<WorkoutTemplateProvider />}>
+                <Route index element={<WorkoutTemplateView />} />
                 <Route
                   path="add-exercise"
                   element={<WorkoutTemplateAddExerciseView />}
-                />
-                <Route
-                  path="exercises"
-                  element={<WorkoutTemplateExercisesView />}
                 />
                 <Route
                   path="exercise/:order"
@@ -76,10 +74,6 @@ function App() {
                 />
               </Route>
             </Route>
-            <Route
-              path="workout-templates"
-              element={<AllWorkoutTemplatesView />}
-            />
           </Route>
 
           <Route path="workout">

@@ -23,7 +23,7 @@ export const RestDaysDialog = ({
   const patternItem = useGetWorkoutSchedule(
     globalUserId,
     id,
-  )?.data?.pattern.find((item) => item.patternItemId === patternItemId);
+  )?.data?.pattern.find((patternItem) => patternItem.id === patternItemId);
   const [restDays, setRestDays] = useState(patternItem?.restDays || 0);
   const { mutate, isPending } = useAddRestToPatternWorkout();
   if (!patternItem) return null;

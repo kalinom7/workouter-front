@@ -30,7 +30,9 @@ export const ManageExistingSchedulesView = () => {
   }
 
   const onSelectSchedule = (selectedSchedule: WorkoutSchedule) => {
-    navigate(`/workout-schedule/${selectedSchedule.id}?userId=${globalUserId}`);
+    navigate(
+      `/workout-schedules/${selectedSchedule.id}?userId=${globalUserId}`,
+    );
   };
 
   return (

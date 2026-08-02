@@ -76,8 +76,8 @@ function App() {
             </Route>
           </Route>
 
-          <Route path="workout">
-            <Route element={<ViewLayout />}>
+          <Route element={<ViewLayout />}>
+            <Route path="workout">
               <Route path="start-menu" element={<StartWorkoutView />} />
               <Route
                 path="startFromTemplate"
@@ -90,19 +90,12 @@ function App() {
           </Route>
 
           <Route element={<ViewLayout />}>
-            <Route
-              path="workout-schedules/main"
-              element={<WorkoutScheduleMainView />}
-            />
-            <Route
-              path="workout-schedules/manage"
-              element={<ManageExistingSchedulesView />}
-            />
-            <Route
-              path="workout-schedule/:id"
-              element={<WorkoutScheduleProvider />}
-            >
-              <Route index element={<WorkoutScheduleView />} />
+            <Route path="workout-schedules">
+              <Route path="main" element={<WorkoutScheduleMainView />} />
+              <Route path="manage" element={<ManageExistingSchedulesView />} />
+              <Route path=":id" element={<WorkoutScheduleProvider />}>
+                <Route index element={<WorkoutScheduleView />} />
+              </Route>
             </Route>
           </Route>
         </Routes>

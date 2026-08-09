@@ -19,7 +19,7 @@ export const useCreateWorkoutSchedule = () => {
       userId: string;
     }) => {
       toast.success(`Workout schedule "${name}" created successfully!`);
-      navigate(`/workout-schedule/${id}?userId=${userId}`);
+      navigate(`/workout-schedules/${id}?userId=${userId}`);
     },
     onError: (error: Error) => {
       toast.error(`Failed to create workout schedule: ${error.message}`);

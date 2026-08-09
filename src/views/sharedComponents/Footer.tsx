@@ -7,7 +7,7 @@ export const Footer = () => {
     navigate(`/home`);
   };
   const onStartWorkoutClick = () => {
-    navigate(`/workout/start-menu`);
+    navigate(`/workouts/start-menu`);
   };
   const onPrepareClick = () => {
     navigate(`/prepare`);

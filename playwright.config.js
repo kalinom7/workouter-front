@@ -1,6 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
+import dotenv from "dotenv";
 
-dotenv.config({ path: ".env.test" });
+dotenv.config({ path: ".env.test.sample" });
+dotenv.config({ path: ".env.test", override: true });
 
 export default defineConfig({
   testDir: "./e2e",
@@ -24,7 +26,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: "npm run build && npm run preview",
+    command: "npm run build -- --mode test && npm run preview",
     url: "http://localhost:4173",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

@@ -35,3 +35,4 @@ dist-ssr
 
 #vitest
 .vitest-attachments
+__screenshots__

@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
 import { globalUserId } from "@/utils/globalUserId";
 import { useState } from "react";
@@ -15,8 +14,7 @@ export const ExerciseView = () => {
   const { id } = useParams<{ id: string }>();
 
   const [editable, setEditable] = useState(false);
-  const { mutate: updateExercise, isPending: isUpdatePending } =
-    useUpdateExercise();
+  const { mutate: updateExercise } = useUpdateExercise();
 
   const {
     data: exercise,
@@ -31,7 +29,10 @@ export const ExerciseView = () => {
 
   if (isLoading) {
     return (
-      <div className="max-w-2xl mx-auto py-10 space-y-4">
+      <div
+        className="max-w-2xl mx-auto py-10 space-y-4"
+        data-testid="exercise-skeleton"
+      >
         <Skeleton className="h-9 w-1/2" />
         <Skeleton className="h-4 w-3/4" />
       </div>
@@ -69,13 +70,15 @@ export const ExerciseView = () => {
     );
     setEditable(false);
   };
-  if (isUpdatePending) {
-    return <Spinner />;
-  }
+
   return (
     <div className="max-w-2xl mx-auto py-10">
       {editable ? (
-        <Input value={name} onChange={(e) => setName(e.target.value)} />
+        <Input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          data-testid="exercise-name-input"
+        />
       ) : (
         <h1 className="text-3xl font-semibold tracking-tight">
           {exercise.name}
@@ -90,6 +93,7 @@ export const ExerciseView = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             maxLength={256}
+            data-testid="exercise-description-input"
           />
           <p className="text-sm text-muted-foreground text-right">
             {description.length}/{256}

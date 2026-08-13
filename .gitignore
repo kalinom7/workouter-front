@@ -32,3 +32,6 @@ dist-ssr
 # env
 .env
 .env.test
+
+#vitest
+.vitest-attachments

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { renderWithProviders } from "../utils/renderWithProviders";
+import { renderWithProviders } from "../../utils/renderWithProviders";
 import { AllExercisesView } from "@/views/Exercise/AllExercises/AllExercisesView";
 import { worker } from "../mocks/browser";
 import { http, HttpResponse } from "msw";

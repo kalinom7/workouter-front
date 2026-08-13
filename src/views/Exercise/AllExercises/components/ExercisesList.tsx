@@ -1,13 +1,7 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import type { Exercise } from "@/types/ExerciseTypes";
 import { useNavigate } from "react-router-dom";
+import { ExerciseCard } from "./ExerciseCard";
 
 export const ExercisesList = ({
   exercises,
@@ -29,21 +23,11 @@ export const ExercisesList = ({
     <ScrollArea>
       <div className="grid grid-cols-2">
         {searchedExercises.map((exercise) => (
-          <Card
+          <ExerciseCard
             key={exercise.id}
+            exercise={exercise}
             onClick={() => onExerciseCardClick(exercise.id)}
-          >
-            <CardHeader>
-              <CardTitle>{exercise.name}</CardTitle>
-              <CardDescription>
-                description: {exercise.description}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>BodyPart:?</p>
-              <p>Difficulty level:?</p>
-            </CardContent>
-          </Card>
+          />
         ))}
       </div>
     </ScrollArea>

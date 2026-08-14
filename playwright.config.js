@@ -5,7 +5,7 @@ dotenv.config({ path: ".env.test.sample" });
 dotenv.config({ path: ".env.test", override: true });
 
 export default defineConfig({
-  testDir: "./e2e",
+  testDir: "./test/e2e",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,

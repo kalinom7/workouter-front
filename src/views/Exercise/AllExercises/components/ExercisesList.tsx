@@ -2,6 +2,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import type { Exercise } from "@/types/ExerciseTypes";
 import { useNavigate } from "react-router-dom";
 import { ExerciseCard } from "./ExerciseCard";
+import { globalUserId } from "@/utils/globalUserId";
 
 export const ExercisesList = ({
   exercises,
@@ -16,7 +17,7 @@ export const ExercisesList = ({
   );
 
   const onExerciseCardClick = (id: string) => {
-    navigate(`${id}`);
+    navigate(`${id}?userId=${globalUserId}`);
   };
 
   return (

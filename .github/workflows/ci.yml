@@ -31,3 +31,18 @@ jobs:
 
       - name: Build app
         run: npm run build
+
+      - name: Run unit tests
+        run: npm run test:unit
+
+      - name: Install playwright
+        run: npx playwright install
+
+      - name: Run component tests
+        run: npm run test:component
+
+      - name: Run integration tests
+        run: npm run test:integration
+
+      - name: Run e2e tests
+        run: npm run test:e2e

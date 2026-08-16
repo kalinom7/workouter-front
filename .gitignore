@@ -22,3 +22,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# env
+.env
+.env.test
+
+#vitest
+.vitest-attachments
+__screenshots__
+test-results

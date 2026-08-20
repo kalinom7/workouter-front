@@ -21,14 +21,16 @@ export const ViewLayout = ({
   showFooter?: boolean;
 }) => {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen flex flex-col">
       {showHeader && (
-        <header className="flex items-center gap-2 h-14 px-2">
+        <header className="flex items-center gap-2 h-14 px-2 shrink-0">
           <GoBackArrow />
         </header>
       )}
 
-      <main className={showFooter ? "px-4 pb-24" : "px-4"}>
+      <main
+        className={`flex-1 flex flex-col px-4 ${showFooter ? "pb-19" : ""}`}
+      >
         <Outlet />
       </main>
 

@@ -13,7 +13,7 @@ export const Footer = () => {
     navigate(`/prepare`);
   };
   return (
-    <div className="fixed bottom-0 left-0 w-full flex justify-around p-4 bg-white border-t">
+    <div className="h-19 fixed bottom-0 left-0 w-full flex justify-around p-4 bg-white border-t">
       <Button onClick={onHomeClick}>Home</Button>
       <Button onClick={onStartWorkoutClick}>Start Workout</Button>
       <Button onClick={onPrepareClick}>Prepare</Button>

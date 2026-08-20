@@ -14,7 +14,7 @@ export const WorkoutTemplateCreateView = () => {
   const navigate = useNavigate();
 
   const onCreateSuccess = ({ name, id }: { name: string; id: string }) => {
-    navigate(`/workout-template/${id}/exercises`);
+    navigate(`/workout-templates/${id}/exercises`);
     toast.success(`Workout template "${name}" created successfully!`);
   };
 

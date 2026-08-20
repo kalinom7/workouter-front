@@ -32,7 +32,7 @@ export const useEditWorkoutTemplateName = () => {
 
       queryClient.setQueryData(
         ["AllWorkoutTemplates", userId],
-        (old: WorkoutTemplate[] | undefined) => {
+        (old: WorkoutTemplate[]) => {
           if (!old) return old;
 
           return old.map((template) => {

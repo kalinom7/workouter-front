@@ -32,7 +32,7 @@ export const useDeleteWorkoutTemplate = () => {
 
       queryClient.setQueryData(
         ["AllWorkoutTemplates", userId],
-        (old: WorkoutTemplate[] | undefined) => {
+        (old: WorkoutTemplate[]) => {
           if (!old) return old;
 
           return old.filter((template) => template.id !== workoutTemplateId);

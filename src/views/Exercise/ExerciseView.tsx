@@ -97,6 +97,7 @@ export const ExerciseView = () => {
       <main className="flex-1 flex flex-col gap-4">
         {editable ? (
           <Input
+            className="rounded-full border-teal-300 bg-[#00FFFB33]/20 px-0 py-0 text-3xl font-semibold tracking-tight text-[#00ADAA] "
             value={name}
             onChange={(e) => setName(e.target.value)}
             data-testid="exercise-name-input"
@@ -111,7 +112,7 @@ export const ExerciseView = () => {
         {editable ? (
           <div>
             <Textarea
-              className="text-muted-foreground leading-relaxed"
+              className="text-base text-[#7F7F7F] leading-relaxed bg-[#272727]"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               maxLength={256}
@@ -129,10 +130,21 @@ export const ExerciseView = () => {
       </main>
 
       {editable ? (
-        <div className="my-5 flex gap-2 ">
-          <Button onClick={onSaveClick}>Save</Button>
-          <Button variant="secondary" onClick={onCancelClick}>
+        <div className="my-5 flex gap-4">
+          <Button
+            size="lg"
+            variant="outline"
+            className="rounded-full text-xl border-teal-300 text-teal-300"
+            onClick={onCancelClick}
+          >
             Cancel
+          </Button>
+          <Button
+            size="lg"
+            className="rounded-full text-xl bg-teal-300 text-black"
+            onClick={onSaveClick}
+          >
+            Save
           </Button>
         </div>
       ) : (

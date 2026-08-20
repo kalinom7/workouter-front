@@ -16,7 +16,7 @@ export const GoBackArrow = () => {
       onClick={handleGoBack}
       asChild
     >
-      <ArrowLeftIcon className="size-1" />
+      <ArrowLeftIcon className="size-1 text-[#00FFFB]" />
     </Button>
   );
 };

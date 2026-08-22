@@ -94,10 +94,10 @@ export const ExerciseView = () => {
 
   return (
     <div className="flex-1 flex flex-col w-full items-center mx-auto ">
-      <main className="flex-1 flex flex-col gap-4">
+      <main className="flex-1 flex min-w-0 w-full max-w-2xl flex-col gap-4">
         {editable ? (
           <Input
-            className="rounded-full border-teal-300 bg-[#00FFFB33]/20 px-0 py-0 text-3xl font-semibold tracking-tight text-[#00ADAA] "
+            className="h-12 rounded-full border-teal-300 bg-[#00FFFB33]/20 px-0 py-0 text-3xl font-semibold tracking-tight text-[#00ADAA] "
             value={name}
             onChange={(e) => setName(e.target.value)}
             data-testid="exercise-name-input"
@@ -110,9 +110,9 @@ export const ExerciseView = () => {
 
         <Separator className="my-2" />
         {editable ? (
-          <div>
+          <div className="min-w-0 w-full">
             <Textarea
-              className="text-base text-[#7F7F7F] leading-relaxed bg-[#272727]"
+              className="w-full h-26 resize-y text-base text-[#7F7F7F] leading-relaxed bg-[#272727]"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               maxLength={256}
